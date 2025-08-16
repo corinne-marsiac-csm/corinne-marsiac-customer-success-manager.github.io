@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Corinne Marsiac - Customer Success Manager</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- 1) Configurer Tailwind AVANT le CDN -->
     <script>
-        // Applique le thème (clair/sombre) au chargement de la page
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark')
-        } else {
-          document.documentElement.classList.remove('dark')
-        }
+        window.tailwind = window.tailwind || {};
+        tailwind.config = { darkMode: 'class' };
     </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- 2) Appliquer le thème le plus tôt possible pour éviter le FOUC -->
+    <script>
+        (function () {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const saved = localStorage.getItem('theme');
+            const isDark = saved ? saved === 'dark' : prefersDark;
+            if (isDark) document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
+        })();
+    </script>
+
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
+        body { font-family: 'Poppins', sans-serif; }
+        /* Icônes: état par défaut pour éviter le flash */
+        #theme-toggle-dark-icon, #theme-toggle-dark-icon-mobile { display: none; }
+        
         .text-gradient {
             background: linear-gradient(to right, #A78BFA, #F472B6);
             -webkit-background-clip: text;
@@ -96,8 +109,9 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#a-propos" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">À Propos</a>
                     <a href="#parcours" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Parcours</a>
-                    <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Réussite Clé</a>
+                    <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Projet</a>
                     <a href="#competences" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Compétences</a>
+                    <a href="#plus-sur-moi" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Personnalité</a>
                     <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300 text-xl">
                         <i class="fas fa-sun" id="theme-toggle-light-icon"></i>
                         <i class="fas fa-moon" id="theme-toggle-dark-icon"></i>
@@ -118,8 +132,9 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
             <a href="#a-propos" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">À Propos</a>
             <a href="#parcours" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Parcours</a>
-            <a href="#reussite" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Réussite Clé</a>
+            <a href="#reussite" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Projet</a>
             <a href="#competences" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Compétences</a>
+            <a href="#plus-sur-moi" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Personnalité</a>
             <a href="#contact" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
         </div>
     </nav>
@@ -642,7 +657,7 @@
                 <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-700 dark:text-gray-300">
                     <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
-                    <a href="https://drive.google.com/file/d/1eJvyycRG6T2qSLvG_r4EtUaxwRosi_FE/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> Télécharger mon CV</a>
+                    <a href="https://drive.google.com/file/d/1ZbzkfTD3YOkyARd9l9vD_BK628Yv3dZS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> Télécharger mon CV</a>
                     <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
                         <i class="fas fa-calendar-check"></i> Réserver un échange
                     </a>
@@ -711,26 +726,30 @@
         // --- GESTION DU MENU MOBILE ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+        }
 
         // --- GESTION DE LA MODALE "RÉUSSITE CLÉ" ---
         const openSuccessModalButton = document.getElementById('open-modal-button');
         const closeSuccessModalButton = document.getElementById('close-success-modal-button');
         const successModal = document.getElementById('success-modal');
-        const openSuccessModal = () => {
-            successModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        };
-        const closeSuccessModal = () => {
-            successModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        };
-        openSuccessModalButton.addEventListener('click', openSuccessModal);
-        closeSuccessModalButton.addEventListener('click', closeSuccessModal);
-        successModal.addEventListener('click', (e) => (e.target === successModal) && closeSuccessModal());
+        if (openSuccessModalButton && closeSuccessModalButton && successModal) {
+            const openSuccessModal = () => {
+                successModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+            const closeSuccessModal = () => {
+                successModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            openSuccessModalButton.addEventListener('click', openSuccessModal);
+            closeSuccessModalButton.addEventListener('click', closeSuccessModal);
+            successModal.addEventListener('click', (e) => (e.target === successModal) && closeSuccessModal());
+        }
         
         // --- GESTION DE LA MODALE "IMPACT" ---
         const impactModal = document.getElementById('impact-modal');
@@ -746,24 +765,26 @@
           finance: { title: "Crédits URSSAF récupérés : +100k€", content: "Mission out-of-scope réalisée pour impacter une cliente détractrice. Récupération de plusieurs crédits URSSAF sur différentes entités du groupe." }
         };
 
-        impactTriggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const key = trigger.dataset.key;
-                const data = impactData[key];
-                impactModalTitle.textContent = data.title;
-                impactModalContent.textContent = data.content;
-                impactModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+        if (impactModal && impactModalTitle && impactModalContent && closeImpactModalButton) {
+            impactTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const key = trigger.dataset.key;
+                    const data = impactData[key];
+                    impactModalTitle.textContent = data.title;
+                    impactModalContent.textContent = data.content;
+                    impactModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
             });
-        });
 
-        const closeImpactModal = () => {
-            impactModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        };
+            const closeImpactModal = () => {
+                impactModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
 
-        closeImpactModalButton.addEventListener('click', closeImpactModal);
-        impactModal.addEventListener('click', (e) => (e.target === impactModal) && closeImpactModal());
+            closeImpactModalButton.addEventListener('click', closeImpactModal);
+            impactModal.addEventListener('click', (e) => (e.target === impactModal) && closeImpactModal());
+        }
 
         // --- GESTION DES ANIMATIONS AU DÉFILEMENT ---
         const faders = document.querySelectorAll('.fade-in');
@@ -781,42 +802,31 @@
         // --- GESTION DU THÈME JOUR/NUIT ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
-        
         const lightIcon = document.getElementById('theme-toggle-light-icon');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
         const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
 
-        // Met à jour l'icône en fonction du thème
-        const updateIcon = () => {
-            if (document.documentElement.classList.contains('dark')) {
-                lightIcon.style.display = 'none';
-                darkIcon.style.display = 'block';
-                lightIconMobile.style.display = 'none';
-                darkIconMobile.style.display = 'block';
-            } else {
-                lightIcon.style.display = 'block';
-                darkIcon.style.display = 'none';
-                lightIconMobile.style.display = 'block';
-                darkIconMobile.style.display = 'none';
-            }
-        };
+        function updateIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            if (lightIcon) lightIcon.style.display = isDark ? 'none' : 'inline-block';
+            if (darkIcon) darkIcon.style.display = isDark ? 'inline-block' : 'none';
+            if (lightIconMobile) lightIconMobile.style.display = isDark ? 'none' : 'inline-block';
+            if (darkIconMobile) darkIconMobile.style.display = isDark ? 'inline-block' : 'none';
+        }
 
-        // Gère le clic sur le bouton de thème
-        const handleThemeToggle = () => {
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+        function handleThemeToggle() {
+            const root = document.documentElement;
+            const willBeDark = !root.classList.contains('dark');
+            root.classList.toggle('dark', willBeDark);
+            localStorage.setItem('theme', willBeDark ? 'dark' : 'light');
             updateIcon();
-        };
+        }
 
-        themeToggleBtn.addEventListener('click', handleThemeToggle);
-        themeToggleMobileBtn.addEventListener('click', handleThemeToggle);
-        
-        // Met à jour l'icône au chargement de la page
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', handleThemeToggle);
+        if (themeToggleMobileBtn) themeToggleMobileBtn.addEventListener('click', handleThemeToggle);
+
+        // Mettre à jour les icônes au chargement
         updateIcon();
 
         // --- GESTION DES MENUS DÉROULANTS ---
@@ -832,43 +842,45 @@
         });
 
         // --- GESTION DE L'ANIMATION DU GRAPHIQUE NPS ---
-        const npsGraph = document.getElementById('nps-graph-container');
-        const npsCircle = document.querySelector('.nps-circle-progress');
-        const npsScoreText = document.getElementById('nps-score-text');
-        const radius = npsCircle.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
-        npsCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-        npsCircle.style.strokeDashoffset = circumference;
+        (function(){
+            const npsGraph = document.getElementById('nps-graph-container');
+            const npsCircle = document.querySelector('.nps-circle-progress');
+            const npsScoreText = document.getElementById('nps-score-text');
+            if (!npsGraph || !npsCircle || !npsScoreText) return;
 
-        function setProgress(percent) {
-            const offset = circumference - percent / 10 * circumference;
-            npsCircle.style.strokeDashoffset = offset;
-        }
+            const radius = npsCircle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            npsCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            npsCircle.style.strokeDashoffset = circumference;
 
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start);
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
+            function setProgress(percent) {
+                const offset = circumference - (percent / 10) * circumference;
+                npsCircle.style.strokeDashoffset = offset;
+            }
 
-        const npsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setProgress(10); // NPS score de 10/10
-                    animateValue(npsScoreText, 0, 10, 2000);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.textContent = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            }
 
-        npsObserver.observe(npsGraph);
+            const npsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setProgress(10);
+                        animateValue(npsScoreText, 0, 10, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            npsObserver.observe(npsGraph);
+        })();
     </script>
 </body>
 </html>
