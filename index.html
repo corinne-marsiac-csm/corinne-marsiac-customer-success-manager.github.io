@@ -1,875 +1,874 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Interactif - Corinne Marsiac</title>
-    <!-- Tailwind CSS for modern, responsive styling -->
+    <title>Corinne Marsiac - Customer Success Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for creating interactive data visualizations -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts for professional typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        // Applique le thème (clair/sombre) au chargement de la page
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
     <style>
-        /* Définition de la police par défaut et des couleurs de fond */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8; /* Arrière-plan doux */
-            color: #3D3D3D;
+            font-family: 'Poppins', sans-serif;
         }
-        html {
-            scroll-behavior: smooth; /* Active le défilement fluide */
+        .text-gradient {
+            background: linear-gradient(to right, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        /* Style pour les conteneurs des graphiques, assurant la réactivité */
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 320px;
-            width: 100%;
-            max-width: 400px;
+        .btn-primary {
+            background: linear-gradient(to right, #8B5CF6, #EC4899);
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-                max-width: 500px;
-            }
+        .btn-secondary {
+            background: rgba(55, 65, 81, 0.5);
+            border: 1px solid #4B5563;
         }
-        /* Classes utilitaires pour l'accentuation des couleurs */
-        .accent-color { color: #E86A33; }
-        .bg-accent-color { background-color: #E86A33; }
-        .border-accent-color { border-color: #E86A33; }
-        
-        /* Styles pour la modale */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 50;
+        .fade-in {
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .modal-overlay.show {
-            display: flex;
+        .fade-in.visible {
             opacity: 1;
+            transform: translateY(0);
         }
-        .modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: slide-in 0.3s ease-in-out;
-            max-height: 90vh; /* Empêche le débordement sur les petits écrans */
-            overflow-y: auto; /* Permet le défilement si le contenu est trop grand */
-        }
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #999;
-        }
-        @keyframes slide-in {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Styles pour les menus déroulants du parcours professionnel */
-        .dropdown-btn {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 1.5rem;
-            text-align: left;
-            transition: background-color 0.3s ease;
-        }
-        .dropdown-btn:hover {
-            background-color: #f3f4f6;
-        }
-        .dropdown-icon {
-            transition: transform 0.3s ease;
-        }
-        .dropdown-btn.active .dropdown-icon {
-            transform: rotate(180deg);
-        }
-        .dropdown-content {
+        /* Styles pour la barre de défilement */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #E5E7EB; }
+        ::-webkit-scrollbar-thumb { background: #6D28D9; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5B21B6; }
+        .dark ::-webkit-scrollbar-track { background: #1F2937; }
+        .dark ::-webkit-scrollbar-thumb { background: #4F46E5; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
+        
+        /* Styles pour les menus déroulants */
+        .details-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
         }
-        .dropdown-content.show {
-            max-height: 500px; /* Ajusté pour permettre plus de contenu */
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+        .details-content.open {
+            max-height: 500px; /* Hauteur suffisante pour le contenu */
+            opacity: 1;
         }
-        
-        /* Style pour l'image dans la modale du témoignage */
-        .testimonial-img {
-             max-width: 100%;
-             height: auto;
-             border-radius: 0.75rem;
-             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-             margin-top: 1rem;
+        .details-trigger .chevron {
+            transition: transform 0.3s ease-in-out;
         }
-        
-        /* Style pour les boutons de téléchargement/réservation */
-        .action-button {
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             padding: 1.5rem;
-             border-radius: 1rem;
-             font-weight: 700;
-             text-align: center;
-             transition: transform 0.2s ease, box-shadow 0.2s ease;
-             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .details-trigger.open .chevron {
+            transform: rotate(180deg);
         }
 
-        /* Styles pour la barre de navigation */
-        .header-bg {
-            background-color: #1f2937;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* Animation pour les pastilles de mots-clés */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
-        .main-content {
-            scroll-behavior: smooth;
+        .keyword-pill {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Styles pour le graphique NPS */
+        .nps-circle-progress {
+            transition: stroke-dashoffset 2s ease-out;
+            stroke-linecap: round;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
 
-    <!-- Barre de navigation -->
-    <header class="header-bg text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-wide md:hidden">Corinne MARSIAC</h1>
-            <nav class="hidden md:flex space-x-6 mx-auto">
-                <a href="#header" class="text-sm font-medium hover:text-gray-300 transition duration-300">À propos</a>
-                <a href="#skills-section" class="text-sm font-medium hover:text-gray-300 transition duration-300">Compétences</a>
-                <a href="#experience-section" class="text-sm font-medium hover:text-gray-300 transition duration-300">Expérience</a>
-                <a href="#education-section" class="text-sm font-medium hover:text-gray-300 transition duration-300">Formations</a>
-                <a href="#interests-section" class="text-sm font-medium hover:text-gray-300 transition duration-300">Centres d'intérêt</a>
-                <a href="#contact" class="text-sm font-medium hover:text-gray-300 transition duration-300">Contact</a>
-            </nav>
-            <!-- Menu mobile -->
-            <button id="menu-button" class="md:hidden text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
-        <!-- Menu mobile déroulant -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
-            <a href="#header" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">À propos</a>
-            <a href="#skills-section" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">Compétences</a>
-            <a href="#experience-section" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">Expérience</a>
-            <a href="#education-section" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">Formations</a>
-            <a href="#interests-section" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">Centres d'intérêt</a>
-            <a href="#contact" class="block py-2 px-6 text-sm font-medium text-white hover:bg-gray-700 transition duration-300">Contact</a>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 main-content">
-
-        <!-- Section d'en-tête (Header) -->
-        <header id="header" class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Corinne MARSIAC</h1>
-            <h2 class="text-2xl md:text-3xl font-medium accent-color mt-4">Customer Success Manager</h2>
-            <p class="max-w-3xl mx-auto mt-8 text-lg md:text-xl font-semibold accent-color">
-                "Une bonne technologie ne suffit pas, c'est l'expérience humaine qui fait toute la différence."
-            </p>
-            <p class="max-w-3xl mx-auto mt-6 text-base text-gray-500">
-                Professionnelle de la relation client avec plus de 10 ans d’expérience dans le SaaS RH B2B, je transforme l’expérience client en levier d’adoption, de fidélisation, de rétention et de croissance durable.
-            </p>
-            <div class="max-w-3xl mx-auto mt-10 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-500">
-                <span>06 51 02 56 72</span>
-                <span class="text-gray-300">|</span>
-                <span>corinne.marsiac.csm@gmail.com</span>
-                <span class="text-gray-300">|</span>
-                <span>92500 Rueil-Malmaison</span>
-                <span class="text-gray-300 hidden md:inline">|</span>
-                <span class="font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded-full text-xs mt-2 md:mt-0">Remote-friendly</span>
-            </div>
-        </header>
-
-        <!-- Nouveau bandeau de mots-clés, sous forme de pastilles -->
-        <div class="mb-10 flex flex-wrap justify-center gap-2 sm:gap-3">
-            <!-- Chaque mot-clé est une pastille -->
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">Customer-centric</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">SaaS</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">Relation client B2B/B2C</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">Onboarding & Adoption</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">Proactivité</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">KPI-driven</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">C-Levels</span>
-            <span class="bg-orange-100 text-orange-700 font-medium text-sm px-3 py-1 rounded-full">Revenue Growth</span>
-        </div>
-
-        <!-- Section des métriques clés -->
-        <section id="metrics" class="mb-20">
-             <h3 class="text-2xl font-bold text-center text-gray-800 mb-2">Résultats Clés</h3>
-             <p class="text-center text-gray-500 mb-10">Un aperçu des indicateurs de performance et des succès quantifiables.</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('metrics', 'metric_nps')">
-                    <p class="text-4xl font-bold accent-color">+35</p>
-                    <p class="text-sm text-gray-500 mt-2">NPS de la BU</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('metrics', 'metric_projects')">
-                    <p class="text-4xl font-bold accent-color">90%</p>
-                    <p class="text-sm text-gray-500 mt-2">Projets livrés à temps</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('metrics', 'metric_csat')">
-                    <p class="text-4xl font-bold accent-color">70%</p>
-                    <p class="text-sm text-gray-500 mt-2">CSAT France</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('metrics', 'metric_urssaf')">
-                    <p class="text-4xl font-bold accent-color">+100k€</p>
-                    <p class="text-sm text-gray-500 mt-2">Crédits URSSAF récupérés</p>
-                </button>
-            </div>
-        </section>
-
-        <!-- Section des compétences et de l'impact -->
-        <section id="skills-section" class="mb-20">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-2">Compétences & Impact</h3>
-            <p class="text-center text-gray-500 mb-12">Cette section présente un aperçu de mes compétences, alliant une forte intelligence émotionnelle à une maîtrise technique d'outils modernes, et illustre mon impact sur la satisfaction client.</p>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <h4 class="text-xl font-bold text-center text-gray-700 mb-4">Soft Skills</h4>
-                    <div class="chart-container">
-                        <canvas id="softSkillsChart"></canvas>
-                    </div>
+    <!-- Barre de Navigation -->
+    <nav class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#accueil" class="text-2xl font-bold text-gradient">Corinne Marsiac</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#a-propos" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">À Propos</a>
+                    <a href="#parcours" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Parcours</a>
+                    <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Réussite Clé</a>
+                    <a href="#competences" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Compétences</a>
+                    <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300 text-xl">
+                        <i class="fas fa-sun" id="theme-toggle-light-icon"></i>
+                        <i class="fas fa-moon" id="theme-toggle-dark-icon"></i>
+                    </button>
+                    <a href="#contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <h4 class="text-xl font-bold text-center text-gray-700 mb-4">Transformation Client</h4>
-                     <p class="text-center text-sm text-gray-500 mb-4">D'un détracteur à un promoteur en 6 mois.</p>
-                    <div class="chart-container" style="height: 360px; max-height: 400px;">
-                        <canvas id="npsChart"></canvas>
-                    </div>
+                <div class="md:hidden flex items-center gap-4">
+                     <button id="theme-toggle-mobile" class="text-gray-600 dark:text-gray-300 text-xl">
+                        <i class="fas fa-sun" id="theme-toggle-light-icon-mobile"></i>
+                        <i class="fas fa-moon" id="theme-toggle-dark-icon-mobile"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="focus:outline-none text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <a href="#a-propos" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">À Propos</a>
+            <a href="#parcours" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Parcours</a>
+            <a href="#reussite" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Réussite Clé</a>
+            <a href="#competences" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Compétences</a>
+            <a href="#contact" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
+        </div>
+    </nav>
 
-             <!-- Section des langues -->
-            <div class="mt-12 bg-white p-8 rounded-xl shadow-sm border border-gray-100 transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                <h4 class="text-xl font-bold text-center text-gray-700 mb-6">Langues</h4>
-                <div class="flex flex-wrap justify-center gap-4 text-center">
-                    <div class="bg-gray-100 px-6 py-4 rounded-xl">
-                        <p class="font-bold text-lg text-gray-800">Français</p>
-                        <p class="text-sm text-gray-600 mt-1">Langue maternelle</p>
-                    </div>
-                     <div class="bg-gray-100 px-6 py-4 rounded-xl">
-                        <p class="font-bold text-lg text-gray-800">Anglais</p>
-                        <p class="text-sm text-gray-600 mt-1">Professionnel (B2)</p>
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Section Accueil -->
+        <section id="accueil" class="min-h-[90vh] flex items-center">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                <div class="md:col-span-3">
+                    <span class="font-semibold text-violet-600 dark:text-violet-400">CUSTOMER SUCCESS MANAGER</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mt-2 animate-pulse">
+                        Je transforme l'expérience client en levier de croissance durable.
+                    </h1>
+                    <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+                        Plus de 10 ans d'expérience en SaaS B2B.
+                    </p>
+                    <div class="mt-8 flex gap-4">
+                        <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">Prenons contact</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Section des compétences techniques -->
-             <div class="mt-12 bg-white p-8 rounded-xl shadow-sm border border-gray-100 transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                <h4 class="text-xl font-bold text-center text-gray-700 mb-6">Compétences Techniques</h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-                    <div>
-                        <h5 class="font-bold mb-3">Bureautique & Data</h5>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Microsoft Office</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Microsoft Project</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">PowerBI</span>
-                        </div>
-                    </div>
-                    <div>
-                        <h5 class="font-bold mb-3">IA & Outils Créatifs</h5>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">ChatGPT</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Canva</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Midjourney</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Wordpress</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">SEO</span>
-                        </div>
-                    </div>
-                     <div>
-                        <h5 class="font-bold mb-3">CRM & Communication</h5>
-                        <div class="flex flex-wrap gap-2">
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">HubSpot</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Zendesk</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Siebel CRM</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Slack</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Notion</span>
-                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Calendly</span>
-                        </div>
-                    </div>
+                <div class="md:col-span-2 flex justify-center" id="nps-graph-container">
+                    <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 200 200">
+                        <defs>
+                            <linearGradient id="npsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#A78BFA" />
+                                <stop offset="100%" style="stop-color:#F472B6" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="80" fill="none" class="stroke-gray-200 dark:stroke-gray-700" stroke-width="20"></circle>
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="url(#npsGradient)" stroke-width="20" class="nps-circle-progress" style="transform: rotate(-90deg); transform-origin: 50% 50%; stroke-dasharray: 502.65; stroke-dashoffset: 502.65;"></circle>
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="text-5xl font-bold fill-gray-800 dark:fill-gray-200" id="nps-score-text">0</text>
+                        <text x="50%" y="65%" text-anchor="middle" class="text-lg font-semibold fill-gray-500 dark:fill-gray-400">Score NPS</text>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <!-- Section du parcours professionnel (avec menus déroulants) -->
-        <section id="experience-section" class="mb-20">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-12">Parcours Professionnel</h3>
-            <div class="max-w-3xl mx-auto space-y-4">
-
-                <!-- Élément déroulant 1 : Customer Success Manager - Bootcamp -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">
-                        <div class="flex-1">
-                            <h4 class="text-xl font-bold text-gray-800">Customer Success Manager - Bootcamp</h4>
-                            <p class="font-medium text-gray-800">Kare School | <span class="text-sm text-gray-500">08/2025</span></p>
-                        </div>
-                        <svg class="dropdown-icon w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="dropdown-content">
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</li>
-                            <li>Pilotage des KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR …)</li>
-                            <li>Détection des opportunités de croissance : upsell, cross-sell, renouvellement</li>
-                            <li>Workflows d’automatisation dans des CRM (HubSpot, Zendesk)</li>
-                            <li>Élaboration de personas, Customer Journey maps, Health score, et playbooks</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Élément déroulant 2 : Payroll Implementation Project Manager -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">
-                        <div class="flex-1">
-                            <h4 class="text-xl font-bold text-gray-800">Payroll Implementation Project Manager</h4>
-                            <p class="font-medium text-gray-800">ADP France, Paie SIRH, Nanterre | <span class="text-sm text-gray-500">02/2022 - 11/2023</span></p>
-                        </div>
-                        <svg class="dropdown-icon w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="dropdown-content">
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Piloter des projets de mise en place et de migrations auprès de groupes internationaux</li>
-                            <li>Analyser les besoins clients, et rédiger les spécifications techniques</li>
-                            <li>Paramétrer, tester les solutions, assurer le go-live, suivi post go-live et passation interne</li>
-                            <li>Onboarding utilisateurs : formations à distance, FAQ, documentation, bilans de projet</li>
-                            <li>Collaboration transverse avec Sales, AM, service client et équipes techniques</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Élément déroulant 3 : Local Payroll Account Manager -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">
-                        <div class="flex-1">
-                            <h4 class="text-xl font-bold text-gray-800">Local Payroll Account Manager</h4>
-                            <p class="font-medium text-gray-800">ADP France, Paie SIRH, Nanterre | <span class="text-sm text-gray-500">09/2014 - 01/2022</span></p>
-                        </div>
-                        <svg class="dropdown-icon w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="dropdown-content">
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Gérer un portefeuille de 400 paies de clients mid-market internationaux</li>
-                            <li>Animer les touchpoints stratégiques : atelier de formation, monthly review et QBR</li>
-                            <li>Détecter les signaux faibles de désengagement et mise en œuvre des actions préventives</li>
-                            <li>Détecter des opportunités d’upsell/cross-sell pour générer du growth revenue</li>
-                            <li>Piloter les prestations out-of-scope & add-ons pour favoriser la croissance du MRR</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Nouvel élément déroulant 4 : Gestionnaire paie -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">
-                        <div class="flex-1">
-                            <h4 class="text-xl font-bold text-gray-800">Gestionnaire paie</h4>
-                            <p class="font-medium text-gray-800">Nibelis, Levallois-Perret | <span class="text-sm text-gray-500">09/2013 - 08/2014</span></p>
-                        </div>
-                        <svg class="dropdown-icon w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="dropdown-content">
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Gestion complète du cycle de paie en SaaS B2B</li>
-                            <li>Conseil réglementaire et support client</li>
-                            <li>Remontée de feedbacks pour amélioration produit</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Nouvel élément déroulant 5 : Conseillère bancaire à distance -->
-                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">
-                        <div class="flex-1">
-                            <h4 class="text-xl font-bold text-gray-800">Conseillère bancaire à distance</h4>
-                            <p class="font-medium text-gray-800">Crédit Agricole du Nord-Est, Reims | <span class="text-sm text-gray-500">09/2011 – 06/2012</span></p>
-                        </div>
-                        <svg class="dropdown-icon w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="dropdown-content">
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Gestion relation client à distance, conseil et ventes additionnelles</li>
-                            <li>Détection d’opportunités cross-sell/upsell</li>
-                            <li>Suivi administratif et mise à jour CRM</li>
-                        </ul>
-                    </div>
-                </div>
-
+        <!-- Section Mots-clés -->
+        <section class="py-24 fade-in">
+            <div class="flex flex-wrap justify-center items-center gap-4">
+                <span class="keyword-pill bg-violet-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: 0s;">Customer-centric</span>
+                <span class="keyword-pill bg-pink-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -1s;">SaaS</span>
+                <span class="keyword-pill bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -2s;">Relation client B2B/B2C</span>
+                <span class="keyword-pill bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -3s;">Onboarding & Adoption</span>
+                <span class="keyword-pill bg-fuchsia-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -4s;">Proactivité</span>
+                <span class="keyword-pill bg-violet-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -5s;">KPI-driven</span>
+                <span class="keyword-pill bg-pink-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: 0.5s;">C-Levels</span>
+                <span class="keyword-pill bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -1.5s;">Revenue Growth</span>
             </div>
         </section>
 
-        <!-- Section des réalisations -->
-        <section class="mb-16">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-10">Réalisations</h3>
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6 transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg cursor-pointer" onclick="showModal('vision', 'plus_grande_reussite')">
-                    <ul class="space-y-4 text-gray-700 font-medium">
-                        <li class="flex items-start">
-                            <span class="mr-3 text-lg">✅</span>
-                            <span>Coordonner l’implémentation de solutions SIRH, en lien avec des équipes pluridisciplinaires et des enjeux de déploiement à grande échelle</span>
+        <!-- Section Impact chiffré -->
+        <section id="impact" class="py-24 fade-in">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-4"><span class="text-gradient">Impact</span> chiffré</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12 text-lg">
+                    Un aperçu des indicateurs de performance et des succès quantifiables. Cliquez pour en savoir plus.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <button class="impact-trigger group" data-key="nps">
+                    <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">+35</p>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">NPS de la BU</p>
+                </button>
+                <button class="impact-trigger group" data-key="projects">
+                    <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">90%</p>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">Projets livrés à temps</p>
+                </button>
+                <button class="impact-trigger group" data-key="csat">
+                    <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">70%</p>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">CSAT France</p>
+                </button>
+                <button class="impact-trigger group" data-key="finance">
+                    <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">+100k€</p>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">Impact financier client</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section À Propos -->
+        <section id="a-propos" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient">Ma Vision</span> du Customer Success</h2>
+            <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-lg">
+                    Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le CSM est le trait d'union stratégique entre l'humain, le produit et la valeur d'usage. Mon rôle est de <strong>coacher le client</strong> pour l'aider à <strong>atteindre ses objectifs</strong>, tout en veillant à ce qu'ils soient alignés avec les nôtres afin de <strong>favoriser la croissance</strong> de mon entreprise.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                    Dans un monde où la technologie évolue sans cesse, je suis convaincue que c'est <strong>l'humain qui fait la différence</strong>. Je m'engage à valoriser chaque interaction, à prévenir les irritants et à <strong>bâtir des relations de confiance durables</strong> qui impactent concrètement la <strong>rétention</strong> et la <strong>satisfaction</strong>.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Section Parcours -->
+        <section id="parcours" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16"><span class="text-gradient">Parcours</span> Professionnel & Formations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Colonne Expériences -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i class="fas fa-briefcase text-violet-500 dark:text-violet-400"></i> Expériences</h3>
+                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
+                        <!-- Expérience 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">02/2022 - 11/2023</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Payroll Implementation Project Manager</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">ADP France, Nanterre</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li><strong>Analyse des besoins</strong> fonctionnels et réglementaires des clients</li>
+                                    <li><strong>Rédaction des spécifications techniques</strong> en lien avec la Product Team</li>
+                                    <li>Animation de <strong>comités de projet</strong> (kick-off, comités de pilotage, clôture)</li>
+                                    <li><strong>Paramétrage</strong> des environnements clients sur les portails ADP</li>
+                                    <li><strong>Réalisation des tests, mise en production</strong>, suivi post-déploiement</li>
+                                    <li><strong>Onboarding des utilisateurs, formations à distance</strong>, accompagnement personnalisé</li>
+                                    <li>Gestion du backlog client, traitement des tickets et suivi des incidents</li>
+                                    <li class="font-semibold text-green-600 dark:text-green-400">Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Expérience 2 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2014 - 01/2022</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Local Payroll Account Manager</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">ADP France, Nanterre</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li>Production mensuelle de 400 paies multi-conventions : saisie, contrôle, DSN</li>
+                                    <li>Soldes de tout compte et documents de sortie</li>
+                                    <li><strong>Onboarding</strong> des utilisateurs et accompagnement sur les portails</li>
+                                    <li><strong>Support expert et customer care</strong> : tickets complexes, anomalies, backlog</li>
+                                    <li>Monthly review et <strong>QBR</strong> (satisfaction, NPS, détection d’irritants)</li>
+                                    <li>Détection des opportunités (<strong>upsell/cross-sell</strong>) et risques de <strong>churn</strong></li>
+                                    <li>Pilotage de prestations out-of-scope et d’add-ons → <strong>croissance du MRR</strong></li>
+                                    <li>Veille sociale</li>
+                                    <li class="font-semibold text-green-600 dark:text-green-400">Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Expérience 3 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2013 - 08/2014</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Gestionnaire paie</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Nibelis, Levallois-Perret</p>
+                            </button>
+                             <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li><strong>Customer care et support de premier niveau</strong> auprès des clients autonomes pour garantir une adoption fluide et sécurisée de la solution.</li>
+                                    <li><strong>Vulgarisation des sujets</strong> réglementaires et contractuels auprès d’interlocuteurs non spécialistes.</li>
+                                    <li>Suivi proactif des demandes clients et <strong>remontée des feedbacks</strong> pour contribuer à l’amélioration continue du produit.</li>
+                                    <li>Collecte, contrôle et saisie des éléments de paie afin d’assurer la fiabilité des données et la conformité légale.</li>
+                                    <li>Établissement des bulletins de salaire, déclarations sociales, soldes de tout compte et documents de sortie.</li>
+                                    <li><strong>Paramétrage de base et mise à jour de la solution</strong> en fonction des besoins clients.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Expérience 4 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">04/2013 - 07/2013</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Assistante RH</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Groupe BOVIS, Conflans-Sainte-Honorine</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li>Recueil, fiabilisation et transmission de données sociales (absences, heures, primes) en coordination avec la DAF.</li>
+                                    <li><strong>Suivi individualisé</strong> des collaborateurs : gestion des obligations légales (visites médicales, formations, dossiers RH), réponses aux questions terrain.</li>
+                                    <li>Communication quotidienne avec les chauffeurs, managers et responsable de site pour fluidifier les process.</li>
+                                    <li>Collaboration transversale avec le Directeur de site, la DAF, le service paie et l’équipe comptable pour fiabiliser les process et <strong>garantir une expérience fluide</strong> aux collaborateurs.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Expérience 5 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2011 - 06/2012</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Conseillère bancaire à distance</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Crédit Agricole Nord Est, Reims</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li>Gestion des appels entrants des clients et prospects sur le périmètre Nord-Est.</li>
+                                    <li><strong>Traitement des demandes des clients</strong> particuliers et accompagnement dans leurs démarches.</li>
+                                    <li>Qualification des besoins et orientation personnalisée vers les interlocuteurs adéquats (agence, support technique, expert).</li>
+                                    <li>Conseil et vente de produits bancaires adaptés aux besoins (comptes bancaires, livrets, cartes bancaires, assurances).</li>
+                                    <li><strong>Détection d’opportunités de cross-sell et d’upsell</strong>.</li>
+                                    <li><strong>Contrôle des pièces pour conformité</strong>.</li>
+                                    <li>Suivi administratif des dossiers clients et mise à jour des informations dans les outils internes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Colonne Formations -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i class="fas fa-graduation-cap text-pink-500 dark:text-pink-400"></i> Formations & Certifications</h3>
+                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
+                        <!-- Formation 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2025 (en cours)</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Bootcamp Customer Success Manager</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Kare School</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li><strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong></li>
+                                    <li>Pilotage des <strong>KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR …)</strong></li>
+                                    <li>Détection des opportunités de croissance : <strong>upsell, cross-sell, renouvellement</strong></li>
+                                    <li><strong>Workflows d’automatisation</strong> dans des CRM (HubSpot, Zendesk)</li>
+                                    <li>Élaboration de <strong>personas, Customer Journey maps, Health score, et playbooks</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                         <!-- Formation 2 -->
+                         <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2025 (en cours)</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">CCSM level 1 - Success Hacker</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                    <li>Structuration du rôle de <strong>CSM</strong> dans l'organisation.</li>
+                                    <li>Mise en place d'un <strong>onboarding</strong> client efficace.</li>
+                                    <li>Prévention du <strong>churn</strong> & gestion des risques.</li>
+                                    <li>Création de <strong>plan de succès</strong> client et suivi de l'<strong>adoption</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Formation 3 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                             <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2024</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Formation en Stratégie digitale</h4>
+                                     <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Online Sales Success</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <p class="text-gray-600 dark:text-gray-400">
+                                    Marketing digital, E-commerce, ROI, forecast, SEO, Google Ads, Expérience utilisateurs.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Formation 4 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                             <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2022</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Certificat de Gestion de projet</h4>
+                                     <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">UNOW</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <p class="text-gray-600 dark:text-gray-400">
+                                    Planification, gestion des risques, prévisions, SWOT, PDCA, matrice RACI.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Formation 5 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                             <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2013</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Formation de Gestionnaire Paie</h4>
+                                     <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">IFOCOP (Mention Très Bien)</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <p class="text-gray-600 dark:text-gray-400">
+                                    Paie, administration du personnel, Droit social, masse salariale, GPEC, veille paie/RH.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Formation 6 -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                             <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2010</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Master 2 Management</h4>
+                                     <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-700 dark:text-gray-300">Université de Reims</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <p class="text-gray-600 dark:text-gray-400">
+                                    Marketing, techniques de vente, outils qualité, amélioration continue, Supply chain management, analyse de données.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Réussite Clé -->
+        <section id="reussite" class="py-24 text-center fade-in">
+             <h2 class="text-3xl font-bold mb-8"><span class="text-gradient">Projet :</span> mise en place d’une stratégie de rétention client</h2>
+             <button id="open-modal-button" class="btn-primary text-white px-8 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">
+                <i class="fas fa-circle-info mr-2"></i> Plus de détails
+             </button>
+        </section>
+        
+        <!-- Section Compétences -->
+        <section id="competences" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16">Mes <span class="text-gradient">Compétences</span> & Outils</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-heart"></i> Soft Skills</h4>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Intelligence émotionnelle</li>
+                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Proactivité & Orientée solution</li>
+                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Esprit d'analyse & Adaptabilité</li>
+                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Collaboration & Communication</li>
+                    </ul>
+                </div>
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-language"></i> Langues</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <img src="https://flagcdn.com/w40/fr.png" alt="Drapeau Français" class="w-6 h-auto rounded-sm">
+                            <span>Français : Langue maternelle</span>
                         </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-lg">✅</span>
-                            <span>Former et accompagner des clients dans la prise en main d’outils complexes, avec une approche pédagogique et personnalisée</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-lg">✅</span>
-                            <span>Être la voix du client : remonter les irritants, partager les feedbacks terrain et contribuer à l’amélioration continue des produits et services</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-lg">✅</span>
-                            <span>Création de guides internes pour faciliter la prise en main de paramétrages spécifiques par les collègues → diffusion des bonnes pratiques et renforcement de l’autonomie des équipes</span>
+                        <li class="flex items-center gap-3">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="Drapeau Royaume-Uni" class="w-6 h-auto rounded-sm">
+                            <span>Anglais : Professionnel (B2)</span>
                         </li>
                     </ul>
                 </div>
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                     <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('vision', 'plus_grande_reussite')">
-                        <span class="text-4xl">🏆</span>
-                        <p class="font-medium text-gray-700">Une de mes plus grandes réussites</p>
-                    </button>
-                    <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('vision', 'temoignage_client')">
-                        <span class="text-4xl">💌</span>
-                        <p class="font-medium text-gray-700">Témoignage client</p>
-                    </button>
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-headset"></i> CRM & Support</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.2s;">HubSpot</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.4s;">Zendesk</span>
+                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.6s;">Siebel CRM</span>
+                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.8s;">Confluence</span>
+                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1s;">Slack</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.2s;">Notion</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.4s;">Calendly</span>
+                    </div>
+                </div>
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-cogs"></i> Data, IA & Créatifs</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.6s;">Microsoft Office</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.8s;">PowerBI</span>
+                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2s;">ChatGPT</span>
+                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.2s;">Canva</span>
+                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.4s;">Wordpress</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.6s;">Elementor</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.8s;">Gemini</span>
+                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -3s;">YoastSEO</span>
+                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -3.2s;">Adobe Express</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section formation et certifications -->
-        <section id="education-section" class="mb-16">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-10">Formations & Certifications</h3>
-            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Formations -->
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('education', 'formation_strategie_digitale')">
-                    <span class="text-4xl">💡</span>
-                    <p class="font-medium text-gray-700">Stratégie digitale - Online Sales Success (2024)</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('education', 'formation_gestionnaire_paie')">
-                    <span class="text-4xl">🎓</span>
-                    <p class="font-medium text-gray-700">Gestionnaire Paie - IFOCOP Cergy (2013)</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('education', 'master_management')">
-                    <span class="text-4xl">📚</span>
-                    <p class="font-medium text-gray-700">Master 2 Management - Université de Reims (2010)</p>
-                </button>
-                <!-- Certifications -->
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('education', 'certificat_gestion_projet')">
-                    <span class="text-4xl">✅</span>
-                    <p class="font-medium text-gray-700">Certificat Gestion de projet - UNOW (2022)</p>
-                </button>
-                 <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('education', 'ccsm')">
-                    <span class="text-4xl">🏆</span>
-                    <p class="font-medium text-gray-700">CCSM level 1 - SuccessHacker (en cours)</p>
-                </button>
+        <!-- Section Pour en savoir plus -->
+        <section id="plus-sur-moi" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16">Pour en <span class="text-gradient">savoir plus</span> sur moi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Si j'étais...</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-500 dark:text-pink-400"></i> Une fleur de lotus, pour la résilience.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-500 dark:text-pink-400"></i> Tornade des X-Men, pour la maîtrise des éléments.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-500 dark:text-pink-400"></i> One Piece, pour l'amitié et l'aventure.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-500 dark:text-pink-400"></i> Un labrador, pour la fidélité.</li>
+                    </ul>
+                </div>
+                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Lectures & Podcasts du moment</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-500 dark:text-pink-400"></i> Practical Customer Success Management - Rick Adams</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-500 dark:text-pink-400"></i> Le Client par Marine Deck</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-500 dark:text-pink-400"></i> Galères de CS! d'Allison Adelise</li>
+                    </ul>
+                </div>
+                 <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl md:col-span-2 transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Centres d'intérêt & Hobbies</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🍰 Pâtisserie antillaise</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J'aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🌸 Culture japonaise & Mangas</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Depuis l'enfance, l'Asie me fascine. Mon goût pour les mangas et les animés s'est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🤖 Innovation tech (IA, no-code)</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>L'IA, le no-code et l'automatisation sont des leviers qui transforment nos façons de travailler. J'y vois une formidable opportunité de simplification, de productivité et de créativité.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>📈 Marketing digital & UX</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Formée en stratégie digitale, j'aime comprendre les comportements utilisateurs et imaginer des parcours plus intuitifs, en m'intéressant à l'UX, la création de visuels et la conception de sites web.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🌱 Développement personnel</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Apprendre à mieux se connaître, à gérer ses émotions et à rester aligné avec ses valeurs est, selon moi, un travail essentiel pour s'épanouir dans la sphère privée comme professionnelle.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🎮 Jeux vidéo</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Autrefois passionnée de RPG en ligne pour l'aspect stratégique et l'esprit de communauté, je privilégie aujourd'hui des jeux familiaux, propices aux rires partagés.</p>
+                            </div>
+                        </div>
+                         <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🎵 Musique</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>J'apprécie d'écouter de la musique pour me détendre ou faire du sport. Mes goûts sont plutôt éclectiques, je peux passer des "4 Saisons" de Vivaldi à Shawn Mendez.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="details-trigger text-left w-full">
+                                <h5 class="font-semibold flex justify-between items-center">
+                                    <span>🏃 Gestion de projet agile (SCRUM)</span>
+                                    <i class="fas fa-chevron-down chevron text-xs"></i>
+                                </h5>
+                            </button>
+                            <div class="details-content text-sm mt-2">
+                                <p>Je suis convaincue que les méthodologies agiles ne s'appliquent pas uniquement au monde de l'entreprise : elles sont aussi de puissants outils d'organisation personnelle.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Section de la vision professionnelle -->
-        <section class="mb-16">
-             <h3 class="text-2xl font-bold text-center text-gray-800 mb-10">Projet Professionnel & Vision</h3>
-             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('vision', 'projet_pro')">
-                    <span class="text-4xl">💡</span>
-                    <p class="font-medium text-gray-700">Mon projet professionnel</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('vision', 'vision_csm')">
-                    <span class="text-4xl">🎯</span>
-                    <p class="font-medium text-gray-700">Ma vision du métier de Customer Success Manager</p>
-                </button>
+        <!-- Section Contact -->
+        <section id="contact" class="py-24 fade-in">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold">Envie d’<span class="text-gradient">échanger</span> ?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-4 mb-8 max-w-2xl mx-auto">N'hésitez pas à me contacter ou à réserver un créneau pour échanger.</p>
+                <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-700 dark:text-gray-300">
+                    <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
+                    <a href="https://drive.google.com/file/d/1eJvyycRG6T2qSLvG_r4EtUaxwRosi_FE/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> Télécharger mon CV</a>
+                    <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
+                        <i class="fas fa-calendar-check"></i> Réserver un échange
+                    </a>
+                    <a href="#accueil" class="btn-primary text-white w-12 h-12 rounded-full hover:opacity-90 transition duration-300 flex items-center justify-center text-2xl">
+                        ⏫
+                    </a>
+                </div>
             </div>
         </section>
-
-        <!-- Section des centres d'intérêt -->
-        <section id="interests-section" class="mb-16">
-             <h3 class="text-2xl font-bold text-center text-gray-800 mb-10">Centres d'intérêt</h3>
-             <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'lectures')">
-                    <span class="text-4xl">📖</span>
-                    <p class="font-medium text-gray-700">Mes lectures et podcasts du moment</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'innovation')">
-                    <span class="text-4xl">🤖</span>
-                    <p class="font-medium text-gray-700">Innovation technologique (IA, no-code, data)</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'gestion_projet')">
-                    <span class="text-4xl">🎯</span>
-                    <p class="font-medium text-gray-700">Gestion de projet agile</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'developpement_personnel')">
-                    <span class="text-4xl">🌱</span>
-                    <p class="font-medium text-gray-700">Développement personnel</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'marketing_digital')">
-                    <span class="text-4xl">💡</span>
-                    <p class="font-medium text-gray-700">Marketing digital et UX</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'mode_eco')">
-                    <span class="text-4xl">🌍</span>
-                    <p class="font-medium text-gray-700">Mode éco-responsable, retail & grande consommation</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'mangas')">
-                    <span class="text-4xl">📚</span>
-                    <p class="font-medium text-gray-700">Culture japonaise, mangas et animés</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'patisserie')">
-                    <span class="text-4xl">🍰</span>
-                    <p class="font-medium text-gray-700">Pâtisserie antillaise et française</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'jeux_video')">
-                    <span class="text-4xl">🎮</span>
-                    <p class="font-medium text-gray-700">Jeux vidéo</p>
-                </button>
-                <button type="button" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-4 text-left cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-color transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg" onclick="showModal('interests', 'musique')">
-                    <span class="text-4xl">🎧</span>
-                    <p class="font-medium text-gray-700">Musique</p>
-                </button>
-            </div>
-        </section>
-
-        <!-- Section d'actions (téléchargement et rendez-vous) -->
-        <section id="contact" class="mb-16">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-10">Actions</h3>
-            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Mise à jour du lien pour ouvrir le CV PDF dans un nouvel onglet -->
-                <a href="https://drive.google.com/file/d/1eJvyycRG6T2qSLvG_r4EtUaxwRosi_FE/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="action-button bg-gray-100 text-gray-800 hover:bg-gray-200">
-                    <span class="text-4xl mr-4">📄</span>
-                    Télécharger mon CV
-                </a>
-                <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="action-button bg-accent-color text-white hover:bg-orange-600">
-                    <span class="text-4xl mr-4">📅</span>
-                    Réserver un créneau sur Calendly
-                </a>
-            </div>
-        </section>
-
     </main>
 
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="font-bold text-lg">Contact</p>
-            <p class="mt-2 text-gray-300">N'hésitez pas à me contacter pour toute opportunité.</p>
-            <div class="mt-4 flex justify-center items-center space-x-6 text-sm text-gray-300">
-                 <a href="mailto:corinne.marsiac.csm@gmail.com" class="hover:text-white">corinne.marsiac.csm@gmail.com</a>
-                 <span class="text-gray-500">|</span>
-                 <a href="https://www.linkedin.com/in/corinne-marsiac-csm/" target="_blank" class="hover:text-white">LinkedIn</a>
-            </div>
+    <footer class="text-center py-8 text-gray-500 dark:text-gray-500 text-sm border-t border-gray-200 dark:border-gray-800">
+        <div class="flex justify-center items-center gap-4">
+            <p class="text-violet-500 dark:text-violet-400">© 2025 Corinne MARSIAC CSM. Tous droits réservés.</p>
+            <a href="#accueil" class="text-gray-500 dark:text-gray-400 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300 text-xl"><i class="fab fa-github"></i></a>
         </div>
     </footer>
 
-    <!-- Modale générique pour les détails -->
-    <div id="interestModal" class="modal-overlay" onclick="hideModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-button" onclick="hideModal()">&times;</span>
-            <h4 id="modalTitle" class="text-2xl font-bold text-gray-800 mb-4"></h4>
-            <p id="modalBody" class="text-gray-600"></p>
+    <!-- Modal pour la Réussite Clé -->
+    <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative">
+            <button id="close-success-modal-button" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-4 text-gradient">De détracteur (NPS 0) à promoteur (NPS 9)</h3>
+            <div class="text-gray-700 dark:text-gray-300 space-y-4">
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-violet-600 dark:text-violet-400">Le Contexte</h4>
+                    <p>Nouvellement arrivée dans un service utilisant un logiciel et des process différents de mon précédent poste, j’ai dû m’adapter rapidement. Ma manager m’a confié un portefeuille sensible, dont une cliente gérant 4 entités françaises avec un backlog conséquent. Parmi les points critiques figuraient quatre crédits URSSAF en attente, pour un montant total proche de 100 k€. Par ailleurs, cette cliente, habituée à gérer plusieurs pays, maîtrisait mal les spécificités liées aux processus français.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-violet-600 dark:text-violet-400">Mes Actions</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Posture proactive :</strong> Plutôt que de la voir comme une "cliente difficile", j'ai pris le temps de l'écouter activement et d'échanger avec elle pour comprendre ses attentes, clarifier nos processus et la rassurer.</li>
+                        <li><strong>Accompagnement dédié :</strong> Mise en place de points de suivi réguliers pour avoir des feedbacks clients réguliers, et avoir une approche proactive.</li>
+                        <li><strong>Initiative :</strong> J'ai géré directement les échanges avec les organismes sociaux pour accélérer les dossiers bloqués et restaurer la confiance, même si cela sortait de mon périmètre.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-green-600 dark:text-green-400">Les Résultats</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-bold text-green-600 dark:text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li>
+                        <li><span class="font-bold text-green-600 dark:text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li>
+                        <li><span class="font-bold text-green-600 dark:text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li>
+                        <li><span class="font-bold text-green-600 dark:text-green-400">Commercial :</span> Cross-sell d'un nouveau service réussi.</li>
+                        <li><span class="font-bold text-green-600 dark:text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour les Chiffres Clés -->
+    <div id="impact-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative">
+            <button id="close-impact-modal-button" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 id="impact-modal-title" class="text-2xl font-bold mb-4 text-gradient"></h3>
+            <p id="impact-modal-content" class="text-gray-700 dark:text-gray-300"></p>
         </div>
     </div>
 
+
     <script>
-        // Objet contenant le contenu de toutes les modales
-        const modalContent = {
-            metrics: {
-                metric_nps: {
-                    title: "NPS de la BU : +35",
-                    description: "Contribution à l'amélioration du NPS via la reconquête d'un client détracteur en escalation."
-                },
-                metric_projects: {
-                    title: "Projets livrés à temps : 90%",
-                    description: "Respect des délais de go-live via un Réordonnancement des tâches et l'adaptation du planning pour sécuriser les jalons critiques."
-                },
-                metric_csat: {
-                    title: "CSAT France : 70%",
-                    description: "Retour suite aux enquêtes de satisfaction déployées à chaque étape du processus de déploiement."
-                },
-                metric_urssaf: {
-                    title: "Crédits URSSAF récupérés : +100k€",
-                    description: "Mission out-of-scope réalisée pour impacter une cliente détractrice. Récupération de plusieurs crédits URSSAF sur différentes entités du groupe."
+        // --- GESTION DU MENU MOBILE ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // --- GESTION DE LA MODALE "RÉUSSITE CLÉ" ---
+        const openSuccessModalButton = document.getElementById('open-modal-button');
+        const closeSuccessModalButton = document.getElementById('close-success-modal-button');
+        const successModal = document.getElementById('success-modal');
+        const openSuccessModal = () => {
+            successModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+        const closeSuccessModal = () => {
+            successModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+        openSuccessModalButton.addEventListener('click', openSuccessModal);
+        closeSuccessModalButton.addEventListener('click', closeSuccessModal);
+        successModal.addEventListener('click', (e) => (e.target === successModal) && closeSuccessModal());
+        
+        // --- GESTION DE LA MODALE "IMPACT" ---
+        const impactModal = document.getElementById('impact-modal');
+        const impactModalTitle = document.getElementById('impact-modal-title');
+        const impactModalContent = document.getElementById('impact-modal-content');
+        const closeImpactModalButton = document.getElementById('close-impact-modal-button');
+        const impactTriggers = document.querySelectorAll('.impact-trigger');
+        
+        const impactData = {
+          nps: { title: "NPS de la BU : +35", content: "Contribution à l'amélioration du NPS via la reconquête d'un client détracteur en escalation." },
+          projects: { title: "Projets livrés à temps : 90%", content: "Respect des délais de go-live via un Réordonnancement des tâches et l'adaptation du planning pour sécuriser les jalons critiques." },
+          csat: { title: "CSAT France : 70%", content: "Retour suite aux enquêtes de satisfaction déployées à chaque étape du processus de déploiement." },
+          finance: { title: "Crédits URSSAF récupérés : +100k€", content: "Mission out-of-scope réalisée pour impacter une cliente détractrice. Récupération de plusieurs crédits URSSAF sur différentes entités du groupe." }
+        };
+
+        impactTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const key = trigger.dataset.key;
+                const data = impactData[key];
+                impactModalTitle.textContent = data.title;
+                impactModalContent.textContent = data.content;
+                impactModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeImpactModal = () => {
+            impactModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        closeImpactModalButton.addEventListener('click', closeImpactModal);
+        impactModal.addEventListener('click', (e) => (e.target === impactModal) && closeImpactModal());
+
+        // --- GESTION DES ANIMATIONS AU DÉFILEMENT ---
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
-            },
-            interests: {
-                lectures: {
-                    title: "Mes lectures et podcasts du moment",
-                    description: "<ul><li>🔹 Practical Customer Success Management - Rick Adams</li><li>🔹 Le Client par Marine Deck</li><li>🔹 Galères de CS ! d’Allison Adelise</li></ul>"
-                },
-                patisserie: {
-                    title: "Pâtisserie antillaise et française",
-                    description: "Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J’aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches. Leurs retours enthousiastes sont toujours une source de motivation précieuse, et ces instants partagés, réunis autour de la table ont pour moi une valeur toute particulière."
-                },
-                mangas: {
-                    title: "Culture japonaise, mangas et animés",
-                    description: "Depuis l’enfance, l’Asie me fascine. Mon goût pour les mangas et les animés japonais s’est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece. Cet intérêt m'a permis de développer une ouverture d'esprit et une curiosité pour de nouvelles cultures et de nouvelles formes de narration, ce qui me rend plus apte à comprendre les différentes perspectives des clients."
-                },
-                innovation: {
-                    title: "Innovation technologique (IA, no-code, data)",
-                    description: "L’intelligence artificielle, le no-code et l’automatisation ne sont plus de simples tendances, ce sont des leviers qui transforment nos façons de travailler. Plutôt que d’y voir une menace, j’y vois une formidable opportunité de simplification, de productivité et de réinvention des pratiques professionnelles et de créativité."
-                },
-                gestion_projet: {
-                    title: "Gestion de projet agile",
-                    description: "Depuis mes études, j’ai un vrai goût pour les outils de gestion de projet et les démarches qualité. Je suis convaincue que les méthodologies agiles ne s’appliquent pas uniquement au monde de l’entreprise : elles sont aussi de puissants outils d’organisation personnelle."
-                },
-                developpement_personnel: {
-                    title: "Développement personnel",
-                    description: "Apprendre à mieux se connaître, à gérer ses émotions et à rester aligné avec ses valeurs est, selon moi, un travail essentiel pour s’épanouir dans la sphère privée comme professionnelle. J’aime lire, écouter des podcasts ou suivre des formations autour de ces sujets."
-                },
-                marketing_digital: {
-                    title: "Marketing digital et UX",
-                    description: "Mes études m’ont permis d’explorer le marketing et la communication. Par la suite, je me suis formée en stratégie digitale, ce qui a renforcé mon intérêt pour l’UX, la création de visuels et la conception de sites web. J’aime comprendre les comportements utilisateurs et imaginer des parcours plus intuitifs."
-                },
-                mode_eco: {
-                    title: "Mode éco-responsable, retail & grande consommation",
-                    description: "Sensible aux enjeux environnementaux, je m’intéresse particulièrement aux transformations de l’industrie de la mode et du commerce. Cet intérêt a été nourri par mon parcours universitaire, au croisement du merchandising, de la distribution et de la transition numérique."
-                },
-                mangas: {
-                    title: "Culture japonaise, mangas et animés",
-                    description: "Depuis l’enfance, l’Asie me fascine. Mon goût pour les mangas et les animés japonais s’est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece. Cet intérêt m'a permis de développer une ouverture d'esprit et une curiosité pour de nouvelles cultures et de nouvelles formes de narration, ce qui me rend plus apte à comprendre les différentes perspectives des clients."
-                },
-                patisserie: {
-                    title: "Pâtisserie antillaise et française",
-                    description: "Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J’aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches. Leurs retours enthousiastes sont toujours une source de motivation précieuse, et ces instants partagés, réunis autour de la table ont pour moi une valeur toute particulière."
-                },
-                jeux_video: {
-                    title: "Jeux vidéo",
-                    description: "Autrefois passionnée de RPG en ligne, j’appréciais particulièrement l’aspect stratégique, le travail en équipe et l’esprit de communauté que l’on retrouve dans les guildes. Aujourd’hui, je privilégie des jeux familiaux, propices aux rires partagés et aux échanges simples."
-                },
-                musique: {
-                    title: "Musique",
-                    description: "J’adore aussi la musique. Mes goûts sont plutôt éclectiques en la matière, je peux passer des “4 Saisons” de Vivaldi à “There’s nothing holdin’ me back” de Shawn Mendez."
-                }
-            },
-            vision: {
-                projet_pro: {
-                    title: "Mon projet professionnel",
-                    description: "J’ai toujours été l’oreille attentive de mon entourage, celle à qui l’on se confie pour être rassuré ou recevoir un conseil avisé. Cette <b>empathie naturelle</b>, je l’ai cultivée et professionnalisée au fil de mes expériences, pour en faire un véritable levier d’accompagnement client.<br><br>Mon parcours m’a conduite à travailler pour <b>une entreprise américaine de SaaS paie/SIRH</b>, au sein d’un environnement international, dynamique et exigeant. J’y ai développé <b>une solide culture du service</b> et <b>une posture orientée client</b>, fondée sur <b>l’écoute active, l’analyse, la résilience</b> et la recherche constante de solutions.<br><br>En tant que <b>Chef de projet en implémentation</b>, j’ai mené des <b>déploiements stratégiques</b> chez de nouveaux clients. But j’ai réalisé que ce format court, centré sur la phase d’intégration, me tenait trop éloignée de ce que je valorise profondément : construire une <b>relation durable</b>, basée sur la <b>confiance</b> et l’<b>impact au long cours</b>.<br><br>L’accélération du digital et l’arrivée massive de l’intelligence artificielle ont renforcé ma conviction : je veux exercer un <b>métier d’avenir</b>, à la croisée de l’<b>humain et du digital</b>, là où mon <b>sens du relationnel</b> fait la différence. C’est ainsi que le rôle de <b>Customer Success Manager</b> s’est imposé comme une évidence.<br><br>Ce dossier a été conçu pour vous présenter ma vision du métier, mes compétences, et ce que je peux apporter à votre entreprise dès aujourd’hui. Si vous partagez cette <b>exigence d’écoute, d’engagement</b> et de <b>relation client durable</b>, alors j’espère que ce sera le début d’une belle collaboration."
-                },
-                vision_csm: {
-                    title: "Ma vision du métier de Customer Success Manager",
-                    description: "Pour moi, le rôle de Customer Success Manager est bien plus qu’un simple accompagnement technique : c’est être <b>le trait d’union entre l’humain, le produit et la valeur d’usage</b>. C’est un métier qui exige à la fois de l’<b>empathie, de la structure et une vraie intelligence relationnelle</b>.<br><br>Avec mon expérience en <b>gestion de projet</b> et <b>relation client dans le SaaS B2B</b>, j’ai appris que chaque client a besoin d’être compris, guidé et rassuré, pas seulement sur ce qu’il utilise, mais sur pourquoi et comment il le fait. Le CSM est là pour <b>valoriser chaque interaction</b>, <b>prévenir les irritants</b>, et bâtir une <b>relation de confiance durable</b>.<br><br>Il est essentiel que le client <b>perçoive rapidement la valeur</b> que lui apporte notre solution, surtout lorsque notre interlocuteur principal est un utilisateur et non un décideur.<br><br>Dans un environnement digitalisé et en constante évolution, j’y vois un <b>rôle stratégique</b>, capable d’impacter concrètement la <b>rétention, la satisfaction client et la croissance</b>. C’est un métier où la <b>technologie</b> ne remplace pas l’<b>humain</b>, mais le met en lumière.<br><br>En tant que CSM, mon rôle est de <b>coacher le client</b> pour l’aider à <b>atteindre ses objectifs</b>, tout en veillant à ce qu’ils soient alignés avec les nôtres afin de favoriser la <b>croissance de mon entreprise</b>."
-                },
-                plus_grande_reussite: {
-                    title: "Une de mes plus grandes réussites",
-                    description: `<p>Ces dix années d’expérience dans la <b>relation client</b> m’ont permis de développer une conviction profonde :</p>
-                    <p class="font-semibold text-lg accent-color mt-4 mb-4">"Une bonne technologie ne suffit pas, c’est l’<b>expérience humaine</b> qui fait toute la différence."</p>
-                    <p>J’ai été confrontée à de nombreuses situations exigeantes, mais l’une d’elles reste, à ce jour, ma plus grande fierté.</p>
-                    <p>Nouvellement arrivée dans un service gérant un périmètre international, je me suis vu confier la responsabilité d’un portefeuille complexe incluant un client disposant de quatre entités issues d’un même groupe. Mon interlocutrice principale, une Responsable anglophone en charge de la paie pour l’ensemble du groupe (pas uniquement le périmètre de la France), était dans une posture délicate :</p>
-                    <ul class="list-disc list-inside space-y-1 mt-2 mb-4 ml-4">
-                        <li>un retard important dans le traitement des demandes,</li>
-                        <li>une méconnaissance des processus locaux,</li>
-                        <li>une <b>relation dégradée</b> et marquée par des <b>escalades permanentes</b>.</li>
-                    </ul>
-                    <p>S’ajoutait à cela un <b>crédit URSSAF de près de 100K€</b> à recouvrer. Et bien entendu, ce portefeuille ne représentait qu’une partie de ma charge globale.</p>
-                    <h5 class="font-bold mt-6 mb-2 text-gray-700">Tâches</h5>
-                    <p>En collaboration avec mon Team Leader, nous avons élaboré un <b>plan d’actions précis</b>, avec pour objectif de <b>restaurer la confiance</b> et de traiter les urgences, tout en ramenant de la stabilité dans la relation.</p>
-                    <h5 class="font-bold mt-6 mb-2 text-gray-700">Actions</h5>
-                    <ul class="list-disc list-inside space-y-2 text-gray-600">
-                        <li>J'ai pris le temps de l’<b>écouter activement</b>, de clarifier nos processus, et surtout de la rassurer.</li>
-                        <li>J'ai mis en place des <b>touchpoints réguliers</b> afin de lui apporter un <b>accompagnement dédié</b>.</li>
-                        <li>Même si cela sortait du cadre strict de mon périmètre, j’ai pris l’initiative de <b>gérer directement les échanges avec les organismes sociaux</b> pour accélérer le traitement du dossier.</li>
-                        <li>Tout cela dans le but de <b>réinstaurer la confiance</b> auprès de mon interlocutrice.</li>
-                    </ul>
-                    <h5 class="font-bold mt-6 mb-2 text-gray-700">Résultats</h5>
-                    <p>La cliente est <b>passée du statut de détractrice (NPS de 0/10) à celui de promotrice satisfaite (NPS de 9/10)</b>. Cela a contribué à ce que notre BU parvienne à un <b>NPS de +35</b>, ce qui est plutôt un bon score dans le SIRH/Paie. Le <b>crédit a été intégralement récupéré</b>, et les échanges sont devenus fluides, apaisés et collaboratifs. Et “cerise sur le gâteau”, j’ai pu lui faire un cross-sell. Elle était d’ailleurs très satisfaite de ce nouveau service. Sa responsable a adressé un mail de remerciement formel à mon Team Leader et à mon Manager, saluant la <b>qualité de mon accompagnement</b>. La Direction de mon entreprise a également salué la qualité de mon travail.</p>`
-                },
-                 temoignage_client: {
-                    title: "Témoignage d'une cliente satisfaite",
-                    description: `<p>Après avoir résolu une situation complexe pour l'une de mes clientes, j'ai reçu cet e-mail de remerciement qui a été un véritable témoignage de l'impact positif de mon travail et de mon approche orientée client.</p>
-                    <img src="uploaded:image_20c9ed.png-6284dae7-146d-4695-bf56-99ae3f929900" alt="Email de remerciement d'une cliente" class="testimonial-img">`
-                }
-            },
-            education: {
-                formation_strategie_digitale: {
-                    title: "Formation en Stratégie digitale (2024)",
-                    description: "Marketing digital, E-commerce, ROI, forecast, SEO, Google Ads, Expérience utilisateurs."
-                },
-                formation_gestionnaire_paie: {
-                    title: "Formation de Gestionnaire Paie (2013)",
-                    description: "Paie, administration du personnel, Droit social, masse salariale, GPEC, veille paie/RH."
-                },
-                master_management: {
-                    title: "Master 2 Management (2010)",
-                    description: "Marketing, techniques de vente, outils qualité, amélioration continue, Supply chain management, analyse de données."
-                },
-                certificat_gestion_projet: {
-                    title: "Certificat Gestion de projet - UNOW (2022)",
-                    description: "Planification, gestion des risques, prévisions, SWOT, PDCA, matrice RACI."
-                },
-                ccsm: {
-                    title: "CCSM level 1 - SuccessHacker (en cours)",
-                    description: "Concepts fondamentaux du Customer Success Management, mise en place de stratégies d’onboarding, adoption, rétention et expansion, gestion des KPIs (NPS, CSAT, MRR, churn), pilotage de la relation client et optimisation du parcours utilisateur."
-                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        // --- GESTION DU THÈME JOUR/NUIT ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+        const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+
+        // Met à jour l'icône en fonction du thème
+        const updateIcon = () => {
+            if (document.documentElement.classList.contains('dark')) {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
+                lightIconMobile.style.display = 'none';
+                darkIconMobile.style.display = 'block';
+            } else {
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
+                lightIconMobile.style.display = 'block';
+                darkIconMobile.style.display = 'none';
             }
         };
 
-        const modal = document.getElementById('interestModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-
-        /**
-         * Affiche la fenêtre modale avec le contenu spécifié.
-         * @param {string} category La catégorie de contenu ('interests', 'vision', 'education' ou 'metrics').
-         * @param {string} key La clé spécifique du contenu à afficher.
-         */
-        function showModal(category, key) {
-            const data = modalContent[category][key];
-            if (data) {
-                modalTitle.textContent = data.title;
-                modalBody.innerHTML = data.description;
-                modal.classList.add('show');
+        // Gère le clic sur le bouton de thème
+        const handleThemeToggle = () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
             }
-        }
+            updateIcon();
+        };
 
-        /**
-         * Masque la fenêtre modale.
-         */
-        function hideModal() {
-            modal.classList.remove('show');
-        }
+        themeToggleBtn.addEventListener('click', handleThemeToggle);
+        themeToggleMobileBtn.addEventListener('click', handleThemeToggle);
+        
+        // Met à jour l'icône au chargement de la page
+        updateIcon();
 
-        /**
-         * Logique pour basculer l'affichage des menus déroulants
-         * @param {HTMLElement} button Le bouton cliqué pour déclencher l'action.
-         */
-        function toggleDropdown(button) {
-            const contentDiv = button.nextElementSibling;
-            button.classList.toggle('active');
-            contentDiv.classList.toggle('show');
-        }
-
-        // Configuration des graphiques avec Chart.js
-        const accentColor = '#E86A33';
-        const accentColorTransparent = 'rgba(232, 106, 51, 0.2)';
-        const gridColor = 'rgba(200, 200, 200, 0.2)';
-
-        // Graphique Radar des Soft Skills
-        const softSkillsCtx = document.getElementById('softSkillsChart').getContext('2d');
-        new Chart(softSkillsCtx, {
-            type: 'radar',
-            data: {
-                labels: ['Intelligence Émotionnelle', 'Curiosité', 'Proactivité', 'Esprit d’analyse', 'Adaptabilité', 'Orientée Solution', 'Collaboration'],
-                datasets: [{
-                    label: 'Soft Skills',
-                    data: [5, 4, 5, 5, 5, 5, 4],
-                    backgroundColor: accentColorTransparent,
-                    borderColor: accentColor,
-                    borderWidth: 2,
-                    pointBackgroundColor: accentColor,
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: accentColor
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: gridColor },
-                        grid: { color: gridColor },
-                        pointLabels: {
-                            font: { size: 12 },
-                            color: '#555'
-                        },
-                        ticks: {
-                            display: false,
-                            stepSize: 1
-                        },
-                        suggestedMin: 0,
-                        suggestedMax: 5
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label;
-                            }
-                        }
-                    }
+        // --- GESTION DES MENUS DÉROULANTS ---
+        const detailsTriggers = document.querySelectorAll('.details-trigger');
+        detailsTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const content = trigger.nextElementSibling;
+                if (content && content.classList.contains('details-content')) {
+                    trigger.classList.toggle('open');
+                    content.classList.toggle('open');
                 }
-            }
+            });
         });
 
-        // Graphique à barres de la transformation NPS
-        const npsCtx = document.getElementById('npsChart').getContext('2d');
-        new Chart(npsCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Avant (Détracteur)', 'Après (Promoteur)'],
-                datasets: [{
-                    label: 'Score NPS',
-                    data: [0, 9],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        accentColorTransparent
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        accentColor
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 10,
-                        grid: { color: gridColor }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+        // --- GESTION DE L'ANIMATION DU GRAPHIQUE NPS ---
+        const npsGraph = document.getElementById('nps-graph-container');
+        const npsCircle = document.querySelector('.nps-circle-progress');
+        const npsScoreText = document.getElementById('nps-score-text');
+        const radius = npsCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        npsCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        npsCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const offset = circumference - percent / 10 * circumference;
+            npsCircle.style.strokeDashoffset = offset;
+        }
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 }
-            }
-        });
+            };
+            window.requestAnimationFrame(step);
+        }
 
-        // Script pour le menu mobile
-        document.getElementById('menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+        const npsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setProgress(10); // NPS score de 10/10
+                    animateValue(npsScoreText, 0, 10, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        npsObserver.observe(npsGraph);
     </script>
 </body>
 </html>
