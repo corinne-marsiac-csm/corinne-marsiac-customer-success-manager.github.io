@@ -27,7 +27,10 @@
       base-uri 'self';
     ">
     
-    <script>tailwind = { config: { darkMode: 'class' } }</script>
+    <script>
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = { darkMode: 'class' };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts & Icons -->
