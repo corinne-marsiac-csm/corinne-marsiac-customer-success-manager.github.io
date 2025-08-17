@@ -16,14 +16,18 @@
         })();
     </script>
     
-    <!-- Config Tailwind AVANT le CDN -->
-    <script>
-      tailwind = {
-        config: {
-          darkMode: 'class'
-        }
-      }
-    </script>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com;
+      style-src  'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+      img-src    'self' data: https://flagcdn.com;
+      font-src   'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+      worker-src 'self' blob:;
+      object-src 'none';
+      base-uri 'self';
+    ">
+    
+    <script>tailwind = { config: { darkMode: 'class' } }</script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts & Icons -->
@@ -115,9 +119,8 @@
                     <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Projet</a>
                     <a href="#competences" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Compétences</a>
                     <a href="#plus-sur-moi" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Personnalité</a>
-                    <button id="theme-toggle" aria-label="Basculer le thème" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300 text-xl">
-                        <i class="fas fa-sun" id="theme-toggle-light-icon"></i>
-                        <i class="fas fa-moon" id="theme-toggle-dark-icon"></i>
+                    <button id="theme-toggle" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700" aria-pressed="false" aria-label="Basculer thème">
+                      <span id="theme-label">🌙 Mode nuit</span>
                     </button>
                     <a href="#contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
                 </div>
@@ -924,5 +927,6 @@
             npsObserver.observe(npsGraph);
         })();
     </script>
+<script src="./script.js" defer></script>
 </body>
 </html>
