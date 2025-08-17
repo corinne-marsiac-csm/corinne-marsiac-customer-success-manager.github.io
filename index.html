@@ -29,7 +29,7 @@
     
     <script>
       window.tailwind = window.tailwind || {};
-      window.tailwind.config = { darkMode: 'class' };
+      window.tailwind.config = { darkMode: 'media' };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -122,16 +122,9 @@
                     <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Projet</a>
                     <a href="#competences" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Compétences</a>
                     <a href="#plus-sur-moi" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Personnalité</a>
-                    <button id="theme-toggle" class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700" aria-pressed="false" aria-label="Basculer thème">
-                      <span id="theme-label">🌙 Mode nuit</span>
-                    </button>
                     <a href="#contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center gap-4">
-                     <button id="theme-toggle-mobile" aria-label="Basculer le thème (mobile)" class="text-gray-600 dark:text-gray-300 text-xl">
-                        <i class="fas fa-sun" id="theme-toggle-light-icon-mobile"></i>
-                        <i class="fas fa-moon" id="theme-toggle-dark-icon-mobile"></i>
-                    </button>
                     <button id="mobile-menu-button" class="focus:outline-none text-gray-800 dark:text-gray-200">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
@@ -893,6 +886,5 @@
             npsObserver.observe(npsGraph);
         })();
     </script>
-<script src="./script.js" defer></script>
 </body>
 </html>
