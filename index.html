@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Corinne Marsiac - Customer Success Manager</title>
 
-    <!-- 1) Appliquer le thème le plus tôt possible pour éviter le FOUC -->
+    <!-- 1) Configurer Tailwind AVANT le CDN -->
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = { darkMode: 'class' };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- 2) Appliquer le thème le plus tôt possible pour éviter le FOUC -->
     <script>
         (function () {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -15,29 +28,6 @@
             else document.documentElement.classList.remove('dark');
         })();
     </script>
-    
-    <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com;
-      style-src  'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-      img-src    'self' data: https://flagcdn.com;
-      font-src   'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-      worker-src 'self' blob:;
-      object-src 'none';
-      base-uri 'self';
-    ">
-    
-    <script>
-      window.tailwind = window.tailwind || {};
-      window.tailwind.config = { darkMode: 'media' };
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -67,9 +57,6 @@
         }
         /* Styles pour la barre de défilement */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #E5E7EB; }
-        ::-webkit-scrollbar-thumb { background: #6D28D9; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #5B21B6; }
         .dark ::-webkit-scrollbar-track { background: #1F2937; }
         .dark ::-webkit-scrollbar-thumb { background: #4F46E5; }
         .dark ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
@@ -109,35 +96,37 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
+<body class="bg-gray-900 text-gray-200 transition-colors duration-500">
 
     <!-- Barre de Navigation -->
-    <nav class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700">
+    <nav class="bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <a href="#accueil" class="text-2xl font-bold text-gradient">Corinne Marsiac</a>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#a-propos" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">À Propos</a>
-                    <a href="#parcours" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Parcours</a>
-                    <a href="#reussite" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Projet</a>
-                    <a href="#competences" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Compétences</a>
-                    <a href="#plus-sur-moi" class="text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300">Personnalité</a>
+                    <a href="#qui-suis-je" class="text-gray-300 hover:text-violet-400 transition duration-300">Qui suis-je ?</a>
+                    <a href="#a-propos" class="text-gray-300 hover:text-violet-400 transition duration-300">À Propos</a>
+                    <a href="#parcours" class="text-gray-300 hover:text-violet-400 transition duration-300">Parcours</a>
+                    <a href="#reussite" class="text-gray-300 hover:text-violet-400 transition duration-300">Projet</a>
+                    <a href="#competences" class="text-gray-300 hover:text-violet-400 transition duration-300">Compétences</a>
+                    <a href="#plus-sur-moi" class="text-gray-300 hover:text-violet-400 transition duration-300">Personnalité</a>
                     <a href="#contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center gap-4">
-                    <button id="mobile-menu-button" class="focus:outline-none text-gray-800 dark:text-gray-200">
+                    <button id="mobile-menu-button" class="focus:outline-none text-gray-200">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-            <a href="#a-propos" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">À Propos</a>
-            <a href="#parcours" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Parcours</a>
-            <a href="#reussite" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Projet</a>
-            <a href="#competences" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Compétences</a>
-            <a href="#plus-sur-moi" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Personnalité</a>
-            <a href="#contact" class="block py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
+            <a href="#qui-suis-je" class="block py-3 px-4 hover:bg-gray-700">Qui suis-je ?</a>
+            <a href="#a-propos" class="block py-3 px-4 hover:bg-gray-700">À Propos</a>
+            <a href="#parcours" class="block py-3 px-4 hover:bg-gray-700">Parcours</a>
+            <a href="#reussite" class="block py-3 px-4 hover:bg-gray-700">Projet</a>
+            <a href="#competences" class="block py-3 px-4 hover:bg-gray-700">Compétences</a>
+            <a href="#plus-sur-moi" class="block py-3 px-4 hover:bg-gray-700">Personnalité</a>
+            <a href="#contact" class="block py-3 px-4 hover:bg-gray-700">Contact</a>
         </div>
     </nav>
 
@@ -147,15 +136,15 @@
         <section id="accueil" class="min-h-[90vh] flex items-center">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
                 <div class="md:col-span-3">
-                    <span class="font-semibold text-violet-600 dark:text-violet-400">CUSTOMER SUCCESS MANAGER</span>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mt-2 animate-pulse">
+                    <span class="text-2xl font-semibold text-violet-400">CUSTOMER SUCCESS MANAGER</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mt-2 animate-pulse">
                         Je transforme l'expérience client en levier de croissance durable.
                     </h1>
-                    <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+                    <p class="mt-6 text-lg text-gray-400 max-w-2xl">
                         Plus de 10 ans d'expérience en SaaS B2B.
                     </p>
                     <div class="mt-8 flex gap-4">
-                        <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">Prenons contact</a>
+                        <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">Contactez-moi</a>
                     </div>
                 </div>
                 <div class="md:col-span-2 flex justify-center" id="nps-graph-container">
@@ -166,13 +155,80 @@
                                 <stop offset="100%" style="stop-color:#F472B6" />
                             </linearGradient>
                         </defs>
-                        <circle cx="100" cy="100" r="80" fill="none" class="stroke-gray-200 dark:stroke-gray-700" stroke-width="20"></circle>
+                        <circle cx="100" cy="100" r="80" fill="none" class="stroke-gray-700" stroke-width="20"></circle>
                         <circle cx="100" cy="100" r="80" fill="none" stroke="url(#npsGradient)" stroke-width="20" class="nps-circle-progress" style="transform: rotate(-90deg); transform-origin: 50% 50%; stroke-dasharray: 502.65; stroke-dashoffset: 502.65;"></circle>
-                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="text-5xl font-bold fill-gray-800 dark:fill-gray-200" id="nps-score-text">0</text>
-                        <text x="50%" y="65%" text-anchor="middle" class="text-lg font-semibold fill-gray-500 dark:fill-gray-400">Score NPS</text>
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="text-5xl font-bold fill-gray-200" id="nps-score-text">0</text>
+                        <text x="50%" y="65%" text-anchor="middle" class="text-lg font-semibold fill-gray-400">Score NPS</text>
                     </svg>
                 </div>
             </div>
+        </section>
+
+        <!-- Section Qui suis-je -->
+        <section id="qui-suis-je" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient">Qui suis-je ?</span></h2>
+            <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-1 flex justify-center">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHYWq2DzXkTfA/profile-displayphoto-scale_200_200/B4DZiwiCFgHYAY-/0/1755308368699?e=1758153600&v=beta&t=lgBVOSsMYg4Roe_HZ2qjwG7OS36rUqDt6o-HC67VaHo" alt="Corinne Marsiac" class="rounded-full border-4 border-violet-500 w-48 h-48 object-cover">
+                    </div>
+                    <div class="md:col-span-2 text-left">
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            Professionnelle proactive et orientée solution, je suis passionnée par la transformation de l'expérience client en véritable moteur de croissance. Ma philosophie : <strong>"Une bonne technologie ne suffit pas, c'est l'expérience humaine qui fait toute la différence"</strong>.
+                            <br/><br/>
+                            Ce qui m’anime, c’est de comprendre les besoins réels des clients et de les guider vers des succès mesurables, tout en cultivant une relation de confiance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Expertise Customer Success -->
+        <section id="expertise" class="py-24 fade-in">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-16"><span class="text-gradient">Expertise Customer Success</span></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Column 1 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-violet-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>1</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Onboarding & Adoption</h4>
+                        <p class="text-gray-400 text-sm">
+                            Accompagnement des clients lors de l’onboarding pour accélérer l’adoption et réduire le Time-to-Value.
+                        </p>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>2</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Rétention & Fidélisation</h4>
+                        <p class="text-gray-400 text-sm">
+                            Identification des signaux faibles de désengagement et mise en place de stratégies proactives pour maintenir un taux de rétention élevé et transformer les détracteurs en promoteurs.
+                        </p>
+                    </div>
+                </div>
+                <!-- Column 3 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>3</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Expansion & Croissance</h4>
+                        <p class="text-gray-400 text-sm">
+                            Détection d'opportunités d'upsell et cross-sell pour générer du growth revenue tout en apportant une valeur ajoutée tangible à vos clients.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-12 text-gray-400 max-w-3xl mx-auto">
+                Chaque étape est pilotée par des KPIs précis (NPS, CSAT, LTV, MRR/ARR, NRR) pour mesurer et optimiser continuellement les performances.
+            </p>
         </section>
 
         <!-- Section Mots-clés -->
@@ -193,46 +249,38 @@
         <section id="impact" class="py-24 fade-in">
             <div class="text-center">
                 <h2 class="text-3xl font-bold mb-4"><span class="text-gradient">Impact</span> chiffré</h2>
-                <p class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12 text-lg">
+                <p class="text-gray-400 max-w-3xl mx-auto mb-12 text-lg">
                     Un aperçu des indicateurs de performance et des succès quantifiables. Cliquez pour en savoir plus.
                 </p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <button class="impact-trigger group" data-key="nps">
                     <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">+35</p>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">NPS de la BU</p>
+                    <p class="mt-2 text-gray-400">NPS de la BU</p>
                 </button>
                 <button class="impact-trigger group" data-key="projects">
                     <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">90%</p>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">Projets livrés à temps</p>
+                    <p class="mt-2 text-gray-400">Projets livrés à temps</p>
                 </button>
                 <button class="impact-trigger group" data-key="csat">
                     <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">70%</p>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">CSAT France</p>
+                    <p class="mt-2 text-gray-400">CSAT France</p>
                 </button>
                 <button class="impact-trigger group" data-key="finance">
                     <p class="text-5xl font-extrabold text-gradient group-hover:scale-110 transition-transform">+100k€</p>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">Impact financier client</p>
+                    <p class="mt-2 text-gray-400">Impact financier client</p>
                 </button>
-            </div>
-            <div class="text-center mt-16">
-                <div class="flex flex-wrap justify-center items-center gap-4">
-                    <span class="keyword-pill bg-violet-500 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -0.5s;">Customer Care</span>
-                    <span class="keyword-pill bg-pink-500 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -1.5s;">Customer Success</span>
-                    <span class="keyword-pill bg-indigo-500 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -2.5s;">Déploiement</span>
-                    <span class="keyword-pill bg-purple-500 text-white px-4 py-2 rounded-full shadow-lg" style="animation-delay: -3.5s;">Account Management</span>
-                </div>
             </div>
         </section>
 
         <!-- Section À Propos -->
         <section id="a-propos" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient">Ma Vision</span> du Customer Success</h2>
-            <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-lg">
+            <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                <p class="text-gray-300 leading-relaxed mb-4 text-lg">
                     Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le CSM est le trait d'union stratégique entre l'humain, le produit et la valeur d'usage. Mon rôle est de <strong>coacher le client</strong> pour l'aider à <strong>atteindre ses objectifs</strong>, tout en veillant à ce qu'ils soient alignés avec les nôtres afin de <strong>favoriser la croissance</strong> de mon entreprise.
                 </p>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                <p class="text-gray-300 leading-relaxed text-lg">
                     Dans un monde où la technologie évolue sans cesse, je suis convaincue que c'est <strong>l'humain qui fait la différence</strong>. Je m'engage à valoriser chaque interaction, à prévenir les irritants et à <strong>bâtir des relations de confiance durables</strong> qui impactent concrètement la <strong>rétention</strong> et la <strong>satisfaction</strong>.
                 </p>
             </div>
@@ -244,21 +292,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- Colonne Expériences -->
                 <div>
-                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i class="fas fa-briefcase text-violet-500 dark:text-violet-400"></i> Expériences</h3>
-                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i class="fas fa-briefcase text-violet-400"></i> Expériences</h3>
+                    <div class="space-y-8 border-l-2 border-gray-700 pl-8">
                         <!-- Expérience 1 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">02/2022 - 11/2023</p>
+                                <p class="text-sm text-gray-400">02/2022 - 11/2023</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Payroll Implementation Project Manager</h4>
+                                    <h4 class="text-xl font-bold text-white">Payroll Implementation Project Manager</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">ADP France, Nanterre</p>
+                                <p class="font-medium text-gray-300">ADP France, Nanterre</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li><strong>Analyse des besoins</strong> fonctionnels et réglementaires des clients</li>
                                     <li><strong>Rédaction des spécifications techniques</strong> en lien avec la Product Team</li>
                                     <li>Animation de <strong>comités de projet</strong> (kick-off, comités de pilotage, clôture)</li>
@@ -266,23 +314,23 @@
                                     <li><strong>Réalisation des tests, mise en production</strong>, suivi post-déploiement</li>
                                     <li><strong>Onboarding des utilisateurs, formations à distance</strong>, accompagnement personnalisé</li>
                                     <li>Gestion du backlog client, traitement des tickets et suivi des incidents</li>
-                                    <li class="font-semibold text-green-600 dark:text-green-400">Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)</li>
+                                    <li class="font-semibold text-green-400">Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)</li>
                                 </ul>
                             </div>
                         </div>
                         <!-- Expérience 2 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2014 - 01/2022</p>
+                                <p class="text-sm text-gray-400">09/2014 - 01/2022</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Local Payroll Account Manager</h4>
+                                    <h4 class="text-xl font-bold text-white">Local Payroll Account Manager</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">ADP France, Nanterre</p>
+                                <p class="font-medium text-gray-300">ADP France, Nanterre</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li>Production mensuelle de 400 paies multi-conventions : saisie, contrôle, DSN</li>
                                     <li>Soldes de tout compte et documents de sortie</li>
                                     <li><strong>Onboarding</strong> des utilisateurs et accompagnement sur les portails</li>
@@ -291,23 +339,23 @@
                                     <li>Détection des opportunités (<strong>upsell/cross-sell</strong>) et risques de <strong>churn</strong></li>
                                     <li>Pilotage de prestations out-of-scope et d’add-ons → <strong>croissance du MRR</strong></li>
                                     <li>Veille sociale</li>
-                                    <li class="font-semibold text-green-600 dark:text-green-400">Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.</li>
+                                    <li class="font-semibold text-green-400">Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.</li>
                                 </ul>
                             </div>
                         </div>
                         <!-- Expérience 3 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2013 - 08/2014</p>
+                                <p class="text-sm text-gray-400">09/2013 - 08/2014</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Gestionnaire paie</h4>
+                                    <h4 class="text-xl font-bold text-white">Gestionnaire paie</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Nibelis, Levallois-Perret</p>
+                                <p class="font-medium text-gray-300">Nibelis, Levallois-Perret</p>
                             </button>
                              <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li><strong>Customer care et support de premier niveau</strong> auprès des clients autonomes pour garantir une adoption fluide et sécurisée de la solution.</li>
                                     <li><strong>Vulgarisation des sujets</strong> réglementaires et contractuels auprès d’interlocuteurs non spécialistes.</li>
                                     <li>Suivi proactif des demandes clients et <strong>remontée des feedbacks</strong> pour contribuer à l’amélioration continue du produit.</li>
@@ -319,17 +367,17 @@
                         </div>
                         <!-- Expérience 4 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">04/2013 - 07/2013</p>
+                                <p class="text-sm text-gray-400">04/2013 - 07/2013</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Assistante RH</h4>
+                                    <h4 class="text-xl font-bold text-white">Assistante RH</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Groupe BOVIS, Conflans-Sainte-Honorine</p>
+                                <p class="font-medium text-gray-300">Groupe BOVIS, Conflans-Sainte-Honorine</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li>Recueil, fiabilisation et transmission de données sociales (absences, heures, primes) en coordination avec la DAF.</li>
                                     <li><strong>Suivi individualisé</strong> des collaborateurs : gestion des obligations légales (visites médicales, formations, dossiers RH), réponses aux questions terrain.</li>
                                     <li>Communication quotidienne avec les chauffeurs, managers et responsable de site pour fluidifier les process.</li>
@@ -339,17 +387,17 @@
                         </div>
                         <!-- Expérience 5 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-violet-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">09/2011 - 06/2012</p>
+                                <p class="text-sm text-gray-400">09/2011 - 06/2012</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Conseillère bancaire à distance</h4>
+                                    <h4 class="text-xl font-bold text-white">Conseillère bancaire à distance</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Crédit Agricole Nord Est, Reims</p>
+                                <p class="font-medium text-gray-300">Crédit Agricole Nord Est, Reims</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li>Gestion des appels entrants des clients et prospects sur le périmètre Nord-Est.</li>
                                     <li><strong>Traitement des demandes des clients</strong> particuliers et accompagnement dans leurs démarches.</li>
                                     <li>Qualification des besoins et orientation personnalisée vers les interlocuteurs adéquats (agence, support technique, expert).</li>
@@ -368,17 +416,17 @@
                     <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
                         <!-- Formation 1 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2025</p>
+                                <p class="text-sm text-gray-400">2025</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Customer Success Manager Bootcamp</h4>
+                                    <h4 class="text-xl font-bold text-white">Bootcamp Customer Success Manager</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Kare School</p>
+                                <p class="font-medium text-gray-300">Kare School</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li><strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong></li>
                                     <li>Pilotage des <strong>KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR …)</strong></li>
                                     <li>Détection des opportunités de croissance : <strong>upsell, cross-sell, renouvellement</strong></li>
@@ -387,42 +435,19 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- Formation Inbound (Nouvelle) -->
-                        <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
-                            <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2025</p>
-                                <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Certification Inbound</h4>
-                                    <i class="fas fa-chevron-down chevron"></i>
-                                </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">HubSpot Academy</p>
-                            </button>
-                            <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
-                                    <li>Maîtrise du <strong>cycle inbound</strong> : <strong>attirer, interagir, fidéliser</strong></li>
-                                    <li>Construction de <strong>buyer personas</strong> et analyse du <strong>parcours d’achat</strong></li>
-                                    <li>Utilisation de <strong>l’entonnoir inbound</strong> pour guider la relation client</li>
-                                    <li>Alignement marketing /sales /service client pour une <strong>approche customer-centric</strong></li>
-                                    <li>Application de la <strong>théorie de l’emploi</strong> pour relier attentes clients et valeur délivrée</li>
-                                    <li>Mise en place d’<strong>OKR</strong> pour piloter et mesurer l’<strong>impact</strong></li>
-                                    <li>Projection dans <strong>les 3 horizons stratégiques</strong>(court, moyen, long terme)</li>
-                                </ul>
-                            </div>
-                        </div>
                          <!-- Formation 2 -->
                          <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2025</p>
+                                <p class="text-sm text-gray-400">2025</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">CCSM Level 1</h4>
+                                    <h4 class="text-xl font-bold text-white">CCSM Level 1 - SuccessCoaching.com</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">SuccessHacker</p>
+                                <p class="font-medium text-gray-300">SuccessHacker</p>
                             </button>
                             <div class="details-content mt-4">
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li>Structuration du rôle de <strong>CSM</strong> dans l'organisation.</li>
                                     <li>Mise en place d'un <strong>onboarding</strong> client efficace.</li>
                                     <li>Prévention du <strong>churn</strong> & gestion des risques.</li>
@@ -432,68 +457,68 @@
                         </div>
                         <!-- Formation 3 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                              <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2024</p>
+                                <p class="text-sm text-gray-400">2024</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Formation en Stratégie digitale</h4>
+                                    <h4 class="text-xl font-bold text-white">Formation en Stratégie digitale</h4>
                                      <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Online Sales Success</p>
+                                <p class="font-medium text-gray-300">Online Sales Success</p>
                             </button>
                             <div class="details-content mt-4">
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-400">
                                     Marketing digital, E-commerce, ROI, forecast, SEO, Google Ads, Expérience utilisateurs.
                                 </p>
                             </div>
                         </div>
                         <!-- Formation 4 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                              <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2022</p>
+                                <p class="text-sm text-gray-400">2022</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Certificat de Gestion de projet</h4>
+                                    <h4 class="text-xl font-bold text-white">Certificat de Gestion de projet</h4>
                                      <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">UNOW</p>
+                                <p class="font-medium text-gray-300">UNOW</p>
                             </button>
                             <div class="details-content mt-4">
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-400">
                                     Planification, gestion des risques, prévisions, SWOT, PDCA, matrice RACI.
                                 </p>
                             </div>
                         </div>
                         <!-- Formation 5 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                              <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2013</p>
+                                <p class="text-sm text-gray-400">2013</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Formation de Gestionnaire Paie</h4>
+                                    <h4 class="text-xl font-bold text-white">Formation de Gestionnaire Paie</h4>
                                      <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">IFOCOP (Mention Très Bien)</p>
+                                <p class="font-medium text-gray-300">IFOCOP (Mention Très Bien)</p>
                             </button>
                             <div class="details-content mt-4">
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-400">
                                     Paie, administration du personnel, Droit social, masse salariale, GPEC, veille paie/RH.
                                 </p>
                             </div>
                         </div>
                         <!-- Formation 6 -->
                         <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-100 dark:border-gray-900"></div>
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                              <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2010</p>
+                                <p class="text-sm text-gray-400">2010</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Master 2 Management</h4>
+                                    <h4 class="text-xl font-bold text-white">Master 2 Management</h4>
                                      <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-700 dark:text-gray-300">Université de Reims</p>
+                                <p class="font-medium text-gray-300">Université de Reims</p>
                             </button>
                             <div class="details-content mt-4">
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-400">
                                     Marketing, techniques de vente, outils qualité, amélioration continue, Supply chain management, analyse de données.
                                 </p>
                             </div>
@@ -506,26 +531,41 @@
         <!-- Section Réussite Clé -->
         <section id="reussite" class="py-24 text-center fade-in">
              <h2 class="text-3xl font-bold mb-8"><span class="text-gradient">Projet :</span> mise en place d’une stratégie de rétention client</h2>
-             <button id="open-modal-button" class="btn-primary text-white px-8 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">
-                <i class="fas fa-circle-info mr-2"></i> Plus de détails
-             </button>
+             <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                 <p class="text-gray-300 leading-relaxed text-lg mb-8">
+                    Comment transformer un client détracteur en promoteur ?
+                 </p>
+                 <button id="open-modal-button" class="btn-primary text-white px-8 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">
+                    <i class="fas fa-circle-info mr-2"></i> Plus de détails
+                 </button>
+             </div>
         </section>
         
+        <!-- Section Soft Skills -->
+        <section id="soft-skills" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16">Des Soft Skills qui Font la <span class="text-gradient">Différence</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <button class="soft-skill-trigger bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl text-left" data-skill="emotionnelle">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-heart"></i> Intelligence Émotionnelle</h4>
+                </button>
+                <button class="soft-skill-trigger bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl text-left" data-skill="proactivite">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-lightbulb"></i> Proactivité & Orientation Solution</h4>
+                </button>
+                <button class="soft-skill-trigger bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl text-left" data-skill="analyse">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-magnifying-glass-chart"></i> Esprit d’Analyse & Adaptabilité</h4>
+                </button>
+                <button class="soft-skill-trigger bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl text-left" data-skill="collaboration">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-users"></i> Collaboration & Communication</h4>
+                </button>
+            </div>
+        </section>
+
         <!-- Section Compétences -->
         <section id="competences" class="py-24 fade-in">
-            <h2 class="text-3xl font-bold text-center mb-16"><span class="text-gradient">Compétences</span> & Outils</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-heart"></i> Soft Skills</h4>
-                    <ul class="space-y-2">
-                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Intelligence émotionnelle</li>
-                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Proactivité & Orientée solution</li>
-                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Esprit d'analyse & Adaptabilité</li>
-                        <li><i class="fas fa-check text-green-500 dark:text-green-400 mr-2"></i>Collaboration & Communication</li>
-                    </ul>
-                </div>
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-language"></i> Langues</h4>
+            <h2 class="text-3xl font-bold text-center mb-16">Mes <span class="text-gradient">Compétences</span> & Outils</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-language"></i> Langues</h4>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3">
                             <img src="https://flagcdn.com/w40/fr.png" alt="Drapeau Français" class="w-6 h-auto rounded-sm">
@@ -537,8 +577,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-headset"></i> CRM & Support</h4>
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-headset"></i> CRM & Support</h4>
                     <div class="flex flex-wrap gap-3">
                         <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.2s;">HubSpot</span>
                         <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.4s;">Zendesk</span>
@@ -549,8 +589,8 @@
                         <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.4s;">Calendly</span>
                     </div>
                 </div>
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 flex items-center gap-2"><i class="fas fa-cogs"></i> Data, IA & Créatifs</h4>
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-cogs"></i> Data, IA & Créatifs</h4>
                     <div class="flex flex-wrap gap-3">
                         <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.6s;">Microsoft Office</span>
                         <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.8s;">PowerBI</span>
@@ -570,30 +610,30 @@
         <section id="plus-sur-moi" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-16">Pour en <span class="text-gradient">savoir plus</span> sur moi</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Si j'étais...</h4>
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-400">Si j'étais...</h4>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-500 dark:text-pink-400"></i>Une fleur : le lotus, pour la résilience.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-500 dark:text-pink-400"></i>Un être fantastique : Tornade des X-Men, pour la maîtrise des éléments.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-500 dark:text-pink-400"></i>Un dessin animé : One Piece, pour l'amitié et l'aventure.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-500 dark:text-pink-400"></i>Un animal : un labrador, pour la fidélité.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage fictif : Tornade des X-Men, pour la maîtrise des éléments.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece, pour l'amitié et l'aventure.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-400"></i> Un animal : un labrador pour la fidélité.</li>
                     </ul>
                 </div>
-                <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Lectures & Podcasts du moment</h4>
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-400">Lectures & Podcasts du moment</h4>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-500 dark:text-pink-400"></i>Practical Customer Success Management - Rick Adams</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-500 dark:text-pink-400"></i>Le Client par Marine Deck</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-500 dark:text-pink-400"></i>Galères de CS! d'Allison Adelise</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-400"></i> Practical Customer Success Management - Rick Adams</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Le Client par Marine Deck</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Galères de CS! d'Allison Adelise</li>
                     </ul>
                 </div>
-                 <div class="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700/50 p-6 rounded-2xl md:col-span-2 transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 class="text-xl font-bold mb-4 text-pink-600 dark:text-pink-400">Centres d'intérêt & Hobbies</h4>
+                 <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl md:col-span-2 transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 text-pink-400">Centres d'intérêt & Hobbies</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                         <div>
                             <button class="details-trigger text-left w-full">
                                 <h5 class="font-semibold flex justify-between items-center">
-                                    <span>🍰 Pâtisserie antillaise et française</span>
+                                    <span>🍰 Pâtisserie antillaise</span>
                                     <i class="fas fa-chevron-down chevron text-xs"></i>
                                 </h5>
                             </button>
@@ -687,13 +727,13 @@
         <section id="contact" class="py-24 fade-in">
             <div class="text-center">
                 <h2 class="text-3xl font-bold">Envie d’<span class="text-gradient">échanger</span> ?</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-4 mb-8 max-w-2xl mx-auto">N'hésitez pas à me contacter ou à réserver un créneau pour échanger.</p>
-                <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-700 dark:text-gray-300">
-                    <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
-                    <a href="https://drive.google.com/file/d/1ZbzkfTD3YOkyARd9l9vD_BK628Yv3dZS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> Télécharger mon CV</a>
+                <p class="text-gray-400 mt-4 mb-8 max-w-2xl mx-auto">N'hésitez pas à me contacter ou à réserver un créneau pour échanger.</p>
+                <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-300">
+                    <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
+                    <a href="https://drive.google.com/file/d/1ZbzkfTD3YOkyARd9l9vD_BK628Yv3dZS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> Télécharger mon CV</a>
                     <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
-                        <i class="fas fa-calendar-check"></i> Prendre un rendez-vous
+                        <i class="fas fa-calendar-check"></i> Réserver un échange
                     </a>
                     <a href="#accueil" class="btn-primary text-white w-12 h-12 rounded-full hover:opacity-90 transition duration-300 flex items-center justify-center text-2xl">
                         ⏫
@@ -703,27 +743,27 @@
         </section>
     </main>
 
-    <footer class="text-center py-8 text-gray-500 dark:text-gray-500 text-sm border-t border-gray-200 dark:border-gray-800">
+    <footer class="text-center py-8 text-gray-500 text-sm border-t border-gray-800">
         <div class="flex justify-center items-center gap-4">
-            <p class="text-violet-500 dark:text-violet-400">© 2025 Corinne MARSIAC CSM. Tous droits réservés.</p>
-            <a href="#accueil" class="text-gray-500 dark:text-gray-400 hover:text-violet-500 dark:hover:text-violet-400 transition duration-300 text-xl"><i class="fab fa-github"></i></a>
+            <p class="text-violet-400">© 2025 Corinne MARSIAC CSM. Tous droits réservés.</p>
+            <a href="#accueil" class="text-gray-400 hover:text-violet-400 transition duration-300 text-xl"><i class="fab fa-github"></i></a>
         </div>
     </footer>
 
     <!-- Modal pour la Réussite Clé -->
     <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative">
-            <button id="close-success-modal-button" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative">
+            <button id="close-success-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
             <h3 class="text-2xl font-bold mb-4 text-gradient">De détracteur (NPS 0) à promoteur (NPS 9)</h3>
-            <div class="text-gray-700 dark:text-gray-300 space-y-4">
+            <div class="text-gray-300 space-y-4">
                 <div>
-                    <h4 class="font-semibold text-lg mb-2 text-violet-600 dark:text-violet-400">Le Contexte</h4>
+                    <h4 class="font-semibold text-lg mb-2 text-violet-400">Le Contexte</h4>
                     <p>Nouvellement arrivée dans un service utilisant un logiciel et des process différents de mon précédent poste, j’ai dû m’adapter rapidement. Ma manager m’a confié un portefeuille sensible, dont une cliente gérant 4 entités françaises avec un backlog conséquent. Parmi les points critiques figuraient quatre crédits URSSAF en attente, pour un montant total proche de 100 k€. Par ailleurs, cette cliente, habituée à gérer plusieurs pays, maîtrisait mal les spécificités liées aux processus français.</p>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-lg mb-2 text-violet-600 dark:text-violet-400">Mes Actions</h4>
+                    <h4 class="font-semibold text-lg mb-2 text-violet-400">Mes Actions</h4>
                     <ul class="list-disc list-inside space-y-2">
                         <li><strong>Posture proactive :</strong> Plutôt que de la voir comme une "cliente difficile", j'ai pris le temps de l'écouter activement et d'échanger avec elle pour comprendre ses attentes, clarifier nos processus et la rassurer.</li>
                         <li><strong>Accompagnement dédié :</strong> Mise en place de points de suivi réguliers pour avoir des feedbacks clients réguliers, et avoir une approche proactive.</li>
@@ -731,13 +771,13 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-lg mb-2 text-green-600 dark:text-green-400">Les Résultats</h4>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                        <li><span class="font-bold text-green-600 dark:text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li>
-                        <li><span class="font-bold text-green-600 dark:text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li>
-                        <li><span class="font-bold text-green-600 dark:text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li>
-                        <li><span class="font-bold text-green-600 dark:text-green-400">Commercial :</span> Cross-sell d'un nouveau service réussi.</li>
-                        <li><span class="font-bold text-green-600 dark:text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>
+                    <h4 class="font-semibold text-lg mb-2 text-green-400">Les Résultats</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li><span class="font-bold text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li>
+                        <li><span class="font-bold text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li>
+                        <li><span class="font-bold text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li>
+                        <li><span class="font-bold text-green-400">Commercial :</span> Cross-sell d'un nouveau service réussi.</li>
+                        <li><span class="font-bold text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>
                     </ul>
                 </div>
             </div>
@@ -746,12 +786,23 @@
     
     <!-- Modal pour les Chiffres Clés -->
     <div id="impact-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative">
-            <button id="close-impact-modal-button" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative">
+            <button id="close-impact-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
             <h3 id="impact-modal-title" class="text-2xl font-bold mb-4 text-gradient"></h3>
-            <p id="impact-modal-content" class="text-gray-700 dark:text-gray-300"></p>
+            <p id="impact-modal-content" class="text-gray-300"></p>
+        </div>
+    </div>
+
+    <!-- Modal pour les Soft Skills -->
+    <div id="soft-skill-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative">
+            <button id="close-soft-skill-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 id="soft-skill-modal-title" class="text-2xl font-bold mb-4 text-gradient"></h3>
+            <p id="soft-skill-modal-content" class="text-gray-300"></p>
         </div>
     </div>
 
@@ -818,6 +869,43 @@
 
             closeImpactModalButton.addEventListener('click', closeImpactModal);
             impactModal.addEventListener('click', (e) => (e.target === impactModal) && closeImpactModal());
+        }
+
+        // --- GESTION DE LA MODALE "SOFT SKILLS" ---
+        const softSkillModal = document.getElementById('soft-skill-modal');
+        const softSkillModalTitle = document.getElementById('soft-skill-modal-title');
+        const softSkillModalContent = document.getElementById('soft-skill-modal-content');
+        const closeSoftSkillModalButton = document.getElementById('close-soft-skill-modal-button');
+        const softSkillTriggers = document.querySelectorAll('.soft-skill-trigger');
+
+        const softSkillData = {
+          emotionnelle: { title: "Intelligence Émotionnelle", content: "Écoute active et empathie pour comprendre les besoins explicites et implicites, instaurer un climat de confiance et créer des relations durables." },
+          proactivite: { title: "Proactivité & Orientation Solution", content: "Anticipation des problèmes et recherche pragmatique de solutions adaptées, afin de transformer chaque défi en opportunité d’amélioration." },
+          analyse: { title: "Esprit d’Analyse & Adaptabilité", content: "Capacité à identifier les signaux faibles, analyser les situations complexes et ajuster ses actions face à des contextes en constante évolution." },
+          collaboration: { title: "Collaboration & Communication", content: "Travail en équipe fluide et communication claire, favorisant la coopération, la transmission d’idées et la réussite collective." }
+        };
+
+        if (softSkillModal && softSkillModalTitle && softSkillModalContent && closeSoftSkillModalButton) {
+            softSkillTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const key = trigger.dataset.skill;
+                    const data = softSkillData[key];
+                    if (data) {
+                        softSkillModalTitle.textContent = data.title;
+                        softSkillModalContent.textContent = data.content;
+                        softSkillModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            const closeSoftSkillModal = () => {
+                softSkillModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+
+            closeSoftSkillModalButton.addEventListener('click', closeSoftSkillModal);
+            softSkillModal.addEventListener('click', (e) => (e.target === softSkillModal) && closeSoftSkillModal());
         }
 
         // --- GESTION DES ANIMATIONS AU DÉFILEMENT ---
