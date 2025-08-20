@@ -98,14 +98,6 @@
 </head>
 <body class="bg-gray-900 text-gray-200 transition-colors duration-500">
 
-    <!-- Bouton de Traduction Flottant -->
-    <div class="fixed top-20 right-4 z-40">
-        <button id="translate-button" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 text-sm flex items-center gap-2 shadow-lg shadow-violet-500/30">
-            <img id="translate-flag" src="https://flagcdn.com/w40/gb.png" alt="English Flag" class="w-5 h-auto rounded-sm">
-            <span id="translate-text">Traduire en Anglais</span>
-        </button>
-    </div>
-
     <!-- Barre de Navigation -->
     <nav class="bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4">
@@ -119,8 +111,14 @@
                     <a href="#competences" id="nav-competences" class="text-gray-300 hover:text-violet-400 transition duration-300">Compétences</a>
                     <a href="#plus-sur-moi" id="nav-personnalite" class="text-gray-300 hover:text-violet-400 transition duration-300">Personnalité</a>
                     <a href="#contact" id="nav-contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
+                    <button id="translate-button-desktop" aria-label="Changer de langue" class="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-500 flex items-center justify-center hover:scale-105 transition hover:shadow-lg">
+                        <img id="translate-flag-desktop" src="https://flagcdn.com/w20/gb.png" alt="English Flag" class="w-5 h-auto rounded-sm">
+                    </button>
                 </div>
                 <div class="md:hidden flex items-center gap-4">
+                    <button id="translate-button-mobile" aria-label="Changer de langue" class="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-500 flex items-center justify-center hover:scale-105 transition hover:shadow-lg">
+                        <img id="translate-flag-mobile" src="https://flagcdn.com/w20/gb.png" alt="English Flag" class="w-5 h-auto rounded-sm">
+                    </button>
                     <button id="mobile-menu-button" class="focus:outline-none text-gray-200">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
@@ -635,119 +633,129 @@
         <!-- Section Pour en savoir plus -->
         <section id="plus-sur-moi" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-16"><span id="plus-sur-moi-title-1">En</span> <span class="text-gradient" id="plus-sur-moi-title-2">savoir plus</span> <span id="plus-sur-moi-title-3">sur moi</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 id="plus-sur-moi-si-jetais" class="text-xl font-bold mb-4 text-pink-400">Si j'étais...</h4>
-                    <ul class="space-y-3">
-                        <li id="si-jetais-1" class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.</li>
-                        <li id="si-jetais-2" class="flex items-center gap-3"><i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique, mon île natale.</li>
-                        <li id="si-jetais-3" class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage fictif : Tornade des X-Men, pour la maîtrise des éléments.</li>
-                        <li id="si-jetais-4" class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece, pour l'amitié et l'aventure.</li>
-                        <li id="si-jetais-5" class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-400"></i> Un animal : un labrador pour la fidélité.</li>
-                    </ul>
-                </div>
-                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 id="plus-sur-moi-lectures" class="text-xl font-bold mb-4 text-pink-400">Lectures & Podcasts du moment</h4>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-400"></i> Practical Customer Success Management - Rick Adams</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Le Client par Marine Deck</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Galères de CS! d'Allison Adelise</li>
-                    </ul>
-                </div>
-                 <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl md:col-span-2 transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 id="plus-sur-moi-hobbies" class="text-xl font-bold mb-4 text-pink-400">Centres d'intérêt & Hobbies</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-1-title">🍰 Pâtisserie antillaise</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-1-text">Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J'aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches.</p>
-                            </div>
+            <details class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl" aria-label="En savoir plus sur ma personnalité et mes centres d'intérêt">
+                <summary class="list-none cursor-pointer text-center">
+                    <p id="plus-sur-moi-accroche" class="text-gray-300 leading-relaxed text-lg mb-8">Parce que derrière un CV se cache une personnalité.</p>
+                    <div class="inline-block btn-primary text-white px-8 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">
+                        <i class="fas fa-circle-info mr-2" aria-hidden="true"></i><span id="plus-sur-moi-btn">Plus de détails</span>
+                    </div>
+                </summary>
+                <div class="mt-12 space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                            <h4 id="plus-sur-moi-si-jetais" class="text-xl font-bold mb-4 text-pink-400">Si j'étais...</h4>
+                            <ul class="space-y-3">
+                                <li id="si-jetais-1" class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.</li>
+                                <li id="si-jetais-2" class="flex items-center gap-3"><i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique, mon île natale.</li>
+                                <li id="si-jetais-3" class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage fictif : Tornade des X-Men, pour la maîtrise des éléments.</li>
+                                <li id="si-jetais-4" class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece, pour l'amitié et l'aventure.</li>
+                                <li id="si-jetais-5" class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-400"></i> Un animal : un labrador pour la fidélité.</li>
+                            </ul>
                         </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-2-title">🌸 Culture japonaise & Mangas</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-2-text">Depuis l'enfance, l'Asie me fascine. Mon goût pour les mangas et les animés s'est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece.</p>
-                            </div>
+                        <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                            <h4 id="plus-sur-moi-lectures" class="text-xl font-bold mb-4 text-pink-400">Lectures & Podcasts du moment</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-400"></i> Practical Customer Success Management - Rick Adams</li>
+                                <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Le Client par Marine Deck</li>
+                                <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Galères de CS! d'Allison Adelise</li>
+                            </ul>
                         </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-3-title">🤖 Innovation tech (IA, no-code)</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-3-text">L'IA, le no-code et l'automatisation sont des leviers qui transforment nos façons de travailler. J'y vois une formidable opportunité de simplification, de productivité et de créativité.</p>
+                    </div>
+                     <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                        <h4 id="plus-sur-moi-hobbies" class="text-xl font-bold mb-4 text-pink-400">Centres d'intérêt & Hobbies</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-1-title">🍰 Pâtisserie antillaise</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-1-text">Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J'aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-4-title">📈 Marketing digital & UX</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-4-text">Formée en stratégie digitale, j'aime comprendre les comportements utilisateurs et imaginer des parcours plus intuitifs, en m'intéressant à l'UX, la création de visuels et la conception de sites web.</p>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-2-title">🌸 Culture japonaise & Mangas</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-2-text">Depuis l'enfance, l'Asie me fascine. Mon goût pour les mangas et les animés s'est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-5-title">🌱 Développement personnel</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-5-text">Apprendre à mieux se connaître, à gérer ses émotions et à rester aligné avec ses valeurs est, selon moi, un travail essentiel pour s'épanouir dans la sphère privée comme professionnelle.</p>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-3-title">🤖 Innovation tech (IA, no-code)</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-3-text">L'IA, le no-code et l'automatisation sont des leviers qui transforment nos façons de travailler. J'y vois une formidable opportunité de simplification, de productivité et de créativité.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-6-title">🎮 Jeux vidéo</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-6-text">Autrefois passionnée de RPG en ligne pour l'aspect stratégique et l'esprit de communauté, je privilégie aujourd'hui des jeux familiaux, propices aux rires partagés.</p>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-4-title">📈 Marketing digital & UX</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-4-text">Formée en stratégie digitale, j'aime comprendre les comportements utilisateurs et imaginer des parcours plus intuitifs, en m'intéressant à l'UX, la création de visuels et la conception de sites web.</p>
+                                </div>
                             </div>
-                        </div>
-                         <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-7-title">🎵 Musique</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-7-text">J'apprécie d'écouter de la musique pour me détendre ou faire du sport. Mes goûts sont plutôt éclectiques, je peux passer des "4 Saisons" de Vivaldi à Shawn Mendez.</p>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-5-title">🌱 Développement personnel</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-5-text">Apprendre à mieux se connaître, à gérer ses émotions et à rester aligné avec ses valeurs est, selon moi, un travail essentiel pour s'épanouir dans la sphère privée comme professionnelle.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="details-trigger text-left w-full">
-                                <h5 class="font-semibold flex justify-between items-center">
-                                    <span id="hobby-8-title">🏃 Gestion de projet agile (SCRUM)</span>
-                                    <i class="fas fa-chevron-down chevron text-xs"></i>
-                                </h5>
-                            </button>
-                            <div class="details-content text-sm mt-2">
-                                <p id="hobby-8-text">Je suis convaincue que les méthodologies agiles ne s'appliquent pas uniquement au monde de l'entreprise : elles sont aussi de puissants outils d'organisation personnelle.</p>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-6-title">🎮 Jeux vidéo</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-6-text">Autrefois passionnée de RPG en ligne pour l'aspect stratégique et l'esprit de communauté, je privilégie aujourd'hui des jeux familiaux, propices aux rires partagés.</p>
+                                </div>
+                            </div>
+                             <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-7-title">🎵 Musique</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-7-text">J'apprécie d'écouter de la musique pour me détendre ou faire du sport. Mes goûts sont plutôt éclectiques, je peux passer des "4 Saisons" de Vivaldi à Shawn Mendez.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="details-trigger text-left w-full">
+                                    <h5 class="font-semibold flex justify-between items-center">
+                                        <span id="hobby-8-title">🏃 Gestion de projet agile (SCRUM)</span>
+                                        <i class="fas fa-chevron-down chevron text-xs"></i>
+                                    </h5>
+                                </button>
+                                <div class="details-content text-sm mt-2">
+                                    <p id="hobby-8-text">Je suis convaincue que les méthodologies agiles ne s'appliquent pas uniquement au monde de l'entreprise : elles sont aussi de puissants outils d'organisation personnelle.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </details>
         </section>
 
         <!-- Section Contact -->
@@ -762,9 +770,6 @@
                     <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
                         <i class="fas fa-calendar-check"></i> <span id="contact-booking">Réserver un échange</span>
                     </a>
-                    <a href="#accueil" class="btn-primary text-white w-12 h-12 rounded-full hover:opacity-90 transition duration-300 flex items-center justify-center text-2xl">
-                        ⏫
-                    </a>
                 </div>
             </div>
         </section>
@@ -776,6 +781,11 @@
             <a href="https://github.com" class="text-gray-400 hover:text-violet-400 transition duration-300 text-xl"><i class="fab fa-github"></i></a>
         </div>
     </footer>
+    
+    <!-- Scroll to Top Button -->
+    <a href="#accueil" aria-label="Remonter en haut de la page" class="fixed bottom-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg hover:scale-110 transition">
+        <i class="fas fa-arrow-up text-white"></i>
+    </a>
 
     <!-- Modal pour la Réussite Clé -->
     <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
@@ -1024,10 +1034,6 @@
         })();
 
         // --- SYSTÈME DE TRADUCTION ---
-        const translateButton = document.getElementById('translate-button');
-        const translateFlag = document.getElementById('translate-flag');
-        const translateText = document.getElementById('translate-text');
-        
         const translations = {
             en: {
                 'nav-qui': 'Who am I?', 'nav-apropos': 'About', 'nav-parcours': 'Career', 'nav-projet': 'Project', 'nav-competences': 'Skills', 'nav-personnalite': 'Personality', 'nav-contact': 'Contact',
@@ -1125,6 +1131,8 @@
                 'competences-langues-title': "Languages", 'competences-langue-fr': "French: Native", 'competences-langue-en': "English: Professional (B2)",
                 'competences-crm-title': "CRM & Support", 'competences-data-title': "Data, AI & Creative",
                 'plus-sur-moi-title-1': "More", 'plus-sur-moi-title-2': "about", 'plus-sur-moi-title-3': "me",
+                'plus-sur-moi-accroche': "Because behind a resume, there is a personality.",
+                'plus-sur-moi-btn': "More details",
                 'plus-sur-moi-si-jetais': "If I were...",
                 'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> A flower: the lotus, for resilience.',
                 'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> A destination: Martinique, my native island.',
@@ -1141,7 +1149,7 @@
                 'hobby-6-title': "🎮 Video Games", 'hobby-6-text': "Once passionate about online RPGs for their strategic aspect and community spirit, I now prefer family games that lead to shared laughter.",
                 'hobby-7-title': "🎵 Music", 'hobby-7-text': 'I enjoy listening to music to relax or exercise. My tastes are quite eclectic; I can go from Vivaldi\'s "The Four Seasons" to Shawn Mendes.',
                 'hobby-8-title': "🏃 Agile Project Management (SCRUM)", 'hobby-8-text': "I am convinced that agile methodologies do not only apply to the business world: they are also powerful tools for personal organization.",
-                'contact-title-1': "Want to", 'contact-title-2': "connect",
+                'contact-title-1': "Want to ", 'contact-title-2': "connect",
                 'contact-subtitle': "Feel free to contact me or book a slot to chat.",
                 'contact-download-cv': "Download my resume", 'contact-booking': "Book a meeting",
                 'footer-text': "© 2025 Corinne MARSIAC CSM. All rights reserved.",
@@ -1248,6 +1256,8 @@
                 'competences-langues-title': "Langues", 'competences-langue-fr': "Français : Langue maternelle", 'competences-langue-en': "Anglais : Professionnel (B2)",
                 'competences-crm-title': "CRM & Support", 'competences-data-title': "Data, IA & Créatifs",
                 'plus-sur-moi-title-1': "En", 'plus-sur-moi-title-2': "savoir plus", 'plus-sur-moi-title-3': "sur moi",
+                'plus-sur-moi-accroche': "Parce que derrière un CV se cache une personnalité.",
+                'plus-sur-moi-btn': "Plus de détails",
                 'plus-sur-moi-si-jetais': "Si j'étais...",
                 'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.',
                 'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique, mon île natale.',
@@ -1277,7 +1287,7 @@
             }
         };
 
-        translateButton.addEventListener('click', () => {
+        function toggleLanguage() {
             const currentLang = document.documentElement.lang;
             const newLang = currentLang === 'fr' ? 'en' : 'fr';
             document.documentElement.lang = newLang;
@@ -1289,17 +1299,30 @@
                 }
             }
 
-            // Update the button
+            const flagDesktop = document.getElementById('translate-flag-desktop');
+            const flagMobile = document.getElementById('translate-flag-mobile');
+            const buttonDesktop = document.getElementById('translate-button-desktop');
+            const buttonMobile = document.getElementById('translate-button-mobile');
+
             if (newLang === 'en') {
-                translateFlag.src = 'https://flagcdn.com/w40/fr.png';
-                translateFlag.alt = 'French Flag';
-                translateText.textContent = 'Translate to French';
+                flagDesktop.src = 'https://flagcdn.com/w20/fr.png';
+                flagDesktop.alt = 'Drapeau Français';
+                flagMobile.src = 'https://flagcdn.com/w20/fr.png';
+                flagMobile.alt = 'Drapeau Français';
+                buttonDesktop.setAttribute('aria-label', 'Changer la langue en français');
+                buttonMobile.setAttribute('aria-label', 'Changer la langue en français');
             } else {
-                translateFlag.src = 'https://flagcdn.com/w40/gb.png';
-                translateFlag.alt = 'English Flag';
-                translateText.textContent = 'Traduire en Anglais';
+                flagDesktop.src = 'https://flagcdn.com/w20/gb.png';
+                flagDesktop.alt = 'English Flag';
+                flagMobile.src = 'https://flagcdn.com/w20/gb.png';
+                flagMobile.alt = 'English Flag';
+                buttonDesktop.setAttribute('aria-label', 'Switch language to English');
+                buttonMobile.setAttribute('aria-label', 'Switch language to English');
             }
-        });
+        }
+
+        document.getElementById('translate-button-desktop').addEventListener('click', toggleLanguage);
+        document.getElementById('translate-button-mobile').addEventListener('click', toggleLanguage);
 
     </script>
 </body>
