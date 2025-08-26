@@ -140,8 +140,9 @@
 
         <!-- Section Accueil -->
         <section id="accueil" class="min-h-[90vh] flex items-center">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-                <div class="md:col-span-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Column -->
+                <div>
                     <span id="accueil-job-title" class="text-2xl font-semibold text-violet-400">CUSTOMER SUCCESS MANAGER</span>
                     <h1 id="accueil-headline" class="text-4xl md:text-6xl font-extrabold text-white leading-tight mt-2 animate-pulse">
                         Je transforme l'expérience client en levier de croissance durable.
@@ -153,19 +154,54 @@
                         <a href="#contact" id="accueil-contact-btn" class="btn-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">Contactez-moi</a>
                     </div>
                 </div>
-                <div class="md:col-span-2 flex justify-center" id="nps-graph-container">
-                    <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 200 200">
-                        <defs>
-                            <linearGradient id="npsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#A78BFA" />
-                                <stop offset="100%" style="stop-color:#F472B6" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="100" cy="100" r="80" fill="none" class="stroke-gray-700" stroke-width="20"></circle>
-                        <circle cx="100" cy="100" r="80" fill="none" stroke="url(#npsGradient)" stroke-width="20" class="nps-circle-progress" style="transform: rotate(-90deg); transform-origin: 50% 50%; stroke-dasharray: 502.65; stroke-dashoffset: 502.65;"></circle>
-                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="text-5xl font-bold fill-gray-200" id="nps-score-text">0</text>
-                        <text x="50%" y="65%" text-anchor="middle" class="text-lg font-semibold fill-gray-400" id="accueil-nps-label">Score NPS</text>
-                    </svg>
+                <!-- Graphic Column -->
+                <div class="flex justify-center items-center">
+                    <button id="open-cycle-modal-button" class="group focus:outline-none" aria-label="Ouvrir le détail du cycle de succès client">
+                        <svg class="w-80 h-80 md:w-96 md:h-96 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 400 400">
+                            <defs>
+                                <!-- Colors for the cycle -->
+                                <linearGradient id="grad1"><stop stop-color="#F472B6"/></linearGradient> <!-- Lightest -->
+                                <linearGradient id="grad2"><stop stop-color="#EC4899"/></linearGradient>
+                                <linearGradient id="grad3"><stop stop-color="#D946EF"/></linearGradient>
+                                <linearGradient id="grad4"><stop stop-color="#A78BFA"/></linearGradient>
+                                <linearGradient id="grad5"><stop stop-color="#8B5CF6"/></linearGradient>
+                                <linearGradient id="grad6"><stop stop-color="#7C3AED"/></linearGradient> <!-- Darkest -->
+
+                                <!-- Invisible paths for text -->
+                                <path id="textPath1" d="M 200,40 A 160,160 0 0 1 338.6,120" fill="none"/>
+                                <path id="textPath2" d="M 338.6,120 A 160,160 0 0 1 338.6,280" fill="none"/>
+                                <path id="textPath3" d="M 338.6,280 A 160,160 0 0 1 200,360" fill="none"/>
+                                <path id="textPath4" d="M 200,360 A 160,160 0 0 1 61.4,280" fill="none"/>
+                                <path id="textPath5" d="M 61.4,280 A 160,160 0 0 1 61.4,120" fill="none"/>
+                                <path id="textPath6" d="M 61.4,120 A 160,160 0 0 1 200,40" fill="none"/>
+                            </defs>
+                            
+                            <!-- Central Text -->
+                            <circle cx="200" cy="200" r="130" fill="#1F2937" opacity="0.8"/>
+                            <text x="200" y="190" text-anchor="middle" class="fill-gray-200 font-bold text-3xl" id="svg-cycle-title1">Cycle Care</text>
+                            <text x="200" y="225" text-anchor="middle" class="fill-gray-200 font-bold text-3xl" id="svg-cycle-title2">& CS</text>
+                            <text x="200" y="250" text-anchor="middle" class="fill-violet-400 text-sm" id="svg-cycle-cta">(Cliquer pour voir)</text>
+                            
+                            <!-- Static Group -->
+                            <g>
+                                <!-- 6 Arc Paths -->
+                                <path d="M 200,40 A 160,160 0 0 1 338.6,120" stroke="url(#grad1)" stroke-width="40" fill="none"/>
+                                <path d="M 338.6,120 A 160,160 0 0 1 338.6,280" stroke="url(#grad2)" stroke-width="40" fill="none"/>
+                                <path d="M 338.6,280 A 160,160 0 0 1 200,360" stroke="url(#grad3)" stroke-width="40" fill="none"/>
+                                <path d="M 200,360 A 160,160 0 0 1 61.4,280" stroke="url(#grad4)" stroke-width="40" fill="none"/>
+                                <path d="M 61.4,280 A 160,160 0 0 1 61.4,120" stroke="url(#grad5)" stroke-width="40" fill="none"/>
+                                <path d="M 61.4,120 A 160,160 0 0 1 200,40" stroke="url(#grad6)" stroke-width="40" fill="none"/>
+
+                                <!-- 6 Text elements using textPath -->
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-1" xlink:href="#textPath1" startOffset="50%" text-anchor="middle">Écouter</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-2" xlink:href="#textPath2" startOffset="50%" text-anchor="middle">Planifier</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-3" xlink:href="#textPath3" startOffset="50%" text-anchor="middle">Accompagner</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-4" xlink:href="#textPath4" startOffset="50%" text-anchor="middle">Mesurer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-5" xlink:href="#textPath5" startOffset="50%" text-anchor="middle">Améliorer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-6" xlink:href="#textPath6" startOffset="50%" text-anchor="middle">Évoluer</textPath></text>
+                            </g>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -183,6 +219,51 @@
                             Professionnelle proactive et orientée solution, je suis passionnée par la transformation de l'expérience client en véritable moteur de croissance. Ma philosophie : <strong>"Une bonne technologie ne suffit pas, c'est l'expérience humaine qui fait toute la différence"</strong>.
                             <br/><br/>
                             <span id="quisuisje-p2">Ce qui m’anime, c’est de comprendre les besoins réels des clients et de les guider vers des succès mesurables, tout en cultivant une relation de confiance.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Expertise Customer Care -->
+        <section id="expertise-care" class="py-24 fade-in">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-16"><span class="text-gradient">Expertise Customer Care</span></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Column 1 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-violet-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>1</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Écoute & Support</h4>
+                        <p class="text-gray-400 text-sm">
+                            Accompagnement des clients via un support réactif et empathique pour résoudre efficacement leurs problématiques et renforcer la satisfaction immédiate.
+                        </p>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>2</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Engagement & Relation</h4>
+                        <p class="text-gray-400 text-sm">
+                            Création d’une relation de confiance grâce à des interactions personnalisées, favorisant la fidélisation et transformant chaque échange en opportunité de valoriser la marque.
+                        </p>
+                    </div>
+                </div>
+                <!-- Column 3 -->
+                <div class="relative pt-8">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <span>3</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl shadow-lg text-center h-full">
+                        <h4 class="text-xl font-bold mt-4 mb-2 text-white">Qualité & Amélioration Continue</h4>
+                        <p class="text-gray-400 text-sm">
+                            Analyse des retours clients et des incidents récurrents afin d’identifier des axes d’amélioration, réduire le volume de tickets et optimiser l’expérience utilisateur.
                         </p>
                     </div>
                 </div>
@@ -278,13 +359,13 @@
 
         <!-- Section À Propos -->
         <section id="a-propos" class="py-24 fade-in">
-            <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient" id="apropos-title-1">Ma Vision</span> <span id="apropos-title-2">du Customer Success</span></h2>
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient" id="apropos-title-1">Ma Vision</span> <span id="apropos-title-2">du Customer Success & du Customer Care</span></h2>
             <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
                 <p id="apropos-p1" class="text-gray-300 leading-relaxed mb-4 text-lg">
-                    Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le CSM est le trait d'union stratégique entre l'humain, le produit et la valeur d'usage. Mon rôle est de <strong>coacher le client</strong> pour l'aider à <strong>atteindre ses objectifs</strong>, tout en veillant à ce qu'ils soient alignés avec les nôtres afin de <strong>favoriser la croissance</strong> de mon entreprise.
+                    Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le Care et le Success sont deux métiers complémentaires : le Care résout rapidement les irritants et rassure le client, tandis que le Success le <strong>coach</strong> pour atteindre ses objectifs et tirer le maximum de valeur de la solution. Ensemble, ils renforcent la satisfaction, la <strong>rétention</strong> et la <strong>croissance</strong>.
                 </p>
                 <p id="apropos-p2" class="text-gray-300 leading-relaxed text-lg">
-                    Dans un monde où la technologie évolue sans cesse, je suis convaincue que c'est <strong>l'humain qui fait la différence</strong>. Je m'engage à valoriser chaque interaction, à prévenir les irritants et à <strong>bâtir des relations de confiance durables</strong> qui impactent concrètement la <strong>rétention</strong> et la <strong>satisfaction</strong>.
+                    Dans un monde où la technologie évolue sans cesse, je suis convaincue que <strong>c’est l’humain qui fait la différence</strong>. Mon rôle est d’être le trait d’union stratégique entre le client, le produit et l’entreprise : valoriser chaque interaction, anticiper les besoins, et <strong>bâtir des relations de confiance durables</strong>.
                 </p>
             </div>
         </section>
@@ -295,7 +376,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- Colonne Expériences -->
                 <div>
-                    <h3 id="parcours-exp-title" class="text-2xl font-semibold mb-8 flex items-center gap-3 text-violet-400"><i class="fas fa-briefcase"></i> Expériences</h3>
+                    <h3 id="parcours-exp-title" class="text-2xl font-semibold mb-8 flex items-center gap-3 text-violet-400">
+                        <i class="fas fa-briefcase"></i> Expériences
+                    </h3>
                     <div class="space-y-8 border-l-2 border-gray-700 pl-8">
                         <!-- Expérience 1 -->
                         <div class="relative">
@@ -309,15 +392,16 @@
                                 <p class="font-medium text-gray-300">ADP France, Nanterre</p>
                             </button>
                             <div class="details-content mt-4">
+                                <p class="text-sm text-gray-400 italic mb-2">Leader mondial des solutions de gestion de la paie et des ressources humaines, ADP accompagne plus de 1 million de clients dans plus de 140 pays, de la PME aux grandes entreprises internationales.</p>
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="exp1-li1"><strong>Analyse des besoins</strong> fonctionnels et réglementaires des clients</li>
-                                    <li id="exp1-li2"><strong>Rédaction des spécifications techniques</strong> en lien avec la Product Team</li>
-                                    <li id="exp1-li3">Animation de <strong>comités de projet</strong> (kick-off, comités de pilotage, clôture)</li>
-                                    <li id="exp1-li4"><strong>Paramétrage</strong> des environnements clients sur les portails ADP</li>
-                                    <li id="exp1-li5"><strong>Réalisation des tests, mise en production</strong>, suivi post-déploiement</li>
-                                    <li id="exp1-li6"><strong>Onboarding des utilisateurs, formations à distance</strong>, accompagnement personnalisé</li>
-                                    <li id="exp1-li7">Gestion du backlog client, traitement des tickets et suivi des incidents</li>
-                                    <li id="exp1-li8" class="font-semibold text-green-400">Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)</li>
+                                    <li><strong>Analyse des besoins</strong> des clients</li>
+                                    <li><strong>Rédaction des spécifications techniques</strong></li>
+                                    <li>Animation de <strong>comités de projet</strong></li>
+                                    <li><strong>Paramétrage</strong> des portails clients</li>
+                                    <li><strong>Testing, mise en production</strong>, suivi post-déploiement</li>
+                                    <li><strong>Onboarding des utilisateurs, formations à distance</strong></li>
+                                    <li>Gestion du backlog client suivant le <strong>SLA</strong></li>
+                                    <li class="font-semibold text-green-400">Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)</li>
                                 </ul>
                             </div>
                         </div>
@@ -333,16 +417,15 @@
                                 <p class="font-medium text-gray-300">ADP France, Nanterre</p>
                             </button>
                             <div class="details-content mt-4">
+                                <p class="text-sm text-gray-400 italic mb-2">Leader mondial des solutions de gestion de la paie et des ressources humaines, ADP accompagne plus de 1 million de clients dans plus de 140 pays, de la PME aux grandes entreprises internationales.</p>
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="exp2-li1">Production mensuelle de 400 paies multi-conventions : saisie, contrôle, DSN</li>
-                                    <li id="exp2-li2">Soldes de tout compte et documents de sortie</li>
-                                    <li id="exp2-li3"><strong>Onboarding</strong> des utilisateurs et accompagnement sur les portails</li>
-                                    <li id="exp2-li4"><strong>Support expert et customer care</strong> : tickets complexes, anomalies, backlog</li>
-                                    <li id="exp2-li5">Monthly review et <strong>QBR</strong> (satisfaction, NPS, détection d’irritants)</li>
-                                    <li id="exp2-li6">Détection des opportunités (<strong>upsell/cross-sell</strong>) et risques de <strong>churn</strong></li>
-                                    <li id="exp2-li7">Pilotage de prestations out-of-scope et d’add-ons → <strong>croissance du MRR</strong></li>
-                                    <li id="exp2-li8">Veille sociale</li>
-                                    <li id="exp2-li9" class="font-semibold text-green-400">Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.</li>
+                                    <li><strong>Production mensuelle</strong> de 400 paies multi-conventions</li>
+                                    <li><strong>Onboarding</strong> des utilisateurs</li>
+                                    <li><strong>Support expert et customer care</strong></li>
+                                    <li><strong>Suivi proactif</strong> clients via des monthly review et <strong>QBR</strong></li>
+                                    <li><strong>Upsell/cross-sell</strong> => MRR</li>
+                                    <li>Prestations <strong>add-ons/out-of-scope</strong> => <strong>MRR</strong></li>
+                                    <li class="font-semibold text-green-400">Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.</li>
                                 </ul>
                             </div>
                         </div>
@@ -358,13 +441,14 @@
                                 <p class="font-medium text-gray-300">Nibelis, Levallois-Perret</p>
                             </button>
                              <div class="details-content mt-4">
+                                <p class="text-sm text-gray-400 italic mb-2">Éditeur français de solutions SaaS dédiées à la gestion de la paie et des RH, Nibelis accompagne plusieurs milliers d’entreprises dans la digitalisation et la conformité de leurs processus RH.</p>
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="exp3-li1"><strong>Customer care et support de premier niveau</strong> auprès des clients autonomes pour garantir une adoption fluide et sécurisée de la solution.</li>
-                                    <li id="exp3-li2"><strong>Vulgarisation des sujets</strong> réglementaires et contractuels auprès d’interlocuteurs non spécialistes.</li>
-                                    <li id="exp3-li3">Suivi proactif des demandes clients et <strong>remontée des feedbacks</strong> pour contribuer à l’amélioration continue du produit.</li>
-                                    <li id="exp3-li4">Collecte, contrôle et saisie des éléments de paie afin d’assurer la fiabilité des données et la conformité légale.</li>
-                                    <li id="exp3-li5">Établissement des bulletins de salaire, déclarations sociales, soldes de tout compte et documents de sortie.</li>
-                                    <li id="exp3-li6"><strong>Paramétrage de base et mise à jour de la solution</strong> en fonction des besoins clients.</li>
+                                    <li>Gestion d’un portefeuille de 300 paies</li>
+                                    <li><strong>Customer care et support de premier niveau</strong> auprès des clients</li>
+                                    <li><strong>Vulgarisation des sujets</strong> réglementaires auprès d’interlocuteurs non spécialistes</li>
+                                    <li>Suivi proactif des demandes clients</li>
+                                    <li><strong>Remontée des feedbacks</strong></li>
+                                    <li><strong>Paramétrage de base et mise à jour de la solution</strong></li>
                                 </ul>
                             </div>
                         </div>
@@ -377,14 +461,14 @@
                                     <h4 id="exp4-title" class="text-xl font-bold text-white">Assistante RH</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
-                                <p class="font-medium text-gray-300">Groupe BOVIS, Conflans-Sainte-Honorine</p>
+                                <p class="font-medium text-gray-300">Marchal Levage – Groupe Bovis, Conflans-Sainte-Honorine</p>
                             </button>
                             <div class="details-content mt-4">
+                                <p class="text-sm text-gray-400 italic mb-2">Entreprise spécialisée dans le levage, la manutention lourde et le transport exceptionnel, intégrée au Groupe Bovis, acteur majeur du déménagement industriel et de la logistique technique en France et en Europe.</p>
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="exp4-li1">Recueil, fiabilisation et transmission de données sociales (absences, heures, primes) en coordination avec la DAF.</li>
-                                    <li id="exp4-li2"><strong>Suivi individualisé</strong> des collaborateurs : gestion des obligations légales (visites médicales, formations, dossiers RH), réponses aux questions terrain.</li>
-                                    <li id="exp4-li3">Communication quotidienne avec les chauffeurs, managers et responsable de site pour fluidifier les process.</li>
-                                    <li id="exp4-li4">Collaboration transversale avec le Directeur de site, la DAF, le service paie et l’équipe comptable pour fiabiliser les process et <strong>garantir une expérience fluide</strong> aux collaborateurs.</li>
+                                    <li>Recueil, fiabilisation et transmission de données sociales</li>
+                                    <li><strong>Suivi individualisé</strong> des collaborateurs</li>
+                                    <li>Collaboration transversale avec le Directeur de site, la DAF, la Paie et la Comptabilité</li>
                                 </ul>
                             </div>
                         </div>
@@ -400,25 +484,26 @@
                                 <p class="font-medium text-gray-300">Crédit Agricole Nord Est, Reims</p>
                             </button>
                             <div class="details-content mt-4">
+                                <p class="text-sm text-gray-400 italic mb-2">Banque coopérative régionale, filiale du groupe Crédit Agricole, le CANE compte plus de 4000 collaborateurs et accompagne particuliers, professionnels et entreprises sur l’ensemble des besoins bancaires et financiers.</p>
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="exp5-li1">Gestion des appels entrants des clients et prospects sur le périmètre Nord-Est.</li>
-                                    <li id="exp5-li2"><strong>Traitement des demandes des clients</strong> particuliers et accompagnement dans leurs démarches.</li>
-                                    <li id="exp5-li3">Qualification des besoins et orientation personnalisée vers les interlocuteurs adéquats (agence, support technique, expert).</li>
-                                    <li id="exp5-li4">Conseil et vente de produits bancaires adaptés aux besoins (comptes bancaires, livrets, cartes bancaires, assurances).</li>
-                                    <li id="exp5-li5"><strong>Détection d’opportunités de cross-sell et d’upsell</strong>.</li>
-                                    <li id="exp5-li6"><strong>Contrôle des pièces pour conformité</strong>.</li>
-                                    <li id="exp5-li7">Suivi administratif des dossiers clients et mise à jour des informations dans les outils internes.</li>
+                                    <li><strong>Traitement des demandes des clients</strong></li>
+                                    <li>Conseil et vente de produits bancaires</li>
+                                    <li><strong>Détection d’opportunités de cross-sell et d’upsell</strong></li>
+                                    <li><strong>Contrôle des pièces pour conformité</strong></li>
+                                    <li>Suivi administratif et mise à jour des dossiers clients</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Colonne Formations -->
+                <!-- Colonne Formations & Certifications -->
                 <div>
-                    <h3 id="parcours-formation-title" class="text-2xl font-semibold mb-8 flex items-center gap-3 text-pink-400"><i class="fas fa-graduation-cap"></i> Formations & Certifications</h3>
-                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
-                        <!-- Formation 1 -->
-                        <div class="relative">
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3 text-pink-400">
+                        <i class="fas fa-certificate"></i> Certifications
+                    </h3>
+                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8 mb-12">
+                          <!-- Formation 1 -->
+                          <div class="relative">
                             <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
                                 <p class="text-sm text-gray-400">2025</p>
@@ -431,20 +516,61 @@
                             <div class="details-content mt-4">
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
                                     <li id="form1-li1"><strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong></li>
-                                    <li id="form1-li2">Pilotage des <strong>KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR …)</strong></li>
-                                    <li id="form1-li3">Détection des opportunités de croissance : <strong>upsell, cross-sell, renouvellement</strong></li>
-                                    <li id="form1-li4"><strong>Workflows d’automatisation</strong> dans des CRM (HubSpot, Zendesk)</li>
-                                    <li id="form1-li5">Élaboration de <strong>personas, Customer Journey maps, Health score, et playbooks</strong></li>
+                                    <li id="form1-li2">Suivi et analyse des <strong>KPIs</strong> : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR</li>
+                                    <li id="form1-li3">Identification et activation des <strong>leviers de croissance</strong> : upsell, cross-sell, renouvellement</li>
+                                    <li id="form1-li4"><strong>Outils opérationnels</strong> : personas, Customer Journey Maps, Health Scores et playbooks</li>
+                                    <li id="form1-li5"><strong>Workflows d’automatisation</strong> pour améliorer l’efficacité et l’expérience client</li>
                                 </ul>
                             </div>
                         </div>
-                         <!-- Formation 2 -->
-                         <div class="relative">
+                        <!-- Formation HubSpot Sales -->
+                        <div class="relative">
                             <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
                                 <p class="text-sm text-gray-400">2025</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 id="form2-title" class="text-xl font-bold text-white">Inbound</h4>
+                                    <h4 id="form-hubspot-sales-title" class="text-xl font-bold text-white">HubSpot Sales Software</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-300">HubSpot Academy</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                    <li id="form-hubspot-sales-li1">Gestion de la relation client (CRM)</li>
+                                    <li id="form-hubspot-sales-li2">Pipelines</li>
+                                    <li id="form-hubspot-sales-li3">Reporting</li>
+                                    <li id="form-hubspot-sales-li4">KPI</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Formation HubSpot Service -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-400">2025</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 id="form-hubspot-service-title" class="text-xl font-bold text-white">HubSpot Service Hub</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-300">HubSpot Academy</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                    <li id="form-hubspot-service-li1">Gestion de la relation client (CRM)</li>
+                                    <li id="form-hubspot-service-li2">Enquêtes de satisfaction client</li>
+                                    <li id="form-hubspot-service-li3">CSAT, NPS</li>
+                                    <li id="form-hubspot-service-li4">Accords de niveau de services (SLA)</li>
+                                    <li id="form-hubspot-service-li5">Base de connaissance</li>
+                                </ul>
+                            </div>
+                        </div>
+                          <!-- Formation 2 -->
+                          <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-400">2025</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 id="form2-title" class="text-xl font-bold text-white">HubSpot Inbound</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
                                 <p class="font-medium text-gray-300">HubSpot Academy</p>
@@ -454,18 +580,17 @@
                                     <li id="form2-li1">Inbound marketing</li>
                                     <li id="form2-li2">Méthode OKR (Objectives and key results)</li>
                                     <li id="form2-li3">Conception centrée sur le client</li>
-                                    <li id="form2-li4">HubSpot</li>
                                     <li id="form2-li5">Expérience client</li>
                                 </ul>
                             </div>
                         </div>
-                         <!-- Formation 3 -->
-                         <div class="relative">
+                          <!-- Formation 3 -->
+                          <div class="relative">
                             <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                             <button class="details-trigger w-full text-left">
                                 <p class="text-sm text-gray-400">2025</p>
                                 <div class="flex justify-between items-center">
-                                    <h4 id="form3-title" class="text-xl font-bold text-white">CCSM Level 1 - SuccessCoaching.com</h4>
+                                    <h4 id="form3-title" class="text-xl font-bold text-white">Certified Customer Success Manager Level 1</h4>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </div>
                                 <p class="font-medium text-gray-300">SuccessHacker</p>
@@ -479,6 +604,55 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- Formation Intercom -->
+                        <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
+                            <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-400">2025</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 id="form-intercom-title" class="text-xl font-bold text-white">Intercom Fundamentals for Supports Agents</h4>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-300">Intercom Academy</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                    <li id="form-intercom-li1">Support client</li>
+                                    <li id="form-intercom-li2">Communication Client multicanal</li>
+                                    <li id="form-intercom-li3">Chatbots</li>
+                                    <li id="form-intercom-li4">Automatisation via macros</li>
+                                    <li id="form-intercom-li5">Service Clientèle</li>
+                                </ul>
+                            </div>
+                        </div>
+                          <!-- Formation 5 -->
+                          <div class="relative">
+                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
+                             <button class="details-trigger w-full text-left">
+                                <p class="text-sm text-gray-400">2022</p>
+                                <div class="flex justify-between items-center">
+                                    <h4 id="form5-title" class="text-xl font-bold text-white">Certificat de Gestion de projet</h4>
+                                     <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <p class="font-medium text-gray-300">UNOW</p>
+                            </button>
+                            <div class="details-content mt-4">
+                                <ul id="form5-text" class="list-disc list-inside text-gray-400 space-y-2">
+                                    <li id="form5-li1">Planification</li>
+                                    <li id="form5-li2">Gestion des risques</li>
+                                    <li id="form5-li3">Prévisions</li>
+                                    <li id="form5-li4">SWOT</li>
+                                    <li id="form5-li5">PDCA</li>
+                                    <li id="form5-li6">Matrice RACI</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 id="parcours-formation-title" class="text-2xl font-semibold mb-4 flex items-center gap-3 text-pink-400">
+                        <i class="fas fa-graduation-cap"></i> Formations
+                    </h3>
+                    <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
                         <!-- Formation 4 -->
                         <div class="relative">
                             <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
@@ -493,23 +667,6 @@
                             <div class="details-content mt-4">
                                 <p id="form4-text" class="text-gray-400">
                                     Marketing digital, E-commerce, ROI, forecast, SEO, Google Ads, Expérience utilisateurs.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Formation 5 -->
-                        <div class="relative">
-                            <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
-                             <button class="details-trigger w-full text-left">
-                                <p class="text-sm text-gray-400">2022</p>
-                                <div class="flex justify-between items-center">
-                                    <h4 id="form5-title" class="text-xl font-bold text-white">Certificat de Gestion de projet</h4>
-                                     <i class="fas fa-chevron-down chevron"></i>
-                                </div>
-                                <p class="font-medium text-gray-300">UNOW</p>
-                            </button>
-                            <div class="details-content mt-4">
-                                <p id="form5-text" class="text-gray-400">
-                                    Planification, gestion des risques, prévisions, SWOT, PDCA, matrice RACI.
                                 </p>
                             </div>
                         </div>
@@ -601,35 +758,44 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 id="competences-crm-title" class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-headset"></i> CRM & Support</h4>
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl md:col-span-2">
+                    <h4 id="competences-outils-title" class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-tools"></i> Ma boîte à outils de CSM</h4>
                     <div class="flex flex-wrap gap-3">
-                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.2s;">HubSpot</span>
-                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.4s;">Zendesk</span>
-                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.6s;">Siebel CRM</span>
-                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -0.8s;">Confluence</span>
-                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1s;">Slack</span>
-                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.2s;">Notion</span>
-                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.4s;">Calendly</span>
-                    </div>
-                </div>
-                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                    <h4 id="competences-data-title" class="text-xl font-bold mb-4 text-violet-400 flex items-center gap-2"><i class="fas fa-cogs"></i> Data, IA & Créatifs</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.6s;">Microsoft Office</span>
-                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -1.8s;">PowerBI</span>
-                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2s;">ChatGPT</span>
-                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.2s;">Canva</span>
-                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.4s;">Wordpress</span>
-                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.6s;">Elementor</span>
-                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -2.8s;">Gemini</span>
-                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -3s;">YoastSEO</span>
-                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm" style="animation-delay: -3.2s;">Adobe Express</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm">HubSpot</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm">Zendesk</span>
+                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm">Slack</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm">Notion</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm">Calendly</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm">Microsoft Office</span>
+                        <span class="keyword-pill bg-pink-500 text-white px-3 py-1 rounded-full text-sm">PowerBI</span>
+                        <span class="keyword-pill bg-purple-500 text-white px-3 py-1 rounded-full text-sm">Canva</span>
+                        <span class="keyword-pill bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm">Miro</span>
+                        <span class="keyword-pill bg-violet-500 text-white px-3 py-1 rounded-full text-sm">Adobe Express</span>
+                        <span class="keyword-pill bg-indigo-500 text-white px-3 py-1 rounded-full text-sm">Google Forms</span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Section Lectures & Podcasts -->
+        <section id="lectures-podcasts" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16"><span id="lectures-title" class="text-gradient">Podcasts</span> <span id="lectures-subtitle">du moment</span></h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                     <div class="space-y-6">
+                        <div class="flex items-center gap-6">
+                            <img src="https://images-cf.getpodpage.com/cdn-cgi/image/quality=70,fit=contain,format=auto,width=480/https://image.ausha.co/lDCL7PlnRFtGSn4a696sgmCWhR8aPB1oVya10gow_1400x1400.jpeg?t=1732295332" alt="Podcast Le Client" class="w-24 h-24 rounded-lg object-cover shadow-lg">
+                            <p id="lecture-2" class="text-lg font-medium">Le Client par Marine Deck</p>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <img src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/40823054/40823054-1747682153327-16a6629ff7894.jpg" alt="Podcast Galères de CS!" class="w-24 h-24 rounded-lg object-cover shadow-lg">
+                            <p id="lecture-3" class="text-lg font-medium">Galères de CS! d'Allison d'abcsm.fr</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Section Pour en savoir plus -->
         <section id="plus-sur-moi" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-16"><span id="plus-sur-moi-title-1">En</span> <span class="text-gradient" id="plus-sur-moi-title-2">savoir plus</span> <span id="plus-sur-moi-title-3">sur moi</span></h2>
@@ -641,24 +807,14 @@
                     </div>
                 </summary>
                 <div class="mt-12 space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                            <h4 id="plus-sur-moi-si-jetais" class="text-xl font-bold mb-4 text-pink-400">Si j'étais...</h4>
-                            <ul class="space-y-3">
-                                <li id="si-jetais-1" class="flex items-center gap-3"><i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.</li>
-                                <li id="si-jetais-2" class="flex items-center gap-3"><i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique, mon île natale.</li>
-                                <li id="si-jetais-3" class="flex items-center gap-3"><i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage fictif : Tornade des X-Men, pour la maîtrise des éléments.</li>
-                                <li id="si-jetais-4" class="flex items-center gap-3"><i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece, pour l'amitié et l'aventure.</li>
-                                <li id="si-jetais-5" class="flex items-center gap-3"><i class="fas fa-dog w-5 text-center text-pink-400"></i> Un animal : un labrador pour la fidélité.</li>
-                            </ul>
-                        </div>
-                        <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                            <h4 id="plus-sur-moi-lectures" class="text-xl font-bold mb-4 text-pink-400">Lectures & Podcasts du moment</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-center gap-3"><i class="fas fa-book w-5 text-center text-pink-400"></i> Practical Customer Success Management - Rick Adams</li>
-                                <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Le Client par Marine Deck</li>
-                                <li class="flex items-center gap-3"><i class="fas fa-podcast w-5 text-center text-pink-400"></i> Galères de CS! d'Allison Adelise</li>
-                            </ul>
+                    <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full">
+                        <h4 id="plus-sur-moi-si-jetais" class="text-xl font-bold mb-4 text-pink-400 text-center">Si j'étais...</h4>
+                        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 text-gray-300">
+                            <span id="si-jetais-1" class="flex items-center gap-2"><i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus</span>
+                            <span id="si-jetais-2" class="flex items-center gap-2"><i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique</span>
+                            <span id="si-jetais-3" class="flex items-center gap-2"><i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage : Tornade</span>
+                            <span id="si-jetais-4" class="flex items-center gap-2"><i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece</span>
+                            <span id="si-jetais-5" class="flex items-center gap-2"><i class="fas fa-paw w-5 text-center text-pink-400"></i> Un animal : le loup</span>
                         </div>
                     </div>
                      <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-6 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
@@ -762,11 +918,12 @@
         <section id="contact" class="py-24 fade-in">
             <div class="text-center">
                 <h2 class="text-3xl font-bold"><span id="contact-title-1">Envie d’</span><span class="text-gradient" id="contact-title-2">échanger</span> ?</h2>
-                <p id="contact-subtitle" class="text-gray-400 mt-4 mb-8 max-w-2xl mx-auto">N'hésitez pas à me contacter ou à réserver un créneau pour échanger.</p>
+                <p class="text-gray-300 mt-6 max-w-3xl mx-auto">Vous recherchez un professionnel du Customer Care ou du Customer Success pour renforcer votre équipe et et accélérer la croissance client ?</p>
+                <p id="contact-subtitle" class="text-violet-400 mt-4 mb-8 max-w-2xl mx-auto">N'hésitez pas à me contacter ou à réserver un créneau pour échanger.</p>
                 <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-300">
                     <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
-                    <a href="https://drive.google.com/file/d/1ZbzkfTD3YOkyARd9l9vD_BK628Yv3dZS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> <span id="contact-download-cv">Télécharger mon CV</span></a>
+                    <a href="https://drive.google.com/file/d/1MhaTS16dXZDiXtRLW2vdVXudlbIyMduk/view" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> <span id="contact-download-cv">Télécharger mon CV</span></a>
                     <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
                         <i class="fas fa-calendar-check"></i> <span id="contact-booking">Réserver un échange</span>
                     </a>
@@ -789,7 +946,7 @@
 
     <!-- Modal pour la Réussite Clé -->
     <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
-        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 relative">
             <button id="close-success-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -807,16 +964,36 @@
                         <li><strong>Initiative :</strong> J'ai géré directement les échanges avec les organismes sociaux pour accélérer les dossiers bloqués et restaurer la confiance, même si cela sortait de mon périmètre.</li>
                     </ul>
                 </div>
-                <div>
-                    <h4 id="modal-reussite-resultats-title" class="font-semibold text-lg mb-2 text-green-400">Les Résultats</h4>
-                    <ul id="modal-reussite-resultats-list" class="list-disc list-inside space-y-2 text-gray-300">
-                        <li><span class="font-bold text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li>
-                        <li><span class="font-bold text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li>
-                        <li><span class="font-bold text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li>
-                        <li><span class="font-bold text-green-400">Commercial :</span> Cross-sell d'un nouveau service réussi.</li>
-                        <li><span class="font-bold text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>
-                    </ul>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-6">
+                    <!-- Colonne 1: Résultats -->
+                    <div>
+                        <h4 id="modal-reussite-resultats-title" class="font-semibold text-lg mb-2 text-green-400">Les Résultats</h4>
+                        <ul id="modal-reussite-resultats-list" class="list-disc list-inside space-y-2 text-gray-300">
+                            <li><span class="font-bold text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li>
+                            <li><span class="font-bold text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li>
+                            <li><span class="font-bold text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li>
+                            <li><span class="font-bold text-green-400">Commercial :</span> Cross-sell d'un nouveau service réussi.</li>
+                            <li><span class="font-bold text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>
+                        </ul>
+                    </div>
+                    <!-- Colonne 2: Graphique NPS -->
+                    <div class="flex justify-center" id="nps-graph-container">
+                         <svg class="w-64 h-64" viewBox="0 0 200 200">
+                            <defs>
+                                <linearGradient id="npsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#A78BFA" />
+                                    <stop offset="100%" style="stop-color:#F472B6" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="80" fill="none" class="stroke-gray-700" stroke-width="20"></circle>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="url(#npsGradient)" stroke-width="20" class="nps-circle-progress" style="transform: rotate(-90deg); transform-origin: 50% 50%;"></circle>
+                            <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="text-5xl font-bold fill-gray-200" id="nps-score-text">0</text>
+                            <text x="50%" y="65%" text-anchor="middle" class="text-lg font-semibold fill-gray-400" id="modal-nps-label">NPS Final</text>
+                        </svg>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -843,6 +1020,41 @@
         </div>
     </div>
 
+    <!-- Modal pour le Cycle de Succès Client -->
+    <div id="cycle-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative">
+            <button id="close-cycle-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Fermer la fenêtre">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 id="cycle-modal-title" class="text-2xl font-bold mb-6 text-gradient text-center">Cycle Care & CS : un framework de complémentarité</h3>
+            <div class="space-y-4 text-gray-300">
+                <div>
+                    <h4 id="cycle-step1-title" class="font-semibold text-lg text-violet-400">1. Écouter & Comprendre</h4>
+                    <p id="cycle-step1-desc" class="text-gray-400 ml-4">Recueillir la voix du client (tickets, entretiens, NPS, CSAT, CES). Identifier attentes, irritants et objectifs pour capter les vrais points de douleur.</p>
+                </div>
+                <div>
+                    <h4 id="cycle-step2-title" class="font-semibold text-lg text-violet-400">2. Planifier & Aligner</h4>
+                    <p id="cycle-step2-desc" class="text-gray-400 ml-4">Définir une stratégie adaptée (onboarding, adoption, support réactif/proactif). S’aligner avec produit, sales et marketing pour garantir une approche cohérente.</p>
+                </div>
+                <div>
+                    <h4 id="cycle-step3-title" class="font-semibold text-lg text-violet-400">3. Accompagner & Soutenir</h4>
+                    <p id="cycle-step3-desc" class="text-gray-400 ml-4">Fournir un support réactif et qualitatif tout en proposant un accompagnement proactif (best practices, bilans réguliers, conseils). Favoriser l’adoption et la satisfaction.</p>
+                </div>
+                <div>
+                    <h4 id="cycle-step4-title" class="font-semibold text-lg text-violet-400">4. Mesurer & Contrôler</h4>
+                    <p id="cycle-step4-desc" class="text-gray-400 ml-4">Suivre les KPIs clés : satisfaction (NPS, CSAT, CES), usage produit, churn, expansion. Identifier tendances et signaux faibles pour piloter la performance.</p>
+                </div>
+                <div>
+                    <h4 id="cycle-step5-title" class="font-semibold text-lg text-violet-400">5. Améliorer & Optimiser</h4>
+                    <p id="cycle-step5-desc" class="text-gray-400 ml-4">Ajuster les processus selon les feedbacks. Enrichir documentation, intégration et self-service. Partager les retours clients pour améliorer produit et expérience.</p>
+                </div>
+                <div>
+                    <h4 id="cycle-step6-title" class="font-semibold text-lg text-violet-400">6. Répéter & Faire Évoluer</h4>
+                    <p id="cycle-step6-desc" class="text-gray-400 ml-4">Capitaliser sur l’expérience acquise, industrialiser les bonnes pratiques (guides, automatisations, playbooks) et tendre vers une amélioration continue.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // --- GESTION DU MENU MOBILE ---
@@ -855,6 +1067,36 @@
             });
         }
 
+        // --- GESTION DE L'ANIMATION DU GRAPHIQUE NPS ---
+        const npsCircle = document.querySelector('.nps-circle-progress');
+        const npsScoreText = document.getElementById('nps-score-text');
+        let radius, circumference;
+        if (npsCircle) {
+            radius = npsCircle.r.baseVal.value;
+            circumference = 2 * Math.PI * radius;
+            npsCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            npsCircle.style.strokeDashoffset = circumference;
+        }
+
+        function setProgress(score, maxScore = 10) {
+            if (!npsCircle) return;
+            const percent = (score / maxScore) * 100;
+            const offset = circumference - (percent / 100) * circumference;
+            npsCircle.style.strokeDashoffset = offset;
+        }
+
+        function animateValue(obj, start, end, duration) {
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+
         // --- GESTION DE LA MODALE "RÉUSSITE CLÉ" ---
         const openSuccessModalButton = document.getElementById('open-modal-button');
         const closeSuccessModalButton = document.getElementById('close-success-modal-button');
@@ -863,10 +1105,18 @@
             const openSuccessModal = () => {
                 successModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
+                setTimeout(() => { 
+                    setProgress(9);
+                    animateValue(npsScoreText, 0, 9, 2000);
+                }, 100);
             };
             const closeSuccessModal = () => {
                 successModal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    setProgress(0);
+                    if(npsScoreText) npsScoreText.textContent = '0';
+                }, 300);
             };
             openSuccessModalButton.addEventListener('click', openSuccessModal);
             closeSuccessModalButton.addEventListener('click', closeSuccessModal);
@@ -962,6 +1212,25 @@
             closeSoftSkillModalButton.addEventListener('click', closeSoftSkillModal);
             softSkillModal.addEventListener('click', (e) => (e.target === softSkillModal) && closeSoftSkillModal());
         }
+        
+        // --- GESTION DE LA MODALE "CYCLE" ---
+        const openCycleModalButton = document.getElementById('open-cycle-modal-button');
+        const closeCycleModalButton = document.getElementById('close-cycle-modal-button');
+        const cycleModal = document.getElementById('cycle-modal');
+
+        if (openCycleModalButton && closeCycleModalButton && cycleModal) {
+            const openCycleModal = () => {
+                cycleModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+            const closeCycleModal = () => {
+                cycleModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            openCycleModalButton.addEventListener('click', openCycleModal);
+            closeCycleModalButton.addEventListener('click', closeCycleModal);
+            cycleModal.addEventListener('click', (e) => (e.target === cycleModal) && closeCycleModal());
+        }
 
         // --- GESTION DES ANIMATIONS AU DÉFILEMENT ---
         const faders = document.querySelectorAll('.fade-in');
@@ -987,52 +1256,7 @@
                 }
             });
         });
-
-        // --- GESTION DE L'ANIMATION DU GRAPHIQUE NPS ---
-        (function(){
-            const npsGraph = document.getElementById('nps-graph-container');
-            const npsCircle = document.querySelector('.nps-circle-progress');
-            const npsScoreText = document.getElementById('nps-score-text');
-            if (!npsGraph || !npsCircle || !npsScoreText) return;
-
-            const radius = npsCircle.r.baseVal.value;
-            const circumference = 2 * Math.PI * radius;
-            npsCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-            npsCircle.style.strokeDashoffset = circumference;
-
-            function setProgress(score) {
-                // Le score est sur 10, on le convertit en pourcentage pour le cercle
-                const percent = (score / 10) * 100;
-                const offset = circumference - (percent / 100) * circumference;
-                npsCircle.style.strokeDashoffset = offset;
-            }
-
-            function animateValue(obj, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    obj.textContent = Math.floor(progress * (end - start) + start);
-                    if (progress < 1) requestAnimationFrame(step);
-                };
-                requestAnimationFrame(step);
-            }
-
-            const npsObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Animer le score jusqu'à 10
-                        setProgress(10); 
-                        // Animer le texte du score jusqu'à 10
-                        animateValue(npsScoreText, 0, 10, 2000); 
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            npsObserver.observe(npsGraph);
-        })();
-
+        
         // --- SYSTÈME DE TRADUCTION ---
         const translations = {
             en: {
@@ -1041,7 +1265,6 @@
                 'accueil-headline': "I turn customer experience into a sustainable growth driver.",
                 'accueil-subheadline': "Over 10 years of experience in B2B SaaS.",
                 'accueil-contact-btn': "Contact me",
-                'accueil-nps-label': "NPS Score",
                 'quisuisje-title': "Who am I?",
                 'quisuisje-p1': 'A proactive and solution-oriented professional, I am passionate about transforming the customer experience into a real engine for growth. My philosophy: <strong>"Good technology is not enough; it\'s the human experience that makes all the difference."</strong>',
                 'quisuisje-p2': "What drives me is understanding the real needs of clients and guiding them towards measurable success, while cultivating a relationship of trust.",
@@ -1052,72 +1275,53 @@
                 'impact-title-1': "Quantified", 'impact-title-2': "Impact",
                 'impact-subtitle': "An overview of performance indicators and quantifiable successes. Click to learn more.",
                 'impact-nps-label': "BU NPS", 'impact-projects-label': "Projects delivered on time", 'impact-csat-label': "CSAT France", 'impact-finance-label': "Client financial impact",
-                'apropos-title-1': "My Vision", 'apropos-title-2': "of Customer Success",
-                'apropos-p1': 'My natural <strong>empathy</strong> is the cornerstone of my approach. For me, the CSM is the strategic link between people, product, and usage value. My role is to <strong>coach the client</strong> to help them <strong>achieve their goals</strong>, while ensuring they are aligned with ours to <strong>foster my company\'s growth</strong>.',
-                'apropos-p2': 'In a world where technology is constantly evolving, I am convinced that it is <strong>the human element that makes the difference</strong>. I am committed to valuing every interaction, preventing irritants, and <strong>building lasting relationships of trust</strong> that concretely impact <strong>retention</strong> and <strong>satisfaction</strong>.',
+                'apropos-title-1': "My Vision", 'apropos-title-2': "of Customer Success & Customer Care",
+                'apropos-p1': 'My <strong>empathy</strong> is the cornerstone of my approach. For me, Care and Success are two complementary professions: Care quickly resolves irritants and reassures the customer, while Success <strong>coaches</strong> them to achieve their goals and get the most value from the solution. Together, they strengthen satisfaction, <strong>retention</strong>, and <strong>growth</strong>.',
+                'apropos-p2': 'In a world where technology is constantly evolving, I am convinced that <strong>it is the human element that makes the difference</strong>. My role is to be the strategic link between the customer, the product, and the company: valuing every interaction, anticipating needs, and <strong>building lasting relationships of trust</strong>.',
                 'parcours-title-1': "Professional", 'parcours-title-2': "Career & Education",
                 'parcours-exp-title': "Experiences",
                 'parcours-formation-title': "Education & Certifications",
                 'exp1-title': "Payroll Implementation Project Manager",
-                'exp1-li1': "<strong>Needs analysis</strong> of clients' functional and regulatory requirements",
-                'exp1-li2': "<strong>Drafting of technical specifications</strong> in conjunction with the Product Team",
-                'exp1-li3': "Leading <strong>project committees</strong> (kick-off, steering committees, closing)",
-                'exp1-li4': "<strong>Configuration</strong> of client environments on ADP portals",
-                'exp1-li5': "<strong>Carrying out tests, production deployment</strong>, post-deployment follow-up",
-                'exp1-li6': "<strong>User onboarding, remote training</strong>, personalized support",
-                'exp1-li7': "Client backlog management, ticket processing, and incident tracking",
-                'exp1-li8': "Results: 90% of projects delivered on time, CSAT of 70% (France scope)",
                 'exp2-title': "Local Payroll Account Manager",
-                'exp2-li1': "Monthly production of 400 multi-agreement payrolls: data entry, control, DSN",
-                'exp2-li2': "Final settlements and exit documents",
-                'exp2-li3': "User <strong>onboarding</strong> and support on portals",
-                'exp2-li4': "<strong>Expert support and customer care</strong>: complex tickets, anomalies, backlog",
-                'exp2-li5': "Monthly review and <strong>QBR</strong> (satisfaction, NPS, irritant detection)",
-                'exp2-li6': "Detection of opportunities (<strong>upsell/cross-sell</strong>) and <strong>churn</strong> risks",
-                'exp2-li7': "Management of out-of-scope services and add-ons → <strong>MRR growth</strong>",
-                'exp2-li8': "Social legislation watch",
-                'exp2-li9': "Results: Transformed a detractor into a promoter, recovered €100k in URSSAF credits.",
                 'exp3-title': "Payroll Manager",
-                'exp3-li1': "<strong>First-level customer care and support</strong> for autonomous clients to ensure smooth and secure solution adoption.",
-                'exp3-li2': "<strong>Simplification of regulatory and contractual topics</strong> for non-specialist contacts.",
-                'exp3-li3': "Proactive follow-up of client requests and <strong>feedback escalation</strong> to contribute to continuous product improvement.",
-                'exp3-li4': "Collection, control, and entry of payroll elements to ensure data reliability and legal compliance.",
-                'exp3-li5': "Preparation of pay slips, social declarations, final settlements, and exit documents.",
-                'exp3-li6': "<strong>Basic configuration and updating of the solution</strong> according to client needs.",
                 'exp4-title': "HR Assistant",
-                'exp4-li1': "Collection, validation, and transmission of social data (absences, hours, bonuses) in coordination with the Finance Department.",
-                'exp4-li2': "<strong>Individualized employee follow-up</strong>: management of legal obligations (medical visits, training, HR files), answering field questions.",
-                'exp4-li3': "Daily communication with drivers, managers, and the site manager to streamline processes.",
-                'exp4-li4': "Cross-functional collaboration with the Site Director, Finance Department, payroll service, and accounting team to ensure process reliability and <strong>guarantee a smooth experience</strong> for employees.",
                 'exp5-title': "Remote Banking Advisor",
-                'exp5-li1': "Handling incoming calls from clients and prospects in the North-East region.",
-                'exp5-li2': "<strong>Processing requests from individual clients</strong> and assisting them with their procedures.",
-                'exp5-li3': "Qualifying needs and providing personalized guidance to the appropriate contacts (branch, technical support, expert).",
-                'exp5-li4': "Advising and selling banking products tailored to needs (bank accounts, savings accounts, credit cards, insurance).",
-                'exp5-li5': "<strong>Detecting cross-sell and upsell opportunities</strong>.",
-                'exp5-li6': "<strong>Checking documents for compliance</strong>.",
-                'exp5-li7': "Administrative follow-up of client files and updating information in internal tools.",
                 'form1-title': "Customer Success Manager Bootcamp",
                 'form1-li1': "<strong>Onboarding, adoption, retention, and expansion strategies</strong>",
-                'form1-li2': "Management of <strong>KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR…)</strong>",
-                'form1-li3': "Detection of growth opportunities: <strong>upsell, cross-sell, renewal</strong>",
-                'form1-li4': "<strong>Automation workflows</strong> in CRMs (HubSpot, Zendesk)",
-                'form1-li5': "Development of <strong>personas, Customer Journey maps, Health score, and playbooks</strong>",
-                'form2-title': "Inbound",
+                'form1-li2': "Tracking and analysis of <strong>KPIs</strong>: NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
+                'form1-li3': "Identification and activation of <strong>growth levers</strong>: upsell, cross-sell, renewal",
+                'form1-li4': "<strong>Operational tools</strong>: personas, Customer Journey Maps, Health Scores, and playbooks",
+                'form1-li5': "<strong>Automation workflows</strong> to improve efficiency and customer experience",
+                'form-hubspot-sales-title': "HubSpot Sales Software",
+                'form-hubspot-sales-li1': "Customer Relationship Management (CRM)",
+                'form-hubspot-sales-li2': "Pipelines",
+                'form-hubspot-sales-li3': "Reporting",
+                'form-hubspot-sales-li4': "KPIs",
+                'form-hubspot-service-title': "HubSpot Service Hub",
+                'form-hubspot-service-li1': "Customer Relationship Management (CRM)",
+                'form-hubspot-service-li2': "Customer satisfaction surveys",
+                'form-hubspot-service-li3': "CSAT, NPS",
+                'form-hubspot-service-li4': "Service Level Agreements (SLA)",
+                'form-hubspot-service-li5': "Knowledge Base",
+                'form2-title': "HubSpot Inbound",
                 'form2-li1': "Inbound marketing",
                 'form2-li2': "OKR method (Objectives and Key Results)",
                 'form2-li3': "Customer-centric design",
-                'form2-li4': "HubSpot",
                 'form2-li5': "Customer experience",
-                'form3-title': "CCSM Level 1 - SuccessCoaching.com",
+                'form3-title': "Certified Customer Success Manager Level 1",
                 'form3-li1': "Structuring the <strong>CSM</strong> role in the organization.",
                 'form3-li2': "Implementing an effective client <strong>onboarding</strong>.",
                 'form3-li3': "<strong>Churn</strong> prevention & risk management.",
                 'form3-li4': "Creating a customer <strong>success plan</strong> and monitoring <strong>adoption</strong>.",
+                'form-intercom-title': "Intercom Fundamentals for Support Agents",
+                'form-intercom-li1': "Customer support",
+                'form-intercom-li2': "Multichannel customer communication",
+                'form-intercom-li3': "Chatbots",
+                'form-intercom-li4': "Automation via macros",
+                'form-intercom-li5': "Customer Service",
                 'form4-title': "Digital Strategy",
                 'form4-text': "Digital marketing, E-commerce, ROI, forecast, SEO, Google Ads, User experience.",
                 'form5-title': "Project Management Certificate",
-                'form5-text': "Planning, risk management, forecasting, SWOT, PDCA, RACI matrix.",
                 'form6-title': "Payroll Manager Training",
                 'form6-text': "Payroll, personnel administration, Social law, payroll, GPEC, payroll/HR watch.",
                 'form7-title': "Master 2 Management",
@@ -1129,17 +1333,16 @@
                 'softskill-1': '<i class="fas fa-heart"></i> Emotional Intelligence', 'softskill-2': '<i class="fas fa-lightbulb"></i> Proactivity & Solution Orientation', 'softskill-3': '<i class="fas fa-magnifying-glass-chart"></i> Analytical Mindset & Adaptability', 'softskill-4': '<i class="fas fa-users"></i> Collaboration & Communication',
                 'competences-title-1': "Skills", 'competences-title-2': "& Tools",
                 'competences-langues-title': "Languages", 'competences-langue-fr': "French: Native", 'competences-langue-en': "English: Professional (B2)",
-                'competences-crm-title': "CRM & Support", 'competences-data-title': "Data, AI & Creative",
+                'competences-outils-title': "My CSM Toolkit",
                 'plus-sur-moi-title-1': "More", 'plus-sur-moi-title-2': "about", 'plus-sur-moi-title-3': "me",
                 'plus-sur-moi-accroche': "Because behind a resume, there is a personality.",
                 'plus-sur-moi-btn': "More details",
                 'plus-sur-moi-si-jetais': "If I were...",
-                'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> A flower: the lotus, for resilience.',
-                'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> A destination: Martinique, my native island.',
-                'si-jetais-3': '<i class="fas fa-feather w-5 text-center text-pink-400"></i> A fictional character: Storm from X-Men, for mastering the elements.',
-                'si-jetais-4': '<i class="fas fa-anchor w-5 text-center text-pink-400"></i> A cartoon: One Piece, for friendship and adventure.',
-                'si-jetais-5': '<i class="fas fa-dog w-5 text-center text-pink-400"></i> An animal: a Labrador, for loyalty.',
-                'plus-sur-moi-lectures': "Currently Reading & Listening",
+                'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> A flower: the lotus',
+                'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> A destination: Martinique',
+                'si-jetais-3': '<i class="fas fa-feather w-5 text-center text-pink-400"></i> A character: Storm',
+                'si-jetais-4': '<i class="fas fa-anchor w-5 text-center text-pink-400"></i> A cartoon: One Piece',
+                'si-jetais-5': '<i class="fas fa-paw w-5 text-center text-pink-400"></i> An animal: the wolf',
                 'plus-sur-moi-hobbies': "Interests & Hobbies",
                 'hobby-1-title': "🍰 West Indian Pastry", 'hobby-1-text': "Cooking, and especially baking, is a real source of relaxation for me. I love experimenting, mixing flavors, and above all, sharing my creations with my loved ones.",
                 'hobby-2-title': "🌸 Japanese Culture & Manga", 'hobby-2-text': "Asia has fascinated me since childhood. My taste for manga and anime has refined over time, especially through the poetic works of Studio Ghibli or the epic adventures of One Piece.",
@@ -1154,11 +1357,21 @@
                 'contact-download-cv': "Download my resume", 'contact-booking': "Book a meeting",
                 'footer-text': "© 2025 Corinne MARSIAC CSM. All rights reserved.",
                 'modal-reussite-title': "From Detractor (NPS 0) to Promoter (NPS 9)",
+                'modal-nps-label': "Final NPS",
                 'modal-reussite-contexte-title': "The Context", 'modal-reussite-contexte-text': "Newly arrived in a department using different software and processes from my previous position, I had to adapt quickly. My manager entrusted me with a sensitive portfolio, including a client managing 4 French entities with a significant backlog. Critical issues included four pending URSSAF credits, totaling nearly €100k. Furthermore, this client, accustomed to managing several countries, was not well-versed in the specifics of French processes.",
                 'modal-reussite-actions-title': "My Actions",
-                'modal-reussite-actions-list': '<li><strong>Proactive stance:</strong> Rather than seeing her as a "difficult client," I took the time to listen actively and discuss with her to understand her expectations, clarify our processes, and reassure her.</li><li><strong>Dedicated support:</strong> Set up regular follow-up meetings to get regular client feedback and take a proactive approach.</li><li><strong>Initiative:</strong> I directly managed communications with social security organizations to expedite blocked files and restore trust, even though it was outside my scope.</li>',
+                'modal-reussite-actions-list': '<li><strong>Proactive Stance:</strong> Rather than seeing her as a "difficult client," I took the time to listen actively and discuss with her to understand her expectations, clarify our processes, and reassure her.</li><li><strong>Dedicated Support:</strong> Set up regular follow-up meetings to get regular client feedback and take a proactive approach.</li><li><strong>Initiative:</strong> I directly managed communications with social security organizations to expedite blocked files and restore trust, even though it was outside my scope.</li>',
                 'modal-reussite-resultats-title': "The Results",
-                'modal-reussite-resultats-list': '<li><span class="font-bold text-green-400">NPS:</span> Increased from 0/10 to 9/10. Impact on BU NPS: +35.</li><li><span class="font-bold text-green-400">Financial:</span> €100k in URSSAF credits fully recovered.</li><li><span class="font-bold text-green-400">Relational:</span> Communications became smooth, calm, and collaborative.</li><li><span class="font-bold text-green-400">Commercial:</span> Successful cross-sell of a new service.</li><li><span class="font-bold text-green-400">Recognition:</span> Formal acknowledgment from the client\'s management and my own.</li>'
+                'modal-reussite-resultats-list': '<li><span class="font-bold text-green-400">NPS:</span> Increased from 0/10 to 9/10. Impact on BU NPS: +35.</li><li><span class="font-bold text-green-400">Financial:</span> €100k in URSSAF credits fully recovered.</li><li><span class="font-bold text-green-400">Relational:</span> Communications became smooth, calm, and collaborative.</li><li><span class="font-bold text-green-400">Commercial:</span> Successful cross-sell of a new service.</li><li><span class="font-bold text-green-400">Recognition:</span> Formal acknowledgment from the client\'s management and my own.</li>',
+                'svg-cycle-title1': 'Care & CS', 'svg-cycle-title2': 'Cycle', 'svg-cycle-cta': '(Click to view)',
+                'lectures-title': "Podcasts", 'lectures-subtitle': "of the moment",
+                'cycle-modal-title': 'Care & CS Cycle: A Framework of Complementarity',
+                'cycle-step1-title': '1. Listen & Understand', 'cycle-step1-desc': 'Gather the voice of the customer (tickets, interviews, NPS, CSAT, CES). Identify expectations, irritants, and goals to capture the real pain points.',
+                'cycle-step2-title': '2. Plan & Align', 'cycle-step2-desc': 'Define a tailored strategy (onboarding, adoption, reactive/proactive support). Align with product, sales, and marketing to ensure a coherent approach.',
+                'cycle-step3-title': '3. Support & Assist', 'cycle-step3-desc': 'Provide reactive and high-quality support while offering proactive guidance (best practices, regular reviews, advice). Foster adoption and satisfaction.',
+                'cycle-step4-title': '4. Measure & Monitor', 'cycle-step4-desc': 'Track key KPIs: satisfaction (NPS, CSAT, CES), product usage, churn, expansion. Identify trends and weak signals to drive performance.',
+                'cycle-step5-title': '5. Improve & Optimize', 'cycle-step5-desc': 'Adjust processes based on feedback. Enhance documentation, onboarding, and self-service. Share customer feedback to improve the product and experience.',
+                'cycle-step6-title': '6. Repeat & Evolve', 'cycle-step6-desc': 'Capitalize on acquired experience, industrialize best practices (guides, automations, playbooks), and strive for continuous improvement.'
             },
             fr: {
                 'nav-qui': 'Qui suis-je ?', 'nav-apropos': 'À Propos', 'nav-parcours': 'Parcours', 'nav-projet': 'Projet', 'nav-competences': 'Compétences', 'nav-personnalite': 'Personnalité', 'nav-contact': 'Contact',
@@ -1166,7 +1379,6 @@
                 'accueil-headline': "Je transforme l'expérience client en levier de croissance durable.",
                 'accueil-subheadline': "Plus de 10 ans d'expérience en SaaS B2B.",
                 'accueil-contact-btn': "Contactez-moi",
-                'accueil-nps-label': "Score NPS",
                 'quisuisje-title': "Qui suis-je ?",
                 'quisuisje-p1': 'Professionnelle proactive et orientée solution, je suis passionnée par la transformation de l\'expérience client en véritable moteur de croissance. Ma philosophie : <strong>"Une bonne technologie ne suffit pas, c\'est l\'expérience humaine qui fait toute la différence"</strong>.',
                 'quisuisje-p2': "Ce qui m’anime, c’est de comprendre les besoins réels des clients et de les guider vers des succès mesurables, tout en cultivant une relation de confiance.",
@@ -1177,72 +1389,53 @@
                 'impact-title-1': "Impact", 'impact-title-2': "chiffré",
                 'impact-subtitle': "Un aperçu des indicateurs de performance et des succès quantifiables. Cliquez pour en savoir plus.",
                 'impact-nps-label': "NPS de la BU", 'impact-projects-label': "Projets livrés à temps", 'impact-csat-label': "CSAT France", 'impact-finance-label': "Impact financier client",
-                'apropos-title-1': "Ma Vision", 'apropos-title-2': "du Customer Success",
-                'apropos-p1': 'Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le CSM est le trait d\'union stratégique entre l\'humain, le produit et la valeur d\'usage. Mon rôle est de <strong>coacher le client</strong> pour l\'aider à <strong>atteindre ses objectifs</strong>, tout en veillant à ce qu\'ils soient alignés avec les nôtres afin de <strong>favoriser la croissance</strong> de mon entreprise.',
-                'apropos-p2': 'Dans un monde où la technologie évolue sans cesse, je suis convaincue que c\'est <strong>l\'humain qui fait la différence</strong>. Je m\'engage à valoriser chaque interaction, à prévenir les irritants et à <strong>bâtir des relations de confiance durables</strong> qui impactent concrètement la <strong>rétention</strong> et la <strong>satisfaction</strong>.',
+                'apropos-title-1': "Ma Vision", 'apropos-title-2': "du Customer Success & du Customer Care",
+                'apropos-p1': 'Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le Care et le Success sont deux métiers complémentaires : le Care résout rapidement les irritants et rassure le client, tandis que le Success le <strong>coach</strong> pour atteindre ses objectifs et tirer le maximum de valeur de la solution. Ensemble, ils renforcent la satisfaction, la <strong>rétention</strong> et la <strong>croissance</strong>.',
+                'apropos-p2': 'Dans un monde où la technologie évolue sans cesse, je suis convaincue que <strong>c’est l’humain qui fait la différence</strong>. Mon rôle est d’être le trait d’union stratégique entre le client, le produit et l’entreprise : valoriser chaque interaction, anticiper les besoins, et <strong>bâtir des relations de confiance durables</strong>.',
                 'parcours-title-1': "Parcours", 'parcours-title-2': "Professionnel & Formations",
                 'parcours-exp-title': "Expériences",
                 'parcours-formation-title': "Formations & Certifications",
                 'exp1-title': "Payroll Implementation Project Manager",
-                'exp1-li1': "<strong>Analyse des besoins</strong> fonctionnels et réglementaires des clients",
-                'exp1-li2': "<strong>Rédaction des spécifications techniques</strong> en lien avec la Product Team",
-                'exp1-li3': "Animation de <strong>comités de projet</strong> (kick-off, comités de pilotage, clôture)",
-                'exp1-li4': "<strong>Paramétrage</strong> des environnements clients sur les portails ADP",
-                'exp1-li5': "<strong>Réalisation des tests, mise en production</strong>, suivi post-déploiement",
-                'exp1-li6': "<strong>Onboarding des utilisateurs, formations à distance</strong>, accompagnement personnalisé",
-                'exp1-li7': "Gestion du backlog client, traitement des tickets et suivi des incidents",
-                'exp1-li8': "Résultats : 90% des projets livrés dans les délais, CSAT de 70% (Périmètre France)",
                 'exp2-title': "Local Payroll Account Manager",
-                'exp2-li1': "Production mensuelle de 400 paies multi-conventions : saisie, contrôle, DSN",
-                'exp2-li2': "Soldes de tout compte et documents de sortie",
-                'exp2-li3': "<strong>Onboarding</strong> des utilisateurs et accompagnement sur les portails",
-                'exp2-li4': "<strong>Support expert et customer care</strong> : tickets complexes, anomalies, backlog",
-                'exp2-li5': "Monthly review et <strong>QBR</strong> (satisfaction, NPS, détection d’irritants)",
-                'exp2-li6': "Détection des opportunités (<strong>upsell/cross-sell</strong>) et risques de <strong>churn</strong>",
-                'exp2-li7': "Pilotage de prestations out-of-scope et d’add-ons → <strong>croissance du MRR</strong>",
-                'exp2-li8': "Veille sociale",
-                'exp2-li9': "Résultats : Transformation d'un détracteur en promoteur, 100k€ de crédits URSSAF récupérés.",
                 'exp3-title': "Gestionnaire paie",
-                'exp3-li1': "<strong>Customer care et support de premier niveau</strong> auprès des clients autonomes pour garantir une adoption fluide et sécurisée de la solution.",
-                'exp3-li2': "<strong>Vulgarisation des sujets</strong> réglementaires et contractuels auprès d’interlocuteurs non spécialistes.",
-                'exp3-li3': "Suivi proactif des demandes clients et <strong>remontée des feedbacks</strong> pour contribuer à l’amélioration continue du produit.",
-                'exp3-li4': "Collecte, contrôle et saisie des éléments de paie afin d’assurer la fiabilité des données et la conformité légale.",
-                'exp3-li5': "Établissement des bulletins de salaire, déclarations sociales, soldes de tout compte et documents de sortie.",
-                'exp3-li6': "<strong>Paramétrage de base et mise à jour de la solution</strong> en fonction des besoins clients.",
                 'exp4-title': "Assistante RH",
-                'exp4-li1': "Recueil, fiabilisation et transmission de données sociales (absences, heures, primes) en coordination avec la DAF.",
-                'exp4-li2': "<strong>Suivi individualisé</strong> des collaborateurs : gestion des obligations légales (visites médicales, formations, dossiers RH), réponses aux questions terrain.",
-                'exp4-li3': "Communication quotidienne avec les chauffeurs, managers et responsable de site pour fluidifier les process.",
-                'exp4-li4': "Collaboration transversale avec le Directeur de site, la DAF, le service paie et l’équipe comptable pour fiabiliser les process et <strong>garantir une expérience fluide</strong> aux collaborateurs.",
                 'exp5-title': "Conseillère bancaire à distance",
-                'exp5-li1': "Gestion des appels entrants des clients et prospects sur le périmètre Nord-Est.",
-                'exp5-li2': "<strong>Traitement des demandes des clients</strong> particuliers et accompagnement dans leurs démarches.",
-                'exp5-li3': "Qualification des besoins et orientation personnalisée vers les interlocuteurs adéquats (agence, support technique, expert).",
-                'exp5-li4': "Conseil et vente de produits bancaires adaptés aux besoins (comptes bancaires, livrets, cartes bancaires, assurances).",
-                'exp5-li5': "<strong>Détection d’opportunités de cross-sell et d’upsell</strong>.",
-                'exp5-li6': "<strong>Contrôle des pièces pour conformité</strong>.",
-                'exp5-li7': "Suivi administratif des dossiers clients et mise à jour des informations dans les outils internes.",
                 'form1-title': "Customer Success Manager Bootcamp",
                 'form1-li1': "<strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong>",
-                'form1-li2': "Pilotage des <strong>KPIs (NPS, CSAT, LTV, TTV, MRR/ARR, NRR …)</strong>",
-                'form1-li3': "Détection des opportunités de croissance : <strong>upsell, cross-sell, renouvellement</strong>",
-                'form1-li4': "<strong>Workflows d’automatisation</strong> dans des CRM (HubSpot, Zendesk)",
-                'form1-li5': "Élaboration de <strong>personas, Customer Journey maps, Health score, et playbooks</strong>",
-                'form2-title': "Inbound",
+                'form1-li2': "Suivi et analyse des <strong>KPIs</strong> : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
+                'form1-li3': "Identification et activation des <strong>leviers de croissance</strong> : upsell, cross-sell, renouvellement",
+                'form1-li4': "<strong>Outils opérationnels</strong> : personas, Customer Journey Maps, Health Scores et playbooks",
+                'form1-li5': "<strong>Workflows d’automatisation</strong> pour améliorer l’efficacité et l’expérience client",
+                'form-hubspot-sales-title': "HubSpot Sales Software",
+                'form-hubspot-sales-li1': "Gestion de la relation client (CRM)",
+                'form-hubspot-sales-li2': "Pipelines",
+                'form-hubspot-sales-li3': "Reporting",
+                'form-hubspot-sales-li4': "KPI",
+                'form-hubspot-service-title': "HubSpot Service Hub",
+                'form-hubspot-service-li1': "Gestion de la relation client (CRM)",
+                'form-hubspot-service-li2': "Enquêtes de satisfaction client",
+                'form-hubspot-service-li3': "CSAT, NPS",
+                'form-hubspot-service-li4': "Accords de niveau de services (SLA)",
+                'form-hubspot-service-li5': "Base de connaissance",
+                'form2-title': "HubSpot Inbound",
                 'form2-li1': "Inbound marketing",
                 'form2-li2': "Méthode OKR (Objectives and key results)",
                 'form2-li3': "Conception centrée sur le client",
-                'form2-li4': "HubSpot",
                 'form2-li5': "Expérience client",
-                'form3-title': "CCSM Level 1 - SuccessCoaching.com",
+                'form3-title': "Certified Customer Success Manager Level 1",
                 'form3-li1': "Structuration du rôle de <strong>CSM</strong> dans l'organisation.",
                 'form3-li2': "Mise en place d'un <strong>onboarding</strong> client efficace.",
                 'form3-li3': "Prévention du <strong>churn</strong> & gestion des risques.",
                 'form3-li4': "Création de <strong>plan de succès</strong> client et suivi de l'<strong>adoption</strong>.",
+                'form-intercom-title': "Intercom Fundamentals for Supports Agents",
+                'form-intercom-li1': "Support client",
+                'form-intercom-li2': "Communication Client multicanal",
+                'form-intercom-li3': "Chatbots",
+                'form-intercom-li4': "Automatisation via macros",
+                'form-intercom-li5': "Service Clientèle",
                 'form4-title': "Stratégie digitale",
                 'form4-text': "Marketing digital, E-commerce, ROI, forecast, SEO, Google Ads, Expérience utilisateurs.",
                 'form5-title': "Certificat de Gestion de projet",
-                'form5-text': "Planification, gestion des risques, prévisions, SWOT, PDCA, matrice RACI.",
                 'form6-title': "Formation de Gestionnaire Paie",
                 'form6-text': "Paie, administration du personnel, Droit social, masse salariale, GPEC, veille paie/RH.",
                 'form7-title': "Master 2 Management",
@@ -1254,17 +1447,16 @@
                 'softskill-1': '<i class="fas fa-heart"></i> Intelligence Émotionnelle', 'softskill-2': '<i class="fas fa-lightbulb"></i> Proactivité & Orientation Solution', 'softskill-3': '<i class="fas fa-magnifying-glass-chart"></i> Esprit d’Analyse & Adaptabilité', 'softskill-4': '<i class="fas fa-users"></i> Collaboration & Communication',
                 'competences-title-1': "Compétences", 'competences-title-2': "& Outils",
                 'competences-langues-title': "Langues", 'competences-langue-fr': "Français : Langue maternelle", 'competences-langue-en': "Anglais : Professionnel (B2)",
-                'competences-crm-title': "CRM & Support", 'competences-data-title': "Data, IA & Créatifs",
+                'competences-outils-title': "Ma boîte à outils de CSM",
                 'plus-sur-moi-title-1': "En", 'plus-sur-moi-title-2': "savoir plus", 'plus-sur-moi-title-3': "sur moi",
                 'plus-sur-moi-accroche': "Parce que derrière un CV se cache une personnalité.",
                 'plus-sur-moi-btn': "Plus de détails",
                 'plus-sur-moi-si-jetais': "Si j'étais...",
-                'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus, pour la résilience.',
-                'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique, mon île natale.',
-                'si-jetais-3': '<i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage fictif : Tornade des X-Men, pour la maîtrise des éléments.',
-                'si-jetais-4': '<i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece, pour l\'amitié et l\'aventure.',
-                'si-jetais-5': '<i class="fas fa-dog w-5 text-center text-pink-400"></i> Un animal : un labrador pour la fidélité.',
-                'plus-sur-moi-lectures': "Lectures & Podcasts du moment",
+                'si-jetais-1': '<i class="fas fa-fan w-5 text-center text-pink-400"></i> Une fleur : le lotus',
+                'si-jetais-2': '<i class="fas fa-plane w-5 text-center text-pink-400"></i> Une destination : la Martinique',
+                'si-jetais-3': '<i class="fas fa-feather w-5 text-center text-pink-400"></i> Un personnage : Tornade',
+                'si-jetais-4': '<i class="fas fa-anchor w-5 text-center text-pink-400"></i> Un dessin animé : One Piece',
+                'si-jetais-5': '<i class="fas fa-paw w-5 text-center text-pink-400"></i> Un animal : le loup',
                 'plus-sur-moi-hobbies': "Centres d'intérêt & Hobbies",
                 'hobby-1-title': "🍰 Pâtisserie antillaise", 'hobby-1-text': "Cuisiner, et surtout pâtisser, est pour moi une véritable source de détente. J'aime expérimenter, mêler les saveurs, et surtout partager mes créations avec mes proches.",
                 'hobby-2-title': "🌸 Culture japonaise & Mangas", 'hobby-2-text': "Depuis l'enfance, l'Asie me fascine. Mon goût pour les mangas et les animés s'est affiné avec le temps, notamment à travers les œuvres poétiques du studio Ghibli ou les aventures épiques de One Piece.",
@@ -1279,11 +1471,21 @@
                 'contact-download-cv': "Télécharger mon CV", 'contact-booking': "Réserver un échange",
                 'footer-text': "© 2025 Corinne MARSIAC CSM. Tous droits réservés.",
                 'modal-reussite-title': "De détracteur (NPS 0) à promoteur (NPS 9)",
+                'modal-nps-label': "NPS Final",
                 'modal-reussite-contexte-title': "Le Contexte", 'modal-reussite-contexte-text': "Nouvellement arrivée dans un service utilisant un logiciel et des process différents de mon précédent poste, j’ai dû m’adapter rapidement. Ma manager m’a confié un portefeuille sensible, dont une cliente gérant 4 entités françaises avec un backlog conséquent. Parmi les points critiques figuraient quatre crédits URSSAF en attente, pour un montant total proche de 100 k€. Par ailleurs, cette cliente, habituée à gérer plusieurs pays, maîtrisait mal les spécificités liées aux processus français.",
                 'modal-reussite-actions-title': "Mes Actions",
                 'modal-reussite-actions-list': '<li><strong>Posture proactive :</strong> Plutôt que de la voir comme une "cliente difficile", j\'ai pris le temps de l\'écouter activement et d\'échanger avec elle pour comprendre ses attentes, clarifier nos processus et la rassurer.</li><li><strong>Accompagnement dédié :</strong> Mise en place de points de suivi réguliers pour avoir des feedbacks clients réguliers, et avoir une approche proactive.</li><li><strong>Initiative :</strong> J\'ai géré directement les échanges avec les organismes sociaux pour accélérer les dossiers bloqués et restaurer la confiance, même si cela sortait de mon périmètre.</li>',
                 'modal-reussite-resultats-title': "Les Résultats",
-                'modal-reussite-resultats-list': '<li><span class="font-bold text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li><li><span class="font-bold text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li><li><span class="font-bold text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li><li><span class="font-bold text-green-400">Commercial :</span> Cross-sell d\'un nouveau service réussi.</li><li><span class="font-bold text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>'
+                'modal-reussite-resultats-list': '<li><span class="font-bold text-green-400">NPS :</span> Passé de 0/10 à 9/10. Impact sur le NPS de la BU : +35.</li><li><span class="font-bold text-green-400">Financier :</span> 100k€ de crédits URSSAF intégralement récupérés.</li><li><span class="font-bold text-green-400">Relationnel :</span> Échanges devenus fluides, apaisés et collaboratifs.</li><li><span class="font-bold text-green-400">Commercial :</span> Cross-sell d\'un nouveau service réussi.</li><li><span class="font-bold text-green-400">Reconnaissance :</span> Formelle de la part de la direction de la cliente et de ma propre direction.</li>',
+                'svg-cycle-title1': 'Cycle Care', 'svg-cycle-title2': '& CS', 'svg-cycle-cta': '(Cliquer pour voir)',
+                'lectures-title': "Podcasts", 'lectures-subtitle': "du moment",
+                'cycle-modal-title': 'Cycle Care & CS : un framework de complémentarité',
+                'cycle-step1-title': '1. Écouter & Comprendre', 'cycle-step1-desc': 'Recueillir la voix du client (tickets, entretiens, NPS, CSAT, CES). Identifier attentes, irritants et objectifs pour capter les vrais points de douleur.',
+                'cycle-step2-title': '2. Planifier & Aligner', 'cycle-step2-desc': 'Définir une stratégie adaptée (onboarding, adoption, support réactif/proactif). S’aligner avec produit, sales et marketing pour garantir une approche cohérente.',
+                'cycle-step3-title': '3. Accompagner & Soutenir', 'cycle-step3-desc': 'Fournir un support réactif et qualitatif tout en proposant un accompagnement proactif (best practices, bilans réguliers, conseils). Favoriser l’adoption et la satisfaction.',
+                'cycle-step4-title': '4. Mesurer & Contrôler', 'cycle-step4-desc': 'Suivre les KPIs clés : satisfaction (NPS, CSAT, CES), usage produit, churn, expansion. Identifier tendances et signaux faibles pour piloter la performance.',
+                'cycle-step5-title': '5. Améliorer & Optimiser', 'cycle-step5-desc': 'Ajuster les processus selon les feedbacks. Enrichir documentation, intégration et self-service. Partager les retours clients pour améliorer produit et expérience.',
+                'cycle-step6-title': '6. Répéter & Faire Évoluer', 'cycle-step6-desc': 'Capitaliser sur l’expérience acquise, industrialiser les bonnes pratiques (guides, automatisations, playbooks) et tendre vers une amélioration continue.'
             }
         };
 
@@ -1320,6 +1522,13 @@
                 buttonMobile.setAttribute('aria-label', 'Switch language to English');
             }
         }
+        
+        // Initial call to set the text based on the default language
+        // Set default to French
+        if (document.documentElement.lang !== 'fr') {
+            toggleLanguage();
+        }
+
 
         document.getElementById('translate-button-desktop').addEventListener('click', toggleLanguage);
         document.getElementById('translate-button-mobile').addEventListener('click', toggleLanguage);
