@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- 2) Appliquer le thème le plus tôt possible pour éviter le FOUC -->
@@ -93,6 +94,54 @@
         .nps-circle-progress {
             transition: stroke-dashoffset 2s ease-out;
             stroke-linecap: round;
+        }
+        /* Hide scrollbar for carousel */
+        #book-carousel-container::-webkit-scrollbar, #portfolio-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        #book-carousel-container, #portfolio-carousel-container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-snap-type: x mandatory; /* Ajout pour un défilement fluide */
+        }
+
+        #portfolio-carousel-container > * {
+            scroll-snap-align: center; /* Aligne chaque élément au centre */
+        }
+
+        /* Styles pour le template d'onboarding dans la modale */
+        #onboarding-modal-content {
+            font-family: 'Inter', sans-serif;
+        }
+        #onboarding-modal-content .card {
+            background-color: #111827; /* bg-gray-900 adjusted */
+            border-radius: 0.75rem;
+            border: 1px solid #374151; /* border-gray-700 */
+        }
+        #onboarding-modal-content h1, #onboarding-modal-content h2, #onboarding-modal-content h3 {
+            font-weight: 700;
+        }
+        #onboarding-modal-content .nav-link-active {
+            background-color: #374151; /* bg-gray-700 */
+            color: #A78BFA; /* text-violet-400 */
+            font-weight: 600;
+        }
+
+        /* Styles pour les points de navigation du carrousel */
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4B5563; /* gray-600 */
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .carousel-dot:hover {
+            transform: scale(1.2);
+        }
+        .carousel-dot.active {
+            background-color: #A78BFA; /* violet-400 */
+            transform: scale(1.2);
         }
     </style>
 </head>
@@ -193,12 +242,12 @@
                                 <path d="M 61.4,120 A 160,160 0 0 1 200,40" stroke="url(#grad6)" stroke-width="40" fill="none"/>
 
                                 <!-- 6 Text elements using textPath -->
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-1" xlink:href="#textPath1" startOffset="50%" text-anchor="middle">Écouter</textPath></text>
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-2" xlink:href="#textPath2" startOffset="50%" text-anchor="middle">Planifier</textPath></text>
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-3" xlink:href="#textPath3" startOffset="50%" text-anchor="middle">Accompagner</textPath></text>
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-4" xlink:href="#textPath4" startOffset="50%" text-anchor="middle">Mesurer</textPath></text>
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-5" xlink:href="#textPath5" startOffset="50%" text-anchor="middle">Améliorer</textPath></text>
-                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-6" xlink:href="#textPath6" startOffset="50%" text-anchor="middle">Évoluer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-1" href="#textPath1" startOffset="50%" text-anchor="middle">Écouter</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-2" href="#textPath2" startOffset="50%" text-anchor="middle">Planifier</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-3" href="#textPath3" startOffset="50%" text-anchor="middle">Accompagner</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-4" href="#textPath4" startOffset="50%" text-anchor="middle">Mesurer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-5" href="#textPath5" startOffset="50%" text-anchor="middle">Améliorer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-6" href="#textPath6" startOffset="50%" text-anchor="middle">Évoluer</textPath></text>
                             </g>
                         </svg>
                     </button>
@@ -212,7 +261,7 @@
             <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                     <div class="md:col-span-1 flex justify-center">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHYWq2DzXkTfA/profile-displayphoto-scale_200_200/B4DZiwiCFgHYAY-/0/1755308368699?e=1758153600&v=beta&t=lgBVOSsMYg4Roe_HZ2qjwG7OS36rUqDt6o-HC67VaHo" alt="Corinne Marsiac" class="rounded-full border-4 border-violet-500 w-48 h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/192x192/1F2937/FFFFFF?text=CM';">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHYWq2DzXkTfA/profile-displayphoto-crop_800_800/B4DZiwiCFgHYAI-/0/1755308368610?e=1759363200&v=beta&t=IzdqhAFMAL8IXJ4xRq6FP0_LGczUPH9VLuJSyJY3QQU" alt="Corinne Marsiac" class="rounded-full border-4 border-violet-500 w-48 h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/192x192/1F2937/FFFFFF?text=CM';">
                     </div>
                     <div class="md:col-span-2 text-left">
                         <p id="quisuisje-p1" class="text-gray-300 leading-relaxed text-lg">
@@ -498,7 +547,7 @@
                 </div>
                 <!-- Colonne Formations & Certifications -->
                 <div>
-                    <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3 text-pink-400">
+                    <h3 id="parcours-formation-title" class="text-2xl font-semibold mb-8 flex items-center gap-3 text-pink-400">
                         <i class="fas fa-certificate"></i> Certifications
                     </h3>
                     <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8 mb-12">
@@ -515,11 +564,11 @@
                             </button>
                             <div class="details-content mt-4">
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="form1-li1"><strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong></li>
-                                    <li id="form1-li2">Suivi et analyse des <strong>KPIs</strong> : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR</li>
-                                    <li id="form1-li3">Identification et activation des <strong>leviers de croissance</strong> : upsell, cross-sell, renouvellement</li>
-                                    <li id="form1-li4"><strong>Outils opérationnels</strong> : personas, Customer Journey Maps, Health Scores et playbooks</li>
-                                    <li id="form1-li5"><strong>Workflows d’automatisation</strong> pour améliorer l’efficacité et l’expérience client</li>
+                                    <li id="form1-li1">Stratégies d’onboarding, d’adoption, de rétention et d’expansion</li>
+                                    <li id="form1-li2">Suivi et analyse des KPIs : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR</li>
+                                    <li id="form1-li3">Identification et activation des leviers de croissance : upsell, cross-sell, renouvellement, parrainage</li>
+                                    <li id="form1-li4">Outils opérationnels : personas, Customer Journey Maps, Health Scores et playbooks</li>
+                                    <li id="form1-li5">Workflows d’automatisation pour améliorer l’efficacité et l’expérience client</li>
                                 </ul>
                             </div>
                         </div>
@@ -539,7 +588,7 @@
                                     <li id="form-hubspot-sales-li1">Gestion de la relation client (CRM)</li>
                                     <li id="form-hubspot-sales-li2">Pipelines</li>
                                     <li id="form-hubspot-sales-li3">Reporting</li>
-                                    <li id="form-hubspot-sales-li4">KPI</li>
+                                    <li id="form-hubspot-sales-li4">KPIs</li>
                                 </ul>
                             </div>
                         </div>
@@ -559,7 +608,7 @@
                                     <li id="form-hubspot-service-li1">Gestion de la relation client (CRM)</li>
                                     <li id="form-hubspot-service-li2">Enquêtes de satisfaction client</li>
                                     <li id="form-hubspot-service-li3">CSAT, NPS</li>
-                                    <li id="form-hubspot-service-li4">Accords de niveau de services (SLA)</li>
+                                    <li id="form-hubspot-service-li4">Accords de niveaux de services (SLA)</li>
                                     <li id="form-hubspot-service-li5">Base de connaissance</li>
                                 </ul>
                             </div>
@@ -597,10 +646,10 @@
                             </button>
                             <div class="details-content mt-4">
                                 <ul class="list-disc list-inside text-gray-400 space-y-2">
-                                    <li id="form3-li1">Structuration du rôle de <strong>CSM</strong> dans l'organisation.</li>
-                                    <li id="form3-li2">Mise en place d'un <strong>onboarding</strong> client efficace.</li>
-                                    <li id="form3-li3">Prévention du <strong>churn</strong> & gestion des risques.</li>
-                                    <li id="form3-li4">Création de <strong>plan de succès</strong> client et suivi de l'<strong>adoption</strong>.</li>
+                                    <li id="form3-li1">Structuration du rôle de CSM dans l'organisation.</li>
+                                    <li id="form3-li2">Mise en place d'un onboarding client efficace.</li>
+                                    <li id="form3-li3">Prévention du churn & gestion des risques.</li>
+                                    <li id="form3-li4">Création de plan de succès client et suivi de l'adoption.</li>
                                 </ul>
                             </div>
                         </div>
@@ -625,8 +674,8 @@
                                 </ul>
                             </div>
                         </div>
-                          <!-- Formation 5 -->
-                          <div class="relative">
+                        <!-- Formation 5 -->
+                        <div class="relative">
                             <div class="absolute -left-[38px] top-1 w-4 h-4 bg-pink-500 rounded-full border-4 border-gray-900"></div>
                              <button class="details-trigger w-full text-left">
                                 <p class="text-sm text-gray-400">2022</p>
@@ -649,7 +698,7 @@
                         </div>
                     </div>
 
-                    <h3 id="parcours-formation-title" class="text-2xl font-semibold mb-4 flex items-center gap-3 text-pink-400">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-3 text-pink-400">
                         <i class="fas fa-graduation-cap"></i> Formations
                     </h3>
                     <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
@@ -777,17 +826,31 @@
             </div>
         </section>
 
+        <!-- Section Mon Portfolio -->
+        <section id="portfolio" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4"><span class="text-gradient" id="portfolio-title">Mon</span> <span id="portfolio-subtitle">Portfolio</span></h2>
+            <p id="portfolio-description" class="text-center text-gray-400 max-w-3xl mx-auto mb-12">Exemples de templates</p>
+            <div class="relative max-w-5xl mx-auto">
+                <button id="portfolio-carousel-prev" class="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 z-10 bg-gray-800/50 p-3 rounded-full text-white hover:bg-gray-700 transition hidden md:block" aria-label="Projet précédent"><i class="fas fa-chevron-left"></i></button>
+                <div id="portfolio-carousel-container" class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-8 pb-4">
+                    <!-- Portfolio items will be injected by JS -->
+                </div>
+                <button id="portfolio-carousel-next" class="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-12 z-10 bg-gray-800/50 p-3 rounded-full text-white hover:bg-gray-700 transition hidden md:block" aria-label="Projet suivant"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div id="portfolio-dots" class="flex justify-center mt-6 space-x-3"></div>
+        </section>
+
         <!-- Section Lectures & Podcasts -->
         <section id="lectures-podcasts" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-16"><span id="lectures-title" class="text-gradient">Podcasts</span> <span id="lectures-subtitle">du moment</span></h2>
             <div class="max-w-2xl mx-auto">
                 <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
                      <div class="space-y-6">
-                        <div class="flex items-center gap-6">
+                          <div class="flex items-center gap-6">
                             <img src="https://images-cf.getpodpage.com/cdn-cgi/image/quality=70,fit=contain,format=auto,width=480/https://image.ausha.co/lDCL7PlnRFtGSn4a696sgmCWhR8aPB1oVya10gow_1400x1400.jpeg?t=1732295332" alt="Podcast Le Client" class="w-24 h-24 rounded-lg object-cover shadow-lg">
                             <p id="lecture-2" class="text-lg font-medium">Le Client par Marine Deck</p>
                         </div>
-                        <div class="flex items-center gap-6">
+                          <div class="flex items-center gap-6">
                             <img src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/40823054/40823054-1747682153327-16a6629ff7894.jpg" alt="Podcast Galères de CS!" class="w-24 h-24 rounded-lg object-cover shadow-lg">
                             <p id="lecture-3" class="text-lg font-medium">Galères de CS! d'Allison d'abcsm.fr</p>
                         </div>
@@ -796,6 +859,22 @@
             </div>
         </section>
         
+        <!-- Section Lectures Carrousel -->
+        <section id="lectures-carrousel" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-16"><span class="text-gradient" id="lectures-carrousel-title">Lectures</span> <span id="lectures-carrousel-subtitle">Inspirantes</span></h2>
+            <div class="relative max-w-5xl mx-auto">
+                <!-- Navigation buttons -->
+                <button id="book-carousel-prev" class="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 z-10 bg-gray-800/50 p-3 rounded-full text-white hover:bg-gray-700 transition hidden md:block" aria-label="Livre précédent"><i class="fas fa-chevron-left"></i></button>
+                <!-- Carousel container -->
+                <div id="book-carousel-container" class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-8 pb-4">
+                    <!-- Book items will be injected here by JS -->
+                </div>
+                <button id="book-carousel-next" class="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-12 z-10 bg-gray-800/50 p-3 rounded-full text-white hover:bg-gray-700 transition hidden md:block" aria-label="Livre suivant"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <!-- Dots container -->
+            <div id="book-dots" class="flex justify-center mt-6 space-x-3"></div>
+        </section>
+
         <!-- Section Pour en savoir plus -->
         <section id="plus-sur-moi" class="py-24 fade-in">
             <h2 class="text-3xl font-bold text-center mb-16"><span id="plus-sur-moi-title-1">En</span> <span class="text-gradient" id="plus-sur-moi-title-2">savoir plus</span> <span id="plus-sur-moi-title-3">sur moi</span></h2>
@@ -923,7 +1002,7 @@
                 <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8 text-gray-300">
                     <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="https://my.assessfirst.com/public/profile/nko6hn6w-corinne-marsiac?lang=fr-FR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-user-check"></i> AssessFirst</a>
-                    <a href="https://drive.google.com/file/d/1MhaTS16dXZDiXtRLW2vdVXudlbIyMduk/view" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> <span id="contact-download-cv">Télécharger mon CV</span></a>
+                    <a href="https://drive.google.com/file/d/1VKCrqfJB6QjxWVaK7lNZsfAwLS1humvB/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-violet-400 transition duration-300"><i class="fas fa-download"></i> <span id="contact-download-cv">Télécharger mon CV</span></a>
                     <a href="https://calendly.com/corinne-marsiac-csm/30min" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition duration-300 flex items-center gap-2">
                         <i class="fas fa-calendar-check"></i> <span id="contact-booking">Réserver un échange</span>
                     </a>
@@ -940,7 +1019,7 @@
     </footer>
     
     <!-- Scroll to Top Button -->
-    <a href="#accueil" aria-label="Remonter en haut de la page" class="fixed bottom-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg hover:scale-110 transition">
+    <a href="#accueil" aria-label="Remonter en haut de la page" class="fixed bottom-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg hover:scale-110 transition opacity-0 pointer-events-none md:opacity-75 md:pointer-events-auto">
         <i class="fas fa-arrow-up text-white"></i>
     </a>
 
@@ -1055,6 +1134,235 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal pour les Lectures -->
+    <div id="book-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative flex flex-col md:flex-row gap-8 items-center">
+            <button id="close-book-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+            <img id="book-modal-img" src="" alt="Book cover" class="w-full md:w-1/3 object-contain rounded-lg shadow-lg">
+            <div class="w-full md:w-2/3">
+                <h3 id="book-modal-title" class="text-2xl font-bold mb-4 text-gradient"></h3>
+                <p id="book-modal-description" class="text-gray-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour le Template d'E-mail de Bienvenue -->
+    <div id="welcome-email-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 id="welcome-email-modal-title" class="text-xl font-bold text-gradient">Template d'E-mail de Bienvenue (Mid-touch)</h2>
+                 <button id="close-welcome-email-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-8 text-gray-300 font-sans">
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="mb-6">
+                        <p id="welcome-ab-test-title" class="font-semibold text-gray-400 mb-2">Options pour l'objet (A/B Test) :</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li id="welcome-ab-test-1"><span>Bienvenue chez [Nom du service], [Prénom] – Votre compte est prêt !</span></li>
+                            <li id="welcome-ab-test-2"><span>Bien démarrer avec [Nom du service] : vos 3 premières étapes</span></li>
+                            <li id="welcome-ab-test-3"><span>[Prénom], faisons connaissance et lançons votre projet</span></li>
+                        </ul>
+                    </div>
+
+                    <p id="welcome-greeting">Cher(e) [Prénom],</p>
+                    <p id="welcome-intro" class="mt-2">Bienvenue chez [Nom du service] ! 🎉</p>
+                    <p id="welcome-goal" class="mt-4">Vous avez franchi le premier pas pour <strong>[objectif du service, ex. créer un CV interactif qui se démarque]</strong>.</p>
+                    <p id="welcome-csm-intro" class="mt-4">Je suis [Votre nom], votre Customer Success Manager. Mon rôle est de vous garantir une expérience exceptionnelle et de vous aider à atteindre vos objectifs le plus rapidement possible.</p>
+                    
+                    <p id="welcome-options-intro" class="mt-6 font-semibold">👉 Pour bien commencer, vous avez deux options :</p>
+
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Option 1: Autonomie -->
+                        <div class="bg-gray-900/50 border border-gray-700 p-6 rounded-lg">
+                            <h3 id="welcome-option1-title" class="font-bold text-lg text-violet-400">🔹 1. Avancer en autonomie</h3>
+                            <p id="welcome-option1-desc" class="mt-3 text-gray-400">Connectez-vous et suivez ces 3 étapes simples :</p>
+                            <ol class="mt-3 space-y-1 list-decimal list-inside">
+                                <li id="welcome-option1-step1"><strong>Étape 1 :</strong> Choisissez un template</li>
+                                <li id="welcome-option1-step2"><strong>Étape 2 :</strong> Remplissez vos informations</li>
+                                <li id="welcome-option1-step3"><strong>Étape 3 :</strong> Partagez votre lien unique</li>
+                            </ol>
+                            <div class="mt-4 border-t border-gray-700 pt-3">
+                                <h4 id="welcome-option1-resources" class="font-semibold text-blue-400">Ressources utiles :</h4>
+                                <ul class="mt-2 text-sm">
+                                    <li><a href="#" id="welcome-option1-link1" class="text-blue-400 hover:underline">Guide de démarrage rapide →</a></li>
+                                    <li><a href="#" id="welcome-option1-link2" class="text-blue-400 hover:underline">Documentation en ligne →</a></li>
+                                    <li><a href="#" id="welcome-option1-link3" class="text-blue-400 hover:underline">Centre d'aide →</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Option 2: Accompagnement -->
+                        <div class="bg-gray-900/50 border border-gray-700 p-6 rounded-lg">
+                            <h3 id="welcome-option2-title" class="font-bold text-lg text-violet-400">🔹 2. Préférer un accompagnement</h3>
+                            <p id="welcome-option2-desc1" class="mt-3 text-gray-400">Je suis [Prénom Nom], votre Customer Success Manager dédié.</p>
+                            <p id="welcome-option2-desc2" class="mt-3 text-gray-400">Je vous propose un court appel (15-20 min) pour :</p>
+                            <ul class="mt-2 list-disc list-inside text-gray-400">
+                                <li id="welcome-option2-li1">Comprendre vos objectifs prioritaires</li>
+                                <li id="welcome-option2-li2">Vous guider sur les fonctionnalités clés</li>
+                                <li id="welcome-option2-li3">Répondre à vos questions en direct</li>
+                            </ul>
+                            <a href="#" class="mt-6 inline-block bg-blue-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-star mr-2"></i><span id="welcome-option2-btn">Réservez votre créneau</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <p id="welcome-closing" class="mt-8">Quel que soit votre choix, nous avons hâte de vous voir réussir avec [Nom du service] ! 🚀</p>
+                    
+                    <div class="mt-8">
+                        <p id="welcome-signoff1">À très bientôt,</p>
+                        <p id="welcome-signoff2" class="font-semibold">[Prénom Nom]</p>
+                        <p class="text-sm text-gray-500">Customer Success Manager</p>
+                        <p class="text-sm text-gray-500">[Nom du service]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour le Template d'Onboarding -->
+    <div id="onboarding-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full h-full max-w-6xl max-h-[95vh] overflow-hidden flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 class="text-xl font-bold text-gradient">Check-lists de l'onboarding</h2>
+                 <button id="close-onboarding-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="onboarding-modal-content" class="flex-grow overflow-y-auto p-8 text-gray-300">
+                <!-- Contenu du template d'onboarding injecté ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Timeline d'Onboarding -->
+    <div id="timeline-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 id="timeline-modal-title" class="text-xl font-bold text-gradient">Timeline d'Onboarding</h2>
+                 <button id="close-timeline-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-8 text-gray-300">
+                <div class="relative pl-8 border-l-2 border-violet-500"> <div class="mb-8"> <div class="absolute w-6 h-6 bg-violet-500 rounded-full -left-3.5 border-4 border-gray-900"></div> <h3 id="timeline-week1-title" class="text-lg font-semibold text-violet-400">Semaine 1 : Accueil du client</h3> <ul class="mt-2 list-disc list-inside text-gray-400"> <li id="timeline-week1-li1">Envoyer l'e-mail de bienvenue</li> <li id="timeline-week1-li2">Planifier une réunion d'introduction</li> <li id="timeline-week1-li3">Collecter les informations du client</li> </ul> </div> <div class="mb-8"> <div class="absolute w-6 h-6 bg-violet-500 rounded-full -left-3.5 border-4 border-gray-900"></div> <h3 id="timeline-week2-title" class="text-lg font-semibold text-violet-400">Semaine 2 : Processus de setup</h3> <ul class="mt-2 list-disc list-inside text-gray-400"> <li id="timeline-week2-li1">Mener la réunion d'introduction</li> <li id="timeline-week2-li2">Aider avec le processus de setup</li> <li id="timeline-week2-li3">Partager les ressources d'onboarding</li> </ul> </div> <div class="mb-8"> <div class="absolute w-6 h-6 bg-violet-500 rounded-full -left-3.5 border-4 border-gray-900"></div> <h3 id="timeline-week3-title" class="text-lg font-semibold text-violet-400">Semaine 3 : Formation et exemples</h3> <ul class="mt-2 list-disc list-inside text-gray-400"> <li id="timeline-week3-li1">Organiser une session de formation en direct</li> <li id="timeline-week3-li2">Partager des études de cas</li> <li id="timeline-week3-li3">Permettre des sessions 1:1</li> </ul> </div> <div class="mb-8"> <div class="absolute w-6 h-6 bg-violet-500 rounded-full -left-3.5 border-4 border-gray-900"></div> <h3 id="timeline-week4-title" class="text-lg font-semibold text-violet-400">Semaine 4 : Intégration et support</h3> <ul class="mt-2 list-disc list-inside text-gray-400"> <li id="timeline-week4-li1">Fournir une assistance à l'intégration</li> <li id="timeline-week4-li2">Présenter les options de personnalisation</li> <li id="timeline-week4-li3">Prévoir du temps pour le support technique</li> </ul> </div> <div> <div class="absolute w-6 h-6 bg-violet-500 rounded-full -left-3.5 border-4 border-gray-900"></div> <h3 id="timeline-week5-title" class="text-lg font-semibold text-violet-400">Semaine 5 – Questions et feedback</h3> <ul class="mt-2 list-disc list-inside text-gray-400"> <li id="timeline-week5-li1">Faire un suivi pour répondre aux questions en suspens</li> <li id="timeline-week5-li2">Mettre en avant l'accès aux canaux de support</li> <li id="timeline-week5-li3">Collecter les retours sur le processus d'onboarding</li> </ul> </div> </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les Étapes Essentielles de l'Onboarding -->
+    <div id="onboarding-steps-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 id="steps-modal-title" class="text-xl font-bold text-gradient">Les étapes d'un onboarding Client (Mid-Touch/High Touch)</h2>
+                 <button id="close-onboarding-steps-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-8 text-gray-300">
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">1</div>
+                        <div>
+                            <h3 id="steps-step1-title" class="font-bold text-violet-300">PREMIÈRE PRISE DE CONTACT</h3>
+                            <p id="steps-step1-desc" class="text-gray-400">E-mail de bienvenue & planification du kick-off.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">2</div>
+                        <div>
+                            <h3 id="steps-step2-title" class="font-bold text-violet-300">RÉUNION DE KICK-OFF</h3>
+                            <p id="steps-step2-desc" class="text-gray-400">Aligner les attentes & définir les objectifs.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">3</div>
+                        <div>
+                            <h3 id="steps-step3-title" class="font-bold text-violet-300">FORMATION INITIALE</h3>
+                            <p id="steps-step3-desc" class="text-gray-400">Présenter les fonctionnalités clés & les bonnes pratiques.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">4</div>
+                        <div>
+                            <h3 id="steps-step4-title" class="font-bold text-violet-300">ACCOMPAGNEMENT PROACTIF</h3>
+                            <p id="steps-step4-desc" class="text-gray-400">Suivi régulier & partage de ressources.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">5</div>
+                        <div>
+                            <h3 id="steps-step5-title" class="font-bold text-violet-300">PREMIER BILAN</h3>
+                            <p id="steps-step5-desc" class="text-gray-400">Mesurer les premiers succès & identifier les blocages.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-600 rounded-full text-white font-bold text-lg">6</div>
+                        <div>
+                            <h3 id="steps-step6-title" class="font-bold text-violet-300">VERS L'AUTONOMIE</h3>
+                            <p id="steps-step6-desc" class="text-gray-400">Encourager l'exploration & valoriser les réussites.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour l'Onboarding Low-Touch -->
+    <div id="onboarding-low-touch-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 id="low-touch-modal-title" class="text-xl font-bold text-gradient">Les étapes essentielles de l'onboarding client (Low-Touch)</h2>
+                 <button id="close-onboarding-low-touch-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-8 text-gray-300">
+                <p id="low-touch-modal-subtitle" class="text-center text-lg text-gray-400 mb-8">Aidez vos clients à tirer de la valeur de votre produit dès le premier jour grâce à un parcours simple et engageant.</p>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-800 border border-violet-500/50 rounded-lg text-violet-400 font-bold text-2xl">01</div>
+                        <div>
+                            <h3 id="low-touch-step1-title" class="font-bold text-violet-300 text-lg">Inscription facile</h3>
+                            <p id="low-touch-step1-desc" class="text-gray-400">Le voyage commence dès l'inscription. Rendez cette étape rapide et intuitive pour que vos clients accèdent sans effort à votre solution.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-800 border border-violet-500/50 rounded-lg text-violet-400 font-bold text-2xl">02</div>
+                        <div>
+                            <h3 id="low-touch-step2-title" class="font-bold text-violet-300 text-lg">Un email de bienvenue personnalisé</h3>
+                            <p id="low-touch-step2-desc" class="text-gray-400">Souhaitez la bienvenue à vos clients et guidez-les vers la prochaine étape. Montrez-leur que vous êtes là pour les accompagner dès le départ.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-800 border border-violet-500/50 rounded-lg text-violet-400 font-bold text-2xl">03</div>
+                        <div>
+                            <h3 id="low-touch-step3-title" class="font-bold text-violet-300 text-lg">Première connexion réussie</h3>
+                            <p id="low-touch-step3-desc" class="text-gray-400">La première impression compte : proposez une visite guidée ou une démonstration interactive pour rassurer vos clients et leur donner envie d'aller plus loin.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-800 border border-violet-500/50 rounded-lg text-violet-400 font-bold text-2xl">04</div>
+                        <div>
+                            <h3 id="low-touch-step4-title" class="font-bold text-violet-300 text-lg">Un apprentissage fluide</h3>
+                            <p id="low-touch-step4-desc" class="text-gray-400">Offrez des tutoriels simples et des ressources interactives qui permettent à vos clients de devenir rapidement autonomes et confiants dans l'usage de votre produit.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-800 border border-violet-500/50 rounded-lg text-violet-400 font-bold text-2xl">05</div>
+                        <div>
+                            <h3 id="low-touch-step5-title" class="font-bold text-violet-300 text-lg">Engagement et support continus</h3>
+                            <p id="low-touch-step5-desc" class="text-gray-400">Aidez vos clients à tirer le meilleur parti de votre produit sur la durée. Envoyez des emails de suivi, partagez des conseils pratiques et des ressources utiles, et restez disponibles via votre support client pour les accompagner à chaque étape.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // --- GESTION DU MENU MOBILE ---
@@ -1257,6 +1565,315 @@
             });
         });
         
+        // --- DONNÉES DES CARROUSELS ---
+        const bookData = [
+            { id: 'book1', imgSrc: 'https://m.media-amazon.com/images/I/710KnVN66OL._SY425_.jpg', title: { fr: "Practical Customer Success Management", en: "Practical Customer Success Management" }, description: { fr: "Une bible pour tout CSM. Ce livre couvre de manière pragmatique toutes les facettes du métier, de l'onboarding à la gestion des renouvellements, en passant par les QBRs et la gestion de crise. Un guide essentiel pour structurer son approche.", en: "A bible for any CSM. This book pragmatically covers all facets of the job, from onboarding to renewal management, including QBRs and crisis management. An essential guide to structure one's approach." } },
+            { id: 'book8', imgSrc: 'https://m.media-amazon.com/images/I/61d0rzZtJRL._SY522_.jpg', title: { fr: "Les mots sont des fenêtres (ou bien ce sont des murs)", en: "Nonviolent Communication: A Language of Life" }, description: { fr: "Une introduction à la Communication NonViolente (CNV). Ce livre enseigne à communiquer avec empathie et authenticité, à transformer les conflits en dialogues constructifs et à créer des relations basées sur le respect mutuel. Essentiel pour un CSM qui cherche à désamorcer les tensions et à comprendre en profondeur les besoins du client.", en: "An introduction to Nonviolent Communication (NVC). This book teaches how to communicate with empathy and authenticity, turn conflicts into constructive dialogues, and create relationships based on mutual respect. Essential for a CSM looking to de-escalate tensions and deeply understand client needs." } },
+            { id: 'book2', imgSrc: 'https://m.media-amazon.com/images/I/71D2NTUUpOL._SY425_.jpg', title: { fr: "L'obsession du service client", en: "The Customer Service Obsession" }, description: { fr: "Ce livre explore comment une culture d'entreprise entièrement centrée sur le client peut devenir le principal moteur de croissance et de succès. Un incontournable pour comprendre l'importance de chaque interaction.", en: "This book explores how a corporate culture entirely focused on the customer can become the main driver of growth and success. A must-read to understand the importance of every interaction." } },
+            { id: 'book3', imgSrc: 'https://m.media-amazon.com/images/I/5184AHE8baL._SY522_.jpg', title: { fr: "Ne coupez jamais la poire en deux", en: "Never Split the Difference" }, description: { fr: "Écrit par un ancien négociateur du FBI, ce livre révèle des techniques de négociation contre-intuitives mais redoutablement efficaces. Il montre comment l'empathie tactique et l'écoute active peuvent transformer n'importe quelle discussion, professionnelle ou personnelle.", en: "Written by a former FBI negotiator, this book reveals counter-intuitive yet incredibly effective negotiation techniques. It shows how tactical empathy and active listening can transform any discussion, whether professional or personal." } },
+            { id: 'book4', imgSrc: 'https://m.media-amazon.com/images/I/71m8dNRvcjL._SY425_.jpg', title: { fr: "Customer Happiness Manager", en: "Customer Happiness Manager" }, description: { fr: "Ce livre explore comment placer l'émotion et l'humain au centre de la stratégie client pour créer des expériences mémorables et fidéliser durablement. Une approche moderne et essentielle du Customer Success.", en: "This book explores how to place emotion and the human element at the center of customer strategy to create memorable experiences and build lasting loyalty. A modern and essential approach to Customer Success." } },
+            { id: 'book5', imgSrc: 'https://m.media-amazon.com/images/I/61L2meGgD8L._SY385_.jpg', title: { fr: "INTELLIGENCE ÉMOTIONNELLE - 5 LIVRES EN 1", en: "EMOTIONAL INTELLIGENCE - 5 BOOKS IN 1" }, description: { fr: "Un manuel complet pour développer son intelligence émotionnelle. Il offre des outils pratiques pour mieux gérer ses émotions, améliorer ses relations et arrêter de sur-analyser, des compétences clés pour un CSM.", en: "A comprehensive manual for developing emotional intelligence. It offers practical tools to better manage emotions, improve relationships, and stop overthinking—key skills for a CSM." } },
+            { id: 'book7', imgSrc: 'https://m.media-amazon.com/images/I/614VlecsEdL._SY466_.jpg', title: { fr: "La Méthode BOCLET", en: "The BOCLET Method" }, description: { fr: "Ce livre présente une méthode de vente et de négociation axée sur la compréhension profonde des besoins du client. Une approche structurée qui peut être adaptée pour renforcer la relation client et identifier des opportunités de croissance.", en: "This book presents a sales and negotiation method focused on a deep understanding of the client's needs. A structured approach that can be adapted to strengthen customer relationships and identify growth opportunities." } }
+        ];
+
+        const portfolioData = [
+            { id: 'timeline-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/EC4899/FFFFFF', text: { fr: "Timeline+d'Onboarding", en: "Onboarding+Timeline" }, title: { fr: "Timeline d'Onboarding", en: "Onboarding Timeline" }, modalId: 'timeline-modal' },
+            { id: 'welcome-email-template', type: 'modal', imgBase: 'https://placehold.co/600x400/A78BFA/FFFFFF', text: { fr: 'E-mail+de+Bienvenue', en: 'Welcome+E-mail' }, title: { fr: 'E-mail de bienvenue', en: 'Welcome E-mail' }, modalId: 'welcome-email-modal' },
+            { id: 'onboarding-template', type: 'modal', imgBase: 'https://placehold.co/600x400/8B5CF6/FFFFFF', text: { fr: "Check-lists+d'onboarding", en: "Onboarding+Check-lists" }, title: { fr: "Check-lists d'onboarding", en: "Onboarding Check-lists" }, modalId: 'onboarding-modal' },
+            { id: 'onboarding-low-touch-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/6D28D9/FFFFFF', text: { fr: "Onboarding+Low-Touch", en: "Onboarding+Low-Touch" }, title: { fr: "Onboarding Low-Touch", en: "Onboarding Low-Touch" }, modalId: 'onboarding-low-touch-modal' },
+            { id: 'onboarding-steps-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/D946EF/FFFFFF', text: { fr: "Onboarding+Mid/High-touch", en: "Onboarding+Mid/High-touch" }, title: { fr: "Onboarding Mid/High-touch", en: "Onboarding Mid/High-touch" }, modalId: 'onboarding-steps-modal' },
+        ];
+
+        // --- GESTION DE LA MODALE DES LIVRES ---
+        const bookModal = document.getElementById('book-modal');
+        const closeBookModalButton = document.getElementById('close-book-modal-button');
+        const bookModalImg = document.getElementById('book-modal-img');
+        const bookModalTitle = document.getElementById('book-modal-title');
+        const bookModalDescription = document.getElementById('book-modal-description');
+
+        function openBookModal(bookId) {
+            const book = bookData.find(b => b.id === bookId);
+            if (!book || !bookModal) return;
+            const lang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+            bookModalImg.src = book.imgSrc;
+            bookModalTitle.textContent = book.title[lang];
+            bookModalDescription.textContent = book.description[lang];
+            bookModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookModal() {
+            if (!bookModal) return;
+            bookModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        if (closeBookModalButton && bookModal) {
+            closeBookModalButton.addEventListener('click', closeBookModal);
+            bookModal.addEventListener('click', (e) => (e.target === bookModal) && closeBookModal());
+        }
+
+        // --- GESTION DE LA MODALE ONBOARDING ET WELCOME EMAIL---
+        function openModalById(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        const welcomeEmailModal = document.getElementById('welcome-email-modal');
+        const closeWelcomeEmailModalButton = document.getElementById('close-welcome-email-modal-button');
+        if (welcomeEmailModal && closeWelcomeEmailModalButton) {
+            const closeModal = () => {
+                welcomeEmailModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            closeWelcomeEmailModalButton.addEventListener('click', closeModal);
+            welcomeEmailModal.addEventListener('click', (e) => {
+                if (e.target === welcomeEmailModal) closeModal();
+            });
+        }
+
+        const onboardingModal = document.getElementById('onboarding-modal');
+        const onboardingModalContent = document.getElementById('onboarding-modal-content');
+        const closeOnboardingModalButton = document.getElementById('close-onboarding-modal-button');
+        const onboardingTemplateHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <aside class="lg:col-span-1">
+                    <div class="sticky top-8">
+                        <h3 id="onboarding-nav-title" class="text-xl font-semibold mb-4 text-gray-400">Navigation</h3>
+                        <ul class="space-y-2" id="onboarding-nav">
+                            <li><a href="#check-list-formation" id="onboarding-nav-link1" class="flex items-center text-gray-400 hover:text-violet-400 hover:bg-gray-800 p-2 rounded-lg transition-colors"><i class="fas fa-tasks w-6 text-center mr-3"></i>Check-list Formation</a></li>
+                            <li><a href="#check-list-tech" id="onboarding-nav-link2" class="flex items-center text-gray-400 hover:text-violet-400 hover:bg-gray-800 p-2 rounded-lg transition-colors"><i class="fas fa-cogs w-6 text-center mr-3"></i>Check-list Tech Stack</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <main class="lg:col-span-3 space-y-12">
+                     <section id="check-list-formation" class="card p-6 md:p-8 scroll-mt-24"> <h2 id="onboarding-checklist-formation-title" class="text-2xl font-bold mb-4">Check-list des ressources de formation</h2> <div class="space-y-4"> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item1-title" class="font-semibold">E-mail de bienvenue client</h3> <p id="onboarding-checklist-item1-desc" class="text-gray-400 text-sm">Aide à établir une relation et lance le processus d'onboarding.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item2-title" class="font-semibold">Guide d'onboarding interne</h3> <p id="onboarding-checklist-item2-desc" class="text-gray-400 text-sm">Synchronise l'équipe avec des étapes détaillées sur l'ensemble du processus.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item3-title" class="font-semibold">Webinaires et sessions de formation</h3> <p id="onboarding-checklist-item3-desc" class="text-gray-400 text-sm">Permettent aux clients de découvrir le produit en interagissant avec votre équipe.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item4-title" class="font-semibold">Base de connaissances avec FAQ</h3> <p id="onboarding-checklist-item4-desc" class="text-gray-400 text-sm">Fournit un point de référence pour des réponses rapides aux questions courantes.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item5-title" class="font-semibold">Tutoriels vidéo ou walkthroughs</h3> <p id="onboarding-checklist-item5-desc" class="text-gray-400 text-sm">Option pour les clients qui préfèrent un apprentissage à leur propre rythme.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item6-title" class="font-semibold">Trackers de progression client</h3> <p id="onboarding-checklist-item6-desc" class="text-gray-400 text-sm">Permet à l'équipe de suivre l'avancement de l'onboarding.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-checklist-item7-title" class="font-semibold">Mécanismes de feedback</h3> <p id="onboarding-checklist-item7-desc" class="text-gray-400 text-sm">Système pour accepter et traiter le retour des clients sur le processus.</p> </div> </label> </div> </section>
+                     <section id="check-list-tech" class="card p-6 md:p-8 scroll-mt-24"> <h2 id="onboarding-checklist-tech-title" class="text-2xl font-bold mb-4">Check-list de la Tech Stack</h2> <div class="space-y-4"> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer" checked> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item1-title" class="font-semibold">Accès client</h3> <p id="onboarding-techlist-item1-desc" class="text-gray-400 text-sm">Assurez-vous que votre client dispose du bon accès aux logiciels ou services achetés et que les identifiants de connexion sont valides.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item2-title" class="font-semibold">Identifier les besoins d'intégration</h3> <p id="onboarding-techlist-item2-desc" class="text-gray-400 text-sm">Si le client a besoin d'un logiciel d'intégration, vérifiez que les outils sont disponibles et fournissez les instructions nécessaires.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item3-title" class="font-semibold">Vérifier les prérequis système</h3> <p id="onboarding-techlist-item3-desc" class="text-gray-400 text-sm">Avant d'utiliser vos logiciels ou services, vérifiez que le matériel de votre client répond bien à toutes les exigences système.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item4-title" class="font-semibold">Accès aux ressources de formation</h3> <p id="onboarding-techlist-item4-desc" class="text-gray-400 text-sm">Assurez-vous que votre client puisse accéder à toutes les ressources de formation ou à la documentation disponibles pour l'onboarding.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item5-title" class="font-semibold">Canaux de support</h3> <p id="onboarding-techlist-item5-desc" class="text-gray-400 text-sm">Des canaux de support doivent être disponibles pour vos clients en cas de problème ou de questions lors du démarrage.</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item6-title" class="font-semibold">Mesures de sécurité</h3> <p id="onboarding-techlist-item6-desc" class="text-gray-400 text-sm">Protégez vos clients et votre équipe en veillant à ce que les deux parties appliquent les bonnes pratiques de sécurité. (Pensez à fournir des directives.)</p> </div> </label> <label class="flex items-start p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"> <input type="checkbox" class="hidden peer"> <i class="far fa-circle text-gray-500 mt-1 mr-4 text-xl peer-checked:hidden"></i> <i class="fas fa-check-circle text-violet-400 mt-1 mr-4 text-xl hidden peer-checked:block"></i> <div> <h3 id="onboarding-techlist-item7-title" class="font-semibold">Rapports et feedback</h3> <p id="onboarding-techlist-item7-desc" class="text-gray-400 text-sm">Utilisez un logiciel de reporting pour surveiller les problèmes potentiels dans la plateforme tout en permettant aux clients de donner leur feedback directement.</p> </div> </label> </div> </section>
+                </main>
+            </div>
+        `;
+        
+        function openOnboardingModal() {
+            if (!onboardingModal || !onboardingModalContent) return;
+            onboardingModalContent.innerHTML = onboardingTemplateHTML; // Inject content
+            onboardingModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Re-initialize scrollspy for the modal's navigation
+            const modalSections = onboardingModalContent.querySelectorAll('main section');
+            const modalNavLinks = onboardingModalContent.querySelectorAll('aside a');
+            const modalActiveClass = 'nav-link-active';
+
+            const modalObserverOptions = {
+                root: onboardingModalContent, // Observe inside the modal scroll area
+                rootMargin: '0px 0px -60% 0px',
+                threshold: 0
+            };
+            
+            const modalObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         modalNavLinks.forEach(link => {
+                             link.classList.remove(modalActiveClass);
+                             if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                 link.classList.add(modalActiveClass);
+                             }
+                         });
+                     }
+                 });
+            }, modalObserverOptions);
+
+            modalSections.forEach(section => modalObserver.observe(section));
+
+            // Smooth scroll for modal links
+            modalNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = onboardingModalContent.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        function closeOnboardingModal() {
+            if (!onboardingModal) return;
+            onboardingModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        if (closeOnboardingModalButton) {
+            closeOnboardingModalButton.addEventListener('click', closeOnboardingModal);
+        }
+        if (onboardingModal) {
+            onboardingModal.addEventListener('click', (e) => {
+                if (e.target === onboardingModal) closeOnboardingModal();
+            });
+        }
+
+        // --- NOUVELLE FONCTION DE GESTION DES CARROUSELS ---
+        function initializeCarousel(options) {
+            const { containerId, prevBtnId, nextBtnId, dotsId, data, renderItemFn, openModalFn } = options;
+            const container = document.getElementById(containerId);
+            const prevBtn = document.getElementById(prevBtnId);
+            const nextBtn = document.getElementById(nextBtnId);
+            const dotsContainer = document.getElementById(dotsId);
+
+            if (!container || !prevBtn || !nextBtn || !dotsContainer) return;
+
+            const lang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+            
+            // 1. Remplir le carrousel et les points
+            container.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            data.forEach((item, index) => {
+                // Créer l'élément du carrousel
+                const carouselItem = renderItemFn(item, lang, openModalFn);
+                carouselItem.dataset.index = index;
+                container.appendChild(carouselItem);
+
+                // Créer le point de navigation
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot';
+                dot.dataset.index = index;
+                dot.setAttribute('aria-label', `Aller à l'élément ${index + 1}`);
+                dot.addEventListener('click', () => {
+                    const targetItem = container.querySelector(`[data-index='${index}']`);
+                    if (targetItem) {
+                        // Utilisation de scrollIntoView pour une meilleure compatibilité
+                        targetItem.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+            const items = container.querySelectorAll('[data-index]');
+
+            // 2. Logique de navigation améliorée
+            const findCenterItemIndex = () => {
+                let centerIndex = 0;
+                let minDistance = Infinity;
+                const containerCenter = container.getBoundingClientRect().left + container.offsetWidth / 2;
+
+                items.forEach((item, index) => {
+                    const itemRect = item.getBoundingClientRect();
+                    const itemCenter = itemRect.left + itemRect.width / 2;
+                    const distance = Math.abs(containerCenter - itemCenter);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        centerIndex = index;
+                    }
+                });
+                return centerIndex;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                const currentIndex = findCenterItemIndex();
+                const newIndex = Math.max(0, currentIndex - 1);
+                if (currentIndex !== newIndex) {
+                    items[newIndex]?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const currentIndex = findCenterItemIndex();
+                const newIndex = Math.min(items.length - 1, currentIndex + 1);
+                 if (currentIndex !== newIndex) {
+                    items[newIndex]?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            });
+
+            // 3. Mettre à jour les points et les flèches avec IntersectionObserver
+            const observer = new IntersectionObserver((entries) => {
+                let activeEntry = entries.reduce((prev, current) => 
+                    (prev.intersectionRatio > current.intersectionRatio) ? prev : current
+                );
+                
+                if (activeEntry.isIntersecting) {
+                    const activeIndex = parseInt(activeEntry.target.dataset.index);
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
+                }
+
+            }, { root: container, threshold: 0.5 });
+            
+            items.forEach(item => observer.observe(item));
+
+            // Gérer la visibilité des flèches au chargement et au défilement manuel
+            const updateArrowVisibility = () => {
+                 const isAtStart = container.scrollLeft < 10;
+                 const isAtEnd = Math.abs(container.scrollWidth - container.clientWidth - container.scrollLeft) < 10;
+                 prevBtn.style.display = isAtStart ? 'none' : 'block';
+                 nextBtn.style.display = isAtEnd ? 'none' : 'block';
+                 
+                 // Masquer les contrôles s'il n'y a pas assez d'éléments pour défiler
+                 if (container.scrollWidth <= container.clientWidth) {
+                   prevBtn.style.display = 'none';
+                   nextBtn.style.display = 'none';
+                   dotsContainer.style.display = 'none';
+                 } else {
+                   dotsContainer.style.display = 'flex';
+                 }
+            }
+            container.addEventListener('scroll', updateArrowVisibility);
+            // Un petit délai pour s'assurer que le DOM est bien rendu avant le premier check
+            setTimeout(updateArrowVisibility, 100);
+        }
+        
+        // --- Fonctions de rendu pour chaque carrousel ---
+        function renderBookItem(book, lang, openModalFn) {
+            const bookElement = document.createElement('button');
+            bookElement.className = 'flex-shrink-0 w-48 snap-center group focus:outline-none';
+            bookElement.innerHTML = `<img src="${book.imgSrc}" alt="${book.title[lang]}" class="w-full h-auto rounded-lg shadow-lg group-hover:scale-105 group-hover:shadow-violet-500/30 transition-transform duration-300">`;
+            bookElement.addEventListener('click', () => openModalFn(book.id));
+            return bookElement;
+        }
+
+        function renderPortfolioItem(item, lang, openModalFn) {
+            const portfolioElement = document.createElement(item.type === 'link' ? 'a' : 'button');
+            if (item.type === 'link') {
+                portfolioElement.href = item.url;
+                portfolioElement.target = '_blank';
+                portfolioElement.rel = 'noopener noreferrer';
+            } else {
+                 if (item.modalId === 'onboarding-modal') {
+                    portfolioElement.addEventListener('click', () => openOnboardingModal());
+                } else {
+                    portfolioElement.addEventListener('click', () => openModalById(item.modalId));
+                }
+            }
+            const imgSrc = `${item.imgBase}?text=${item.text[lang]}`;
+
+            portfolioElement.className = 'flex-shrink-0 w-72 snap-center group focus:outline-none text-center';
+            portfolioElement.innerHTML = `
+                <div class="overflow-hidden rounded-lg shadow-lg group-hover:shadow-pink-500/30 transition-shadow duration-300">
+                    <img src="${imgSrc}" alt="${item.title[lang]}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <p class="mt-4 text-lg font-semibold text-gray-300 group-hover:text-violet-400 transition-colors">${item.title[lang]}</p>
+            `;
+            return portfolioElement;
+        }
+        
         // --- SYSTÈME DE TRADUCTION ---
         const translations = {
             en: {
@@ -1287,11 +1904,11 @@
                 'exp4-title': "HR Assistant",
                 'exp5-title': "Remote Banking Advisor",
                 'form1-title': "Customer Success Manager Bootcamp",
-                'form1-li1': "<strong>Onboarding, adoption, retention, and expansion strategies</strong>",
-                'form1-li2': "Tracking and analysis of <strong>KPIs</strong>: NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
-                'form1-li3': "Identification and activation of <strong>growth levers</strong>: upsell, cross-sell, renewal",
-                'form1-li4': "<strong>Operational tools</strong>: personas, Customer Journey Maps, Health Scores, and playbooks",
-                'form1-li5': "<strong>Automation workflows</strong> to improve efficiency and customer experience",
+                'form1-li1': "Onboarding, adoption, retention, and expansion strategies",
+                'form1-li2': "Tracking and analysis of KPIs: NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
+                'form1-li3': "Identification and activation of growth levers: upsell, cross-sell, renewal, advocacy",
+                'form1-li4': "Operational tools: personas, Customer Journey Maps, Health Scores, and playbooks",
+                'form1-li5': "Automation workflows to improve efficiency and customer experience",
                 'form-hubspot-sales-title': "HubSpot Sales Software",
                 'form-hubspot-sales-li1': "Customer Relationship Management (CRM)",
                 'form-hubspot-sales-li2': "Pipelines",
@@ -1309,10 +1926,10 @@
                 'form2-li3': "Customer-centric design",
                 'form2-li5': "Customer experience",
                 'form3-title': "Certified Customer Success Manager Level 1",
-                'form3-li1': "Structuring the <strong>CSM</strong> role in the organization.",
-                'form3-li2': "Implementing an effective client <strong>onboarding</strong>.",
-                'form3-li3': "<strong>Churn</strong> prevention & risk management.",
-                'form3-li4': "Creating a customer <strong>success plan</strong> and monitoring <strong>adoption</strong>.",
+                'form3-li1': "Structuring the CSM role in the organization.",
+                'form3-li2': "Implementing an effective client onboarding.",
+                'form3-li3': "Churn prevention & risk management.",
+                'form3-li4': "Creating a customer success plan and monitoring adoption.",
                 'form-intercom-title': "Intercom Fundamentals for Support Agents",
                 'form-intercom-li1': "Customer support",
                 'form-intercom-li2': "Multichannel customer communication",
@@ -1334,6 +1951,8 @@
                 'competences-title-1': "Skills", 'competences-title-2': "& Tools",
                 'competences-langues-title': "Languages", 'competences-langue-fr': "French: Native", 'competences-langue-en': "English: Professional (B2)",
                 'competences-outils-title': "My CSM Toolkit",
+                'portfolio-title': "My", 'portfolio-subtitle': "Portfolio",
+                'portfolio-description': "Examples of templates",
                 'plus-sur-moi-title-1': "More", 'plus-sur-moi-title-2': "about", 'plus-sur-moi-title-3': "me",
                 'plus-sur-moi-accroche': "Because behind a resume, there is a personality.",
                 'plus-sur-moi-btn': "More details",
@@ -1366,13 +1985,124 @@
                 'svg-cycle-title1': 'Care & CS', 'svg-cycle-title2': 'Cycle', 'svg-cycle-cta': '(Click to view)',
                 'svg-text-1': 'Listen', 'svg-text-2': 'Plan', 'svg-text-3': 'Support', 'svg-text-4': 'Measure', 'svg-text-5': 'Improve', 'svg-text-6': 'Evolve',
                 'lectures-title': "Podcasts", 'lectures-subtitle': "of the moment",
+                'lectures-carrousel-title': "Inspiring", 'lectures-carrousel-subtitle': "Reads",
+                'lecture-2': 'Le Client by Marine Deck',
+                'lecture-3': 'Galères de CS! by Allison d\'abcsm.fr',
                 'cycle-modal-title': 'Care & CS Cycle: A Framework of Complementarity',
                 'cycle-step1-title': '1. Listen & Understand', 'cycle-step1-desc': 'Gather the voice of the customer (tickets, interviews, NPS, CSAT, CES). Identify expectations, irritants, and goals to capture the real pain points.',
                 'cycle-step2-title': '2. Plan & Align', 'cycle-step2-desc': 'Define a tailored strategy (onboarding, adoption, reactive/proactive support). Align with product, sales, and marketing to ensure a coherent approach.',
                 'cycle-step3-title': '3. Support & Assist', 'cycle-step3-desc': 'Provide reactive and high-quality support while offering proactive guidance (best practices, regular reviews, advice). Foster adoption and satisfaction.',
                 'cycle-step4-title': '4. Measure & Monitor', 'cycle-step4-desc': 'Track key KPIs: satisfaction (NPS, CSAT, CES), product usage, churn, expansion. Identify trends and weak signals to drive performance.',
-                'cycle-step5-title': '5. Improve & Optimize', 'cycle-step5-desc': 'Adjust processes based on feedback. Enhance documentation, onboarding, and self-service. Share customer feedback to improve the product and experience.',
-                'cycle-step6-title': '6. Repeat & Evolve', 'cycle-step6-desc': 'Capitalize on acquired experience, industrialize best practices (guides, automations, playbooks), and strive for continuous improvement.'
+                'cycle-step5-desc': 'Adjust processes based on feedback. Enhance documentation, onboarding, and self-service. Share customer feedback to improve the product and experience.',
+                'cycle-step6-title': '6. Repeat & Evolve', 'cycle-step6-desc': 'Capitalize on acquired experience, industrialize best practices (guides, automations, playbooks), and strive for continuous improvement.',
+                'welcome-email-modal-title': 'Welcome E-mail Template (Mid-touch)',
+                'welcome-ab-test-title': 'Subject Options (A/B Test):',
+                'welcome-ab-test-1': '<span>Welcome to [Service Name], [First Name] – Your account is ready!</span>',
+                'welcome-ab-test-2': '<span>Getting started with [Service Name]: your first 3 steps</span>',
+                'welcome-ab-test-3': '<span>[First Name], let\'s connect and launch your project</span>',
+                'welcome-greeting': 'Dear [First Name],',
+                'welcome-intro': 'Welcome to [Service Name]! 🎉',
+                'welcome-goal': 'You\'ve taken the first step to <strong>[service objective, e.g., create an interactive CV that stands out]</strong>.',
+                'welcome-csm-intro': 'I am [Your Name], your Customer Success Manager. My role is to ensure you have an exceptional experience and to help you achieve your goals as quickly as possible.',
+                'welcome-options-intro': '👉 To get started, you have two options:',
+                'welcome-option1-title': '🔹 1. Get Started on Your Own',
+                'welcome-option1-desc': 'Log in and follow these 3 simple steps:',
+                'welcome-option1-step1': '<strong>Step 1:</strong> Choose a template',
+                'welcome-option1-step2': '<strong>Step 2:</strong> Fill in your information',
+                'welcome-option1-step3': '<strong>Step 3:</strong> Share your unique link',
+                'welcome-option1-resources': 'Useful Resources:',
+                'welcome-option1-link1': 'Quick start guide →',
+                'welcome-option1-link2': 'Online documentation →',
+                'welcome-option1-link3': 'Help center →',
+                'welcome-option2-title': '🔹 2. Prefer Guided Assistance',
+                'welcome-option2-desc1': 'I am [Full Name], your dedicated Customer Success Manager.',
+                'welcome-option2-desc2': 'I suggest a short call (15-20 min) to:',
+                'welcome-option2-li1': 'Understand your priority goals',
+                'welcome-option2-li2': 'Guide you through key features',
+                'welcome-option2-li3': 'Answer your questions live',
+                'welcome-option2-btn': 'Book your slot',
+                'welcome-closing': 'Whatever you choose, we can\'t wait to see you succeed with [Service Name]! 🚀',
+                'welcome-signoff1': 'Talk to you soon,',
+                'welcome-signoff2': '[Full Name]',
+                'timeline-modal-title': 'Onboarding Timeline',
+                'timeline-week1-title': 'Week 1: Customer Welcome',
+                'timeline-week1-li1': 'Send welcome email',
+                'timeline-week1-li2': 'Schedule introductory meeting',
+                'timeline-week1-li3': 'Collect customer information',
+                'timeline-week2-title': 'Week 2: Setup Process',
+                'timeline-week2-li1': 'Conduct introductory meeting',
+                'timeline-week2-li2': 'Assist with the setup process',
+                'timeline-week2-li3': 'Share onboarding resources',
+                'timeline-week3-title': 'Week 3: Training and Examples',
+                'timeline-week3-li1': 'Host a live training session',
+                'timeline-week3-li2': 'Share case studies',
+                'timeline-week3-li3': 'Allow for 1:1 sessions',
+                'timeline-week4-title': 'Week 4: Integration and Support',
+                'timeline-week4-li1': 'Provide integration assistance',
+                'timeline-week4-li2': 'Introduce customization options',
+                'timeline-week4-li3': 'Schedule time for technical support',
+                'timeline-week5-title': 'Week 5 – Questions and Feedback',
+                'timeline-week5-li1': 'Follow up to answer pending questions',
+                'timeline-week5-li2': 'Highlight access to support channels',
+                'timeline-week5-li3': 'Collect feedback on the onboarding process',
+                'steps-modal-title': 'Client Onboarding Steps (Mid-Touch/High Touch)',
+                'steps-step1-title': 'FIRST CONTACT',
+                'steps-step1-desc': 'Welcome email & kick-off scheduling.',
+                'steps-step2-title': 'KICK-OFF MEETING',
+                'steps-step2-desc': 'Align expectations & define objectives.',
+                'steps-step3-title': 'INITIAL TRAINING',
+                'steps-step3-desc': 'Present key features & best practices.',
+                'steps-step4-title': 'PROACTIVE SUPPORT',
+                'steps-step4-desc': 'Regular follow-up & resource sharing.',
+                'steps-step5-title': 'FIRST REVIEW',
+                'steps-step5-desc': 'Measure early wins & identify roadblocks.',
+                'steps-step6-title': 'TOWARDS AUTONOMY',
+                'steps-step6-desc': 'Encourage exploration & celebrate successes.',
+                'low-touch-modal-title': 'Essential Client Onboarding Steps (Low-Touch)',
+                'low-touch-modal-subtitle': 'Help your clients get value from your product from day one with a simple and engaging journey.',
+                'low-touch-step1-title': 'Easy Sign-up',
+                'low-touch-step1-desc': 'The journey begins with sign-up. Make this step quick and intuitive so your clients can effortlessly access your solution.',
+                'low-touch-step2-title': 'Personalized Welcome Email',
+                'low-touch-step2-desc': 'Welcome your clients and guide them to the next step. Show them you are there to support them from the start.',
+                'low-touch-step3-title': 'Successful First Login',
+                'low-touch-step3-desc': 'First impressions matter: offer a guided tour or an interactive demo to reassure your clients and make them want to go further.',
+                'low-touch-step4-title': 'Smooth Learning Curve',
+                'low-touch-step4-desc': 'Provide simple tutorials and interactive resources that allow your clients to quickly become autonomous and confident in using your product.',
+                'low-touch-step5-title': 'Continuous Engagement and Support',
+                'low-touch-step5-desc': 'Help your clients get the most out of your product over time. Send follow-up emails, share practical tips and useful resources, and remain available via your customer support to assist them at every stage.',
+                'onboarding-nav-title': 'Navigation',
+                'onboarding-nav-link1': 'Training Checklist',
+                'onboarding-nav-link2': 'Tech Stack Checklist',
+                'onboarding-checklist-formation-title': 'Training Resources Checklist',
+                'onboarding-checklist-item1-title': 'Customer welcome email',
+                'onboarding-checklist-item1-desc': 'Helps establish a relationship and kicks off the onboarding process.',
+                'onboarding-checklist-item2-title': 'Internal onboarding guide',
+                'onboarding-checklist-item2-desc': 'Synchronizes the team with detailed steps throughout the entire process.',
+                'onboarding-checklist-item3-title': 'Webinars and training sessions',
+                'onboarding-checklist-item3-desc': 'Allow customers to learn about the product by interacting with your team.',
+                'onboarding-checklist-item4-title': 'Knowledge base with FAQ',
+                'onboarding-checklist-item4-desc': 'Provides a reference point for quick answers to common questions.',
+                'onboarding-checklist-item5-title': 'Video tutorials or walkthroughs',
+                'onboarding-checklist-item5-desc': 'An option for customers who prefer self-paced learning.',
+                'onboarding-checklist-item6-title': 'Customer progress trackers',
+                'onboarding-checklist-item6-desc': 'Allows the team to monitor onboarding progress.',
+                'onboarding-checklist-item7-title': 'Feedback mechanisms',
+                'onboarding-checklist-item7-desc': 'A system to accept and process customer feedback on the process.',
+                'onboarding-checklist-tech-title': 'Tech Stack Checklist',
+                'onboarding-techlist-item1-title': 'Customer access',
+                'onboarding-techlist-item1-desc': 'Ensure your customer has the correct access to purchased software or services and that login credentials are valid.',
+                'onboarding-techlist-item2-title': 'Identify integration needs',
+                'onboarding-techlist-item2-desc': 'If the customer needs integration software, verify that the tools are available and provide the necessary instructions.',
+                'onboarding-techlist-item3-title': 'Verify system prerequisites',
+                'onboarding-techlist-item3-desc': "Before using your software or services, verify that your customer's hardware meets all system requirements.",
+                'onboarding-techlist-item4-title': 'Access to training resources',
+                'onboarding-techlist-item4-desc': 'Ensure your customer can access all available training resources or documentation for onboarding.',
+                'onboarding-techlist-item5-title': 'Support channels',
+                'onboarding-techlist-item5-desc': 'Support channels should be available for your customers in case of problems or questions during start-up.',
+                'onboarding-techlist-item6-title': 'Security measures',
+                'onboarding-techlist-item6-desc': 'Protect your customers and your team by ensuring both parties apply good security practices. (Consider providing guidelines.)',
+                'onboarding-techlist-item7-title': 'Reports and feedback',
+                'onboarding-techlist-item7-desc': 'Use reporting software to monitor potential issues on the platform while allowing customers to give their feedback directly.'
             },
             fr: {
                 'nav-qui': 'Qui suis-je ?', 'nav-apropos': 'À Propos', 'nav-parcours': 'Parcours', 'nav-projet': 'Projet', 'nav-competences': 'Compétences', 'nav-personnalite': 'Personnalité', 'nav-contact': 'Contact',
@@ -1402,21 +2132,21 @@
                 'exp4-title': "Assistante RH",
                 'exp5-title': "Conseillère bancaire à distance",
                 'form1-title': "Customer Success Manager Bootcamp",
-                'form1-li1': "<strong>Stratégies d’onboarding, d’adoption, de rétention et d’expansion</strong>",
-                'form1-li2': "Suivi et analyse des <strong>KPIs</strong> : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
-                'form1-li3': "Identification et activation des <strong>leviers de croissance</strong> : upsell, cross-sell, renouvellement",
-                'form1-li4': "<strong>Outils opérationnels</strong> : personas, Customer Journey Maps, Health Scores et playbooks",
-                'form1-li5': "<strong>Workflows d’automatisation</strong> pour améliorer l’efficacité et l’expérience client",
+                'form1-li1': "Stratégies d’onboarding, d’adoption, de rétention et d’expansion",
+                'form1-li2': "Suivi et analyse des KPIs : NPS, CSAT, TTV, DAU/WAU, Churn, MRR/ARR, NRR",
+                'form1-li3': "Identification et activation des leviers de croissance : upsell, cross-sell, renouvellement, parrainage",
+                'form1-li4': "Outils opérationnels : personas, Customer Journey Maps, Health Scores et playbooks",
+                'form1-li5': "Workflows d’automatisation pour améliorer l’efficacité et l’expérience client",
                 'form-hubspot-sales-title': "HubSpot Sales Software",
                 'form-hubspot-sales-li1': "Gestion de la relation client (CRM)",
                 'form-hubspot-sales-li2': "Pipelines",
                 'form-hubspot-sales-li3': "Reporting",
-                'form-hubspot-sales-li4': "KPI",
+                'form-hubspot-sales-li4': "KPIs",
                 'form-hubspot-service-title': "HubSpot Service Hub",
                 'form-hubspot-service-li1': "Gestion de la relation client (CRM)",
                 'form-hubspot-service-li2': "Enquêtes de satisfaction client",
                 'form-hubspot-service-li3': "CSAT, NPS",
-                'form-hubspot-service-li4': "Accords de niveau de services (SLA)",
+                'form-hubspot-service-li4': "Accords de niveaux de services (SLA)",
                 'form-hubspot-service-li5': "Base de connaissance",
                 'form2-title': "HubSpot Inbound",
                 'form2-li1': "Inbound marketing",
@@ -1424,10 +2154,10 @@
                 'form2-li3': "Conception centrée sur le client",
                 'form2-li5': "Expérience client",
                 'form3-title': "Certified Customer Success Manager Level 1",
-                'form3-li1': "Structuration du rôle de <strong>CSM</strong> dans l'organisation.",
-                'form3-li2': "Mise en place d'un <strong>onboarding</strong> client efficace.",
-                'form3-li3': "Prévention du <strong>churn</strong> & gestion des risques.",
-                'form3-li4': "Création de <strong>plan de succès</strong> client et suivi de l'<strong>adoption</strong>.",
+                'form3-li1': "Structuration du rôle de CSM dans l'organisation.",
+                'form3-li2': "Mise en place d'un onboarding client efficace.",
+                'form3-li3': "Prévention du churn & gestion des risques.",
+                'form3-li4': "Création de plan de succès client et suivi de l'adoption.",
                 'form-intercom-title': "Intercom Fundamentals for Supports Agents",
                 'form-intercom-li1': "Support client",
                 'form-intercom-li2': "Communication Client multicanal",
@@ -1449,6 +2179,8 @@
                 'competences-title-1': "Compétences", 'competences-title-2': "& Outils",
                 'competences-langues-title': "Langues", 'competences-langue-fr': "Français : Langue maternelle", 'competences-langue-en': "Anglais : Professionnel (B2)",
                 'competences-outils-title': "Ma boîte à outils de CSM",
+                'portfolio-title': "Mon", 'portfolio-subtitle': "Portfolio",
+                'portfolio-description': "Exemples de templates",
                 'plus-sur-moi-title-1': "En", 'plus-sur-moi-title-2': "savoir plus", 'plus-sur-moi-title-3': "sur moi",
                 'plus-sur-moi-accroche': "Parce que derrière un CV se cache une personnalité.",
                 'plus-sur-moi-btn': "Plus de détails",
@@ -1468,9 +2200,9 @@
                 'hobby-7-title': "🎵 Musique", 'hobby-7-text': 'J\'apprécie d\'écouter de la musique pour me détendre ou faire du sport. Mes goûts sont plutôt éclectiques, je peux passer des "4 Saisons" de Vivaldi à Shawn Mendez.',
                 'hobby-8-title': "🏃 Gestion de projet agile (SCRUM)", 'hobby-8-text': "Je suis convaincue que les méthodologies agiles ne s'appliquent pas uniquement au monde de l'entreprise : elles sont aussi de puissants outils d'organisation personnelle.",
                 'contact-title-1': "Envie d’", 'contact-title-2': "échanger",
-                'contact-subtitle': "N'hésitez pas à me contacter ou à réserver un créneau pour échanger.",
+                'contact-subtitle': "Contactez-moi ou réservez un créneau pour échanger.",
                 'contact-download-cv': "Télécharger mon CV", 'contact-booking': "Réserver un échange",
-                'footer-text': "© 2025 Corinne MARSIAC CSM. Tous droits réservés.",
+                'footer-text': "© 2025 Corinne MARSIAC CSM. Tous droits réservés. Made with 🩷",
                 'modal-reussite-title': "De détracteur (NPS 0) à promoteur (NPS 9)",
                 'modal-nps-label': "NPS Final",
                 'modal-reussite-contexte-title': "Le Contexte", 'modal-reussite-contexte-text': "Nouvellement arrivée dans un service utilisant un logiciel et des process différents de mon précédent poste, j’ai dû m’adapter rapidement. Ma manager m’a confié un portefeuille sensible, dont une cliente gérant 4 entités françaises avec un backlog conséquent. Parmi les points critiques figuraient quatre crédits URSSAF en attente, pour un montant total proche de 100 k€. Par ailleurs, cette cliente, habituée à gérer plusieurs pays, maîtrisait mal les spécificités liées aux processus français.",
@@ -1481,13 +2213,124 @@
                 'svg-cycle-title1': 'Cycle Care', 'svg-cycle-title2': '& CS', 'svg-cycle-cta': '(Cliquer pour voir)',
                 'svg-text-1': 'Écouter', 'svg-text-2': 'Planifier', 'svg-text-3': 'Accompagner', 'svg-text-4': 'Mesurer', 'svg-text-5': 'Améliorer', 'svg-text-6': 'Évoluer',
                 'lectures-title': "Podcasts", 'lectures-subtitle': "du moment",
+                'lectures-carrousel-title': "Lectures", 'lectures-carrousel-subtitle': "Inspirantes",
+                'lecture-2': 'Le Client par Marine Deck',
+                'lecture-3': 'Galères de CS! d\'Allison d\'abcsm.fr',
                 'cycle-modal-title': 'Cycle Care & CS : un framework de complémentarité',
                 'cycle-step1-title': '1. Écouter & Comprendre', 'cycle-step1-desc': 'Recueillir la voix du client (tickets, entretiens, NPS, CSAT, CES). Identifier attentes, irritants et objectifs pour capter les vrais points de douleur.',
                 'cycle-step2-title': '2. Planifier & Aligner', 'cycle-step2-desc': 'Définir une stratégie adaptée (onboarding, adoption, support réactif/proactif). S’aligner avec produit, sales et marketing pour garantir une approche cohérente.',
                 'cycle-step3-title': '3. Accompagner & Soutenir', 'cycle-step3-desc': 'Fournir un support réactif et qualitatif tout en proposant un accompagnement proactif (best practices, bilans réguliers, conseils). Favoriser l’adoption et la satisfaction.',
                 'cycle-step4-title': '4. Mesurer & Contrôler', 'cycle-step4-desc': 'Suivre les KPIs clés : satisfaction (NPS, CSAT, CES), usage produit, churn, expansion. Identifier tendances et signaux faibles pour piloter la performance.',
-                'cycle-step5-title': '5. Améliorer & Optimiser', 'cycle-step5-desc': 'Ajuster les processus selon les feedbacks. Enrichir documentation, intégration et self-service. Partager les retours clients pour améliorer produit et expérience.',
-                'cycle-step6-title': '6. Répéter & Faire Évoluer', 'cycle-step6-desc': 'Capitaliser sur l’expérience acquise, industrialiser les bonnes pratiques (guides, automatisations, playbooks) et tendre vers une amélioration continue.'
+                'cycle-step5-desc': 'Ajuster les processus selon les feedbacks. Enrichir documentation, intégration et self-service. Partager les retours clients pour améliorer produit et expérience.',
+                'cycle-step6-title': '6. Répéter & Faire Évoluer', 'cycle-step6-desc': 'Capitaliser sur l’expérience acquise, industrialiser les bonnes pratiques (guides, automatisations, playbooks) et tendre vers une amélioration continue.',
+                'welcome-email-modal-title': "Template d'E-mail de Bienvenue (Mid-touch)",
+                'welcome-ab-test-title': "Options pour l'objet (A/B Test) :",
+                'welcome-ab-test-1': '<span>Bienvenue chez [Nom du service], [Prénom] – Votre compte est prêt !</span>',
+                'welcome-ab-test-2': '<span>Bien démarrer avec [Nom du service] : vos 3 premières étapes</span>',
+                'welcome-ab-test-3': "<span>[Prénom], faisons connaissance et lançons votre projet</span>",
+                'welcome-greeting': 'Cher(e) [Prénom],',
+                'welcome-intro': 'Bienvenue chez [Nom du service] ! 🎉',
+                'welcome-goal': "Vous avez franchi le premier pas pour <strong>[objectif du service, ex. créer un CV interactif qui se démarque]</strong>.",
+                'welcome-csm-intro': "Je suis [Votre nom], votre Customer Success Manager. Mon rôle est de vous garantir une expérience exceptionnelle et de vous aider à atteindre vos objectifs le plus rapidement possible.",
+                'welcome-options-intro': '👉 Pour bien commencer, vous avez deux options :',
+                'welcome-option1-title': '🔹 1. Avancer en autonomie',
+                'welcome-option1-desc': 'Connectez-vous et suivez ces 3 étapes simples :',
+                'welcome-option1-step1': '<strong>Étape 1 :</strong> Choisissez un template',
+                'welcome-option1-step2': '<strong>Étape 2 :</strong> Remplissez vos informations',
+                'welcome-option1-step3': '<strong>Étape 3 :</strong> Partagez votre lien unique',
+                'welcome-option1-resources': 'Ressources utiles :',
+                'welcome-option1-link1': 'Guide de démarrage rapide →',
+                'welcome-option1-link2': 'Documentation en ligne →',
+                'welcome-option1-link3': "Centre d'aide →",
+                'welcome-option2-title': '🔹 2. Préférer un accompagnement',
+                'welcome-option2-desc1': 'Je suis [Prénom Nom], votre Customer Success Manager dédié.',
+                'welcome-option2-desc2': 'Je vous propose un court appel (15-20 min) pour :',
+                'welcome-option2-li1': 'Comprendre vos objectifs prioritaires',
+                'welcome-option2-li2': 'Vous guider sur les fonctionnalités clés',
+                'welcome-option2-li3': 'Répondre à vos questions en direct',
+                'welcome-option2-btn': 'Réservez votre créneau',
+                'welcome-closing': "Quel que soit votre choix, nous avons hâte de vous voir réussir avec [Nom du service] ! 🚀",
+                'welcome-signoff1': 'À très bientôt,',
+                'welcome-signoff2': '[Prénom Nom]',
+                'timeline-modal-title': "Timeline d'Onboarding",
+                'timeline-week1-title': 'Semaine 1 : Accueil du client',
+                'timeline-week1-li1': "Envoyer l'e-mail de bienvenue",
+                'timeline-week1-li2': "Planifier une réunion d'introduction",
+                'timeline-week1-li3': 'Collecter les informations du client',
+                'timeline-week2-title': 'Semaine 2 : Processus de setup',
+                'timeline-week2-li1': "Mener la réunion d'introduction",
+                'timeline-week2-li2': 'Aider avec le processus de setup',
+                'timeline-week2-li3': "Partager les ressources d'onboarding",
+                'timeline-week3-title': 'Semaine 3 : Formation et exemples',
+                'timeline-week3-li1': 'Organiser une session de formation en direct',
+                'timeline-week3-li2': 'Partager des études de cas',
+                'timeline-week3-li3': 'Permettre des sessions 1:1',
+                'timeline-week4-title': 'Semaine 4 : Intégration et support',
+                'timeline-week4-li1': "Fournir une assistance à l'intégration",
+                'timeline-week4-li2': 'Présenter les options de personnalisation',
+                'timeline-week4-li3': 'Prévoir du temps pour le support technique',
+                'timeline-week5-title': 'Semaine 5 – Questions et feedback',
+                'timeline-week5-li1': 'Faire un suivi pour répondre aux questions en suspens',
+                'timeline-week5-li2': "Mettre en avant l'accès aux canaux de support",
+                'timeline-week5-li3': "Collecter les retours sur le processus d'onboarding",
+                'steps-modal-title': "Les étapes d'un onboarding Client (Mid-Touch/High Touch)",
+                'steps-step1-title': 'PREMIÈRE PRISE DE CONTACT',
+                'steps-step1-desc': 'E-mail de bienvenue & planification du kick-off.',
+                'steps-step2-title': 'RÉUNION DE KICK-OFF',
+                'steps-step2-desc': 'Aligner les attentes & définir les objectifs.',
+                'steps-step3-title': 'FORMATION INITIALE',
+                'steps-step3-desc': 'Présenter les fonctionnalités clés & les bonnes pratiques.',
+                'steps-step4-title': 'ACCOMPAGNEMENT PROACTIF',
+                'steps-step4-desc': 'Suivi régulier & partage de ressources.',
+                'steps-step5-title': 'PREMIER BILAN',
+                'steps-step5-desc': 'Mesurer les premiers succès & identifier les blocages.',
+                'steps-step6-title': "VERS L'AUTONOMIE",
+                'steps-step6-desc': "Encourager l'exploration & valoriser les réussites.",
+                'low-touch-modal-title': "Les étapes essentielles de l'onboarding client (Low-Touch)",
+                'low-touch-modal-subtitle': "Aidez vos clients à tirer de la valeur de votre produit dès le premier jour grâce à un parcours simple et engageant.",
+                'low-touch-step1-title': 'Inscription facile',
+                'low-touch-step1-desc': "Le voyage commence dès l'inscription. Rendez cette étape rapide et intuitive pour que vos clients accèdent sans effort à votre solution.",
+                'low-touch-step2-title': 'Un email de bienvenue personnalisé',
+                'low-touch-step2-desc': "Souhaitez la bienvenue à vos clients et guidez-les vers la prochaine étape. Montrez-leur que vous êtes là pour les accompagner dès le départ.",
+                'low-touch-step3-title': 'Première connexion réussie',
+                'low-touch-step3-desc': "La première impression compte : proposez une visite guidée ou une démonstration interactive pour rassurer vos clients et leur donner envie d'aller plus loin.",
+                'low-touch-step4-title': 'Un apprentissage fluide',
+                'low-touch-step4-desc': "Offrez des tutoriels simples et des ressources interactives qui permettent à vos clients de devenir rapidement autonomes et confiants dans l'usage de votre produit.",
+                'low-touch-step5-title': 'Engagement et support continus',
+                'low-touch-step5-desc': "Aidez vos clients à tirer le meilleur parti de votre produit sur la durée. Envoyez des emails de suivi, partagez des conseils pratiques et des ressources utiles, et restez disponibles via votre support client pour les accompagner à chaque étape.",
+                'onboarding-nav-title': 'Navigation',
+                'onboarding-nav-link1': 'Check-list Formation',
+                'onboarding-nav-link2': 'Check-list Tech Stack',
+                'onboarding-checklist-formation-title': 'Check-list des ressources de formation',
+                'onboarding-checklist-item1-title': 'E-mail de bienvenue client',
+                'onboarding-checklist-item1-desc': "Aide à établir une relation et lance le processus d'onboarding.",
+                'onboarding-checklist-item2-title': "Guide d'onboarding interne",
+                'onboarding-checklist-item2-desc': "Synchronise l'équipe avec des étapes détaillées sur l'ensemble du processus.",
+                'onboarding-checklist-item3-title': 'Webinaires et sessions de formation',
+                'onboarding-checklist-item3-desc': "Permettent aux clients de découvrir le produit en interagissant avec votre équipe.",
+                'onboarding-checklist-item4-title': 'Base de connaissances avec FAQ',
+                'onboarding-checklist-item4-desc': 'Fournit un point de référence pour des réponses rapides aux questions courantes.',
+                'onboarding-checklist-item5-title': 'Tutoriels vidéo ou walkthroughs',
+                'onboarding-checklist-item5-desc': "Option pour les clients qui préfèrent un apprentissage à leur propre rythme.",
+                'onboarding-checklist-item6-title': 'Trackers de progression client',
+                'onboarding-checklist-item6-desc': "Permet à l'équipe de suivre l'avancement de l'onboarding.",
+                'onboarding-checklist-item7-title': 'Mécanismes de feedback',
+                'onboarding-checklist-item7-desc': 'Système pour accepter et traiter le retour des clients sur le processus.',
+                'onboarding-checklist-tech-title': 'Check-list de la Tech Stack',
+                'onboarding-techlist-item1-title': 'Accès client',
+                'onboarding-techlist-item1-desc': 'Assurez-vous que votre client dispose du bon accès aux logiciels ou services achetés et que les identifiants de connexion sont valides.',
+                'onboarding-techlist-item2-title': "Identifier les besoins d'intégration",
+                'onboarding-techlist-item2-desc': "Si le client a besoin d'un logiciel d'intégration, vérifiez que les outils sont disponibles et fournissez les instructions nécessaires.",
+                'onboarding-techlist-item3-title': 'Vérifier les prérequis système',
+                'onboarding-techlist-item3-desc': "Avant d'utiliser vos logiciels ou services, vérifiez que le matériel de votre client répond bien à toutes les exigences système.",
+                'onboarding-techlist-item4-title': 'Accès aux ressources de formation',
+                'onboarding-techlist-item4-desc': "Assurez-vous que votre client puisse accéder à toutes les ressources de formation ou à la documentation disponibles pour l'onboarding.",
+                'onboarding-techlist-item5-title': 'Canaux de support',
+                'onboarding-techlist-item5-desc': 'Des canaux de support doivent être disponibles pour vos clients en cas de problème ou de questions lors du démarrage.',
+                'onboarding-techlist-item6-title': 'Mesures de sécurité',
+                'onboarding-techlist-item6-desc': 'Protégez vos clients et votre équipe en veillant à ce que les deux parties appliquent les bonnes pratiques de sécurité. (Pensez à fournir des directives.)',
+                'onboarding-techlist-item7-title': 'Rapports et feedback',
+                'onboarding-techlist-item7-desc': 'Utilisez un logiciel de reporting pour surveiller les problèmes potentiels dans la plateforme tout en permettant aux clients de donner leur feedback directement.'
             }
         };
 
@@ -1502,6 +2345,9 @@
                     element.innerHTML = translations[newLang][id];
                 }
             }
+            
+            // Re-initialize carousels to update content and alt texts
+            initializeAllCarousels();
 
             const flagDesktop = document.getElementById('translate-flag-desktop');
             const flagMobile = document.getElementById('translate-flag-mobile');
@@ -1525,16 +2371,87 @@
             }
         }
         
-        // Initial call to set the text based on the default language
-        // Set default to French
-        if (document.documentElement.lang !== 'fr') {
-            toggleLanguage();
+        function initializeAllCarousels() {
+             initializeCarousel({
+                containerId: 'book-carousel-container',
+                prevBtnId: 'book-carousel-prev',
+                nextBtnId: 'book-carousel-next',
+                dotsId: 'book-dots',
+                data: bookData,
+                renderItemFn: renderBookItem,
+                openModalFn: openBookModal
+            });
+
+            initializeCarousel({
+                containerId: 'portfolio-carousel-container',
+                prevBtnId: 'portfolio-carousel-prev',
+                nextBtnId: 'portfolio-carousel-next',
+                dotsId: 'portfolio-dots',
+                data: portfolioData,
+                renderItemFn: renderPortfolioItem,
+                openModalFn: openOnboardingModal
+            });
         }
 
-
+        document.addEventListener('DOMContentLoaded', initializeAllCarousels);
         document.getElementById('translate-button-desktop').addEventListener('click', toggleLanguage);
         document.getElementById('translate-button-mobile').addEventListener('click', toggleLanguage);
+
+        const timelineModal = document.getElementById('timeline-modal');
+        const closeTimelineModalButton = document.getElementById('close-timeline-modal-button');
+        if (timelineModal && closeTimelineModalButton) {
+            const closeModal = () => {
+                timelineModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            closeTimelineModalButton.addEventListener('click', closeModal);
+            timelineModal.addEventListener('click', (e) => {
+                if (e.target === timelineModal) closeModal();
+            });
+        }
+
+        const onboardingStepsModal = document.getElementById('onboarding-steps-modal');
+        const closeOnboardingStepsModalButton = document.getElementById('close-onboarding-steps-modal-button');
+        if (onboardingStepsModal && closeOnboardingStepsModalButton) {
+            const closeModal = () => {
+                onboardingStepsModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            closeOnboardingStepsModalButton.addEventListener('click', closeModal);
+            onboardingStepsModal.addEventListener('click', (e) => {
+                if (e.target === onboardingStepsModal) closeModal();
+            });
+        }
+
+        const onboardingLowTouchModal = document.getElementById('onboarding-low-touch-modal');
+        const closeOnboardingLowTouchModalButton = document.getElementById('close-onboarding-low-touch-modal-button');
+        if (onboardingLowTouchModal && closeOnboardingLowTouchModalButton) {
+            const closeModal = () => {
+                onboardingLowTouchModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            closeOnboardingLowTouchModalButton.addEventListener('click', closeModal);
+            onboardingLowTouchModal.addEventListener('click', (e) => {
+                if (e.target === onboardingLowTouchModal) closeModal();
+            });
+        }
 
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
