@@ -13,7 +13,7 @@
 
     <!-- Open Graph (pour le partage sur les réseaux sociaux comme Facebook, LinkedIn) -->
     <meta property="og:title" content="Corinne Marsiac - Customer Success Manager" />
-    <meta property="og:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
+    <meta id="og-description" property="og:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://corinne-marsiac-csm.github.io/corinne-marsiac-customer-success-manager.github.io/" />
     <meta property="og:image" content="https://media.licdn.com/dms/image/v2/D4D03AQHYWq2DzXkTfA/profile-displayphoto-crop_800_800/B4DZiwiCFgHYAI-/0/1755308368610?e=1759363200&v=beta&t=IzdqhAFMAL8IXJ4xRq6FP0_LGczUPH9VLuJSyJY3QQU" />
@@ -21,7 +21,7 @@
     <!-- Twitter Card (pour le partage sur Twitter) -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Corinne Marsiac - Customer Success Manager" />
-    <meta name="twitter:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
+    <meta id="twitter-description" name="twitter:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
     <meta name="twitter:image" content="https://media.licdn.com/dms/image/v2/D4D03AQHYWq2DzXkTfA/profile-displayphoto-crop_800_800/B4DZiwiCFgHYAI-/0/1755308368610?e=1759363200&v=beta&t=IzdqhAFMAL8IXJ4xRq6FP0_LGczUPH9VLuJSyJY3QQU" />
 
 
@@ -1911,6 +1911,8 @@
         const translations = {
             en: {
                 'meta-description': "Discover the profile of Corinne Marsiac, a Customer Success Manager with over 10 years of experience in B2B SaaS. Expert in customer onboarding, retention, and growth.",
+                'og-description': "Customer relationship professional with over 10 years of experience in B2B SaaS, specializing in onboarding, retention, and growth.",
+                'twitter-description': "Customer relationship professional with over 10 years of experience in B2B SaaS, specializing in onboarding, retention, and growth.",
                 'nav-qui': 'Who am I?', 'nav-apropos': 'About', 'nav-parcours': 'Career', 'nav-projet': 'Project', 'nav-competences': 'Skills', 'nav-personnalite': 'Personality', 'nav-contact': 'Contact',
                 'nav-qui-mobile': 'Who am I?', 'nav-apropos-mobile': 'About', 'nav-parcours-mobile': 'Career', 'nav-projet-mobile': 'Project', 'nav-competences-mobile': 'Skills', 'nav-personnalite-mobile': 'Personality', 'nav-contact-mobile': 'Contact',
                 'accueil-headline': "I turn customer experience into a sustainable growth driver.",
@@ -2186,6 +2188,8 @@
             },
             fr: {
                 'meta-description': "Découvrez le profil de Corinne Marsiac, Customer Success Manager avec plus de 10 ans d'expérience en SaaS B2B. Experte en onboarding, rétention et croissance client.",
+                'og-description': "Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance.",
+                'twitter-description': "Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance.",
                 'nav-qui': 'Qui suis-je ?', 'nav-apropos': 'À Propos', 'nav-parcours': 'Parcours', 'nav-projet': 'Projet', 'nav-competences': 'Compétences', 'nav-personnalite': 'Personnalité', 'nav-contact': 'Contact',
                 'nav-qui-mobile': 'Qui suis-je ?', 'nav-apropos-mobile': 'À Propos', 'nav-parcours-mobile': 'Parcours', 'nav-projet-mobile': 'Projet', 'nav-competences-mobile': 'Compétences', 'nav-personnalite-mobile': 'Personnalité', 'nav-contact-mobile': 'Contact',
                 'accueil-headline': "Je transforme l'expérience client en levier de croissance durable.",
@@ -2466,15 +2470,23 @@
             const newLang = currentLang === 'fr' ? 'en' : 'fr';
             document.documentElement.lang = newLang;
 
-            // Mettre à jour la balise meta description
-            const metaDesc = document.getElementById('meta-description');
-            if (metaDesc) {
-                metaDesc.setAttribute('content', translations[newLang]['meta-description']);
+            // Mettre à jour les balises meta de description
+            const metaDescriptions = {
+                'meta-description': translations[newLang]['meta-description'],
+                'og-description': translations[newLang]['og-description'],
+                'twitter-description': translations[newLang]['twitter-description']
+            };
+
+            for (const id in metaDescriptions) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.setAttribute('content', metaDescriptions[id]);
+                }
             }
 
             for (const id in translations[newLang]) {
                 const element = document.getElementById(id);
-                if (element && id !== 'meta-description') { // Ne pas réécrire le contenu de la balise meta ici
+                if (element && !metaDescriptions.hasOwnProperty(id)) { // Ne pas réécrire les metas ici
                     element.innerHTML = translations[newLang][id];
                 }
             }
@@ -2572,6 +2584,7 @@
     </script>
 </body>
 </html>
+
 
 
 
