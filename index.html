@@ -718,7 +718,7 @@
                         </div>
                     </div>
 
-                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-3 text-pink-400">
+                    <h3 id="parcours-education-title" class="text-2xl font-semibold mb-4 flex items-center gap-3 text-pink-400">
                         <i class="fas fa-graduation-cap"></i> Formations
                     </h3>
                     <div class="space-y-8 border-l-2 border-gray-300 dark:border-gray-700 pl-8">
@@ -1682,6 +1682,19 @@
             onboardingModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
+            // Appliquer les traductions à la modale nouvellement injectée
+            const currentLang = document.documentElement.lang || 'fr';
+            const langTranslations = translations[currentLang];
+            if (langTranslations) {
+                const elementsToTranslate = onboardingModalContent.querySelectorAll('[id]');
+                elementsToTranslate.forEach(element => {
+                    const id = element.id;
+                    if (langTranslations[id]) {
+                        element.innerHTML = langTranslations[id];
+                    }
+                });
+            }
+
             // Re-initialize scrollspy for the modal's navigation
             const modalSections = onboardingModalContent.querySelectorAll('main section');
             const modalNavLinks = onboardingModalContent.querySelectorAll('aside a');
@@ -1924,8 +1937,9 @@
                 'apropos-p1': 'My <strong>empathy</strong> is the cornerstone of my approach. For me, Care and Success are two complementary professions: Care quickly resolves irritants and reassures the customer, while Success <strong>coaches</strong> them to achieve their goals and get the most value from the solution. Together, they strengthen satisfaction, <strong>retention</strong>, and <strong>growth</strong>.',
                 'apropos-p2': 'In a world where technology is constantly evolving, I am convinced that <strong>it is the human element that makes the difference</strong>. My role is to be the strategic link between the customer, the product, and the company: valuing every interaction, anticipating needs, and <strong>building lasting relationships of trust</strong>.',
                 'parcours-title-1': "Professional", 'parcours-title-2': "Career & Education",
-                'parcours-exp-title': "Experiences",
-                'parcours-formation-title': "Education & Certifications",
+                'parcours-exp-title': '<i class="fas fa-briefcase"></i> Experiences',
+                'parcours-formation-title': '<i class="fas fa-certificate"></i> Certifications',
+                'parcours-education-title': '<i class="fas fa-graduation-cap"></i> Education',
                 'exp1-title': "Payroll Implementation Project Manager",
                 'exp1-desc': "Global leader in payroll and HR solutions, ADP supports over 1 million clients in more than 140 countries, from SMEs to large international corporations.",
                 'exp1-li1': "<strong>Needs analysis</strong> of clients",
@@ -2135,8 +2149,8 @@
                 'low-touch-step5-title': 'Continuous Engagement and Support',
                 'low-touch-step5-desc': 'Help your clients get the most out of your product over time. Send follow-up emails, share practical tips and useful resources, and remain available via your customer support to assist them at every stage.',
                 'onboarding-nav-title': 'Navigation',
-                'onboarding-nav-link1': 'Training Checklist',
-                'onboarding-nav-link2': 'Tech Stack Checklist',
+                'onboarding-nav-link1': '<i class="fas fa-tasks w-6 text-center mr-3"></i>Training Checklist',
+                'onboarding-nav-link2': '<i class="fas fa-cogs w-6 text-center mr-3"></i>Tech Stack Checklist',
                 'onboarding-checklist-formation-title': 'Training Resources Checklist',
                 'onboarding-checklist-item1-title': 'Customer welcome email',
                 'onboarding-checklist-item1-desc': 'Helps establish a relationship and kicks off the onboarding process.',
@@ -2196,8 +2210,9 @@
                 'apropos-p1': 'Mon <strong>empathie</strong> naturelle est le pilier de mon approche. Pour moi, le Care et le Success sont deux métiers complémentaires : le Care résout rapidement les irritants et rassure le client, tandis que le Success le <strong>coach</strong> pour atteindre ses objectifs et tirer le maximum de valeur de la solution. Ensemble, ils renforcent la satisfaction, la <strong>rétention</strong> et la <strong>croissance</strong>.',
                 'apropos-p2': 'Dans un monde où la technologie évolue sans cesse, je suis convaincue que <strong>c’est l’humain qui fait la différence</strong>. Mon rôle est d’être le trait d’union stratégique entre le client, le produit et l’entreprise : valoriser chaque interaction, anticiper les besoins, et <strong>bâtir des relations de confiance durables</strong>.',
                 'parcours-title-1': "Parcours", 'parcours-title-2': "Professionnel & Formations",
-                'parcours-exp-title': "Expériences",
-                'parcours-formation-title': "Formations & Certifications",
+                'parcours-exp-title': '<i class="fas fa-briefcase"></i> Expériences',
+                'parcours-formation-title': '<i class="fas fa-certificate"></i> Certifications',
+                'parcours-education-title': '<i class="fas fa-graduation-cap"></i> Formations',
                 'exp1-title': "Payroll Implementation Project Manager",
                 'exp1-desc': "Leader mondial des solutions de gestion de la paie et des ressources humaines, ADP accompagne plus de 1 million de clients dans plus de 140 pays, de la PME aux grandes entreprises internationales.",
                 'exp1-li1': "<strong>Analyse des besoins</strong> des clients",
@@ -2407,8 +2422,8 @@
                 'low-touch-step5-title': 'Engagement et support continus',
                 'low-touch-step5-desc': "Aidez vos clients à tirer le meilleur parti de votre produit sur la durée. Envoyez des emails de suivi, partagez des conseils pratiques et des ressources utiles, et restez disponibles via votre support client pour les accompagner à chaque étape.",
                 'onboarding-nav-title': 'Navigation',
-                'onboarding-nav-link1': 'Check-list Formation',
-                'onboarding-nav-link2': 'Check-list Tech Stack',
+                'onboarding-nav-link1': '<i class="fas fa-tasks w-6 text-center mr-3"></i>Check-list Formation',
+                'onboarding-nav-link2': '<i class="fas fa-cogs w-6 text-center mr-3"></i>Check-list Tech Stack',
                 'onboarding-checklist-formation-title': 'Check-list des ressources de formation',
                 'onboarding-checklist-item1-title': 'E-mail de bienvenue client',
                 'onboarding-checklist-item1-desc': "Aide à établir une relation et lance le processus d'onboarding.",
@@ -2553,6 +2568,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
