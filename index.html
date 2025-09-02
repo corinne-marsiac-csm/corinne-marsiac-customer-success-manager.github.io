@@ -1619,11 +1619,11 @@
         ];
 
         const portfolioData = [
-            { id: 'timeline-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/EC4899/FFFFFF', text: { fr: "Timeline+d'Onboarding", en: "Onboarding+Timeline" }, title: { fr: "Timeline d'Onboarding", en: "Onboarding Timeline" }, modalId: 'timeline-modal' },
-            { id: 'welcome-email-template', type: 'modal', imgBase: 'https://placehold.co/600x400/A78BFA/FFFFFF', text: { fr: 'E-mail+de+Bienvenue', en: 'Welcome+E-mail' }, title: { fr: 'E-mail de bienvenue', en: 'Welcome E-mail' }, modalId: 'welcome-email-modal' },
-            { id: 'onboarding-template', type: 'modal', imgBase: 'https://placehold.co/600x400/8B5CF6/FFFFFF', text: { fr: "Check-lists+d'onboarding", en: "Onboarding+Check-lists" }, title: { fr: "Check-lists d'onboarding", en: "Onboarding Check-lists" }, modalId: 'onboarding-modal' },
-            { id: 'onboarding-low-touch-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/6D28D9/FFFFFF', text: { fr: "Onboarding+Low-Touch", en: "Onboarding+Low-Touch" }, title: { fr: "Onboarding Low-Touch", en: "Onboarding Low-Touch" }, modalId: 'onboarding-low-touch-modal' },
-            { id: 'onboarding-steps-portfolio', type: 'modal', imgBase: 'https://placehold.co/600x400/D946EF/FFFFFF', text: { fr: "Onboarding+Mid/High-touch", en: "Onboarding+Mid/High-touch" }, title: { fr: "Onboarding Mid/High-touch", en: "Onboarding Mid/High-touch" }, modalId: 'onboarding-steps-modal' },
+            { id: 'timeline-portfolio', type: 'modal', imgSrc: 'Onboarding Timeline.jpg', title: { fr: "Timeline d'Onboarding", en: "Onboarding Timeline" }, modalId: 'timeline-modal' },
+            { id: 'welcome-email-template', type: 'modal', imgSrc: 'E mail de Bienvenue.jpg', title: { fr: 'E-mail de bienvenue', en: 'Welcome E-mail' }, modalId: 'welcome-email-modal' },
+            { id: 'onboarding-template', type: 'modal', imgSrc: "Check lists d'onboarding.jpg", title: { fr: "Check-lists d'onboarding", en: "Onboarding Check-lists" }, modalId: 'onboarding-modal' },
+            { id: 'onboarding-low-touch-portfolio', type: 'modal', imgSrc: 'Onboarding Low-Touch.jpg', title: { fr: "Onboarding Low-Touch", en: "Onboarding Low-Touch" }, modalId: 'onboarding-low-touch-modal' },
+            { id: 'onboarding-steps-portfolio', type: 'modal', imgSrc: 'Onboarding Mid High Touch.jpg', title: { fr: "Onboarding Mid/High-touch", en: "Onboarding Mid/High-touch" }, modalId: 'onboarding-steps-modal' },
         ];
 
         // --- GESTION DE LA MODALE DES LIVRES ---
@@ -1917,12 +1917,11 @@
                     portfolioElement.addEventListener('click', () => openModalById(item.modalId));
                 }
             }
-            const imgSrc = `${item.imgBase}?text=${item.text[lang]}`;
 
             portfolioElement.className = 'flex-shrink-0 w-72 snap-center group focus:outline-none text-center';
             portfolioElement.innerHTML = `
                 <div class="overflow-hidden rounded-lg shadow-lg group-hover:shadow-pink-500/30 transition-shadow duration-300">
-                    <img src="${imgSrc}" alt="${item.title[lang]}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="${item.imgSrc}" alt="${item.title[lang]}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <p class="mt-4 text-lg font-semibold text-gray-300 group-hover:text-violet-400 transition-colors">${item.title[lang]}</p>
             `;
@@ -2636,6 +2635,7 @@
     </script>
 </body>
 </html>
+
 
 
 
