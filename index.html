@@ -125,10 +125,6 @@
             scroll-snap-type: x mandatory; /* Ajout pour un défilement fluide */
         }
 
-        #portfolio-carousel-container > * {
-            scroll-snap-align: center; /* Aligne chaque élément au centre */
-        }
-
         /* Styles pour le template d'onboarding dans la modale */
         #onboarding-modal-content {
             font-family: 'Inter', sans-serif;
@@ -1408,6 +1404,101 @@
         </div>
     </div>
 
+    <!-- Modal pour la Check-list de Churn -->
+    <div id="churn-checklist-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex justify-center items-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto flex flex-col">
+            <div class="flex-shrink-0 p-4 border-b border-gray-700 flex justify-between items-center">
+                 <h2 id="churn-modal-title" class="text-xl font-bold text-gradient">Check-list des signaux faibles de churn</h2>
+                 <button id="close-churn-checklist-modal-button" class="text-gray-400 hover:text-white">
+                      <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-8 text-gray-300">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-800">
+                                <th id="churn-th-1" class="p-4 border border-gray-700 font-semibold text-violet-300">Catégorie</th>
+                                <th id="churn-th-2" class="p-4 border border-gray-700 font-semibold text-violet-300">Signaux Faibles de Churn</th>
+                                <th id="churn-th-3" class="p-4 border border-gray-700 font-semibold text-violet-300">Actions Recommandées</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-gray-700">
+                                <td id="churn-cat-1" class="p-4 border border-gray-700 align-top font-semibold">Usage du Produit</td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-signal-1-1">Baisse de la fréquence de connexion</li>
+                                        <li id="churn-signal-1-2">Sous-utilisation des fonctionnalités clés</li>
+                                        <li id="churn-signal-1-3">Connexions multiples mais sessions très courtes</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-action-1-1">Contacter le client pour comprendre le contexte</li>
+                                        <li id="churn-action-1-2">Proposer une session de formation ciblée</li>
+                                        <li id="churn-action-1-3">Partager des cas d'usage pertinents</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-800/50 border-t border-gray-700">
+                                <td id="churn-cat-2" class="p-4 border border-gray-700 align-top font-semibold">Relation & Communication</td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-signal-2-1">Absence de réponse aux e-mails ou appels</li>
+                                        <li id="churn-signal-2-2">Changement de contact principal (sponsor)</li>
+                                        <li id="churn-signal-2-3">Baisse de participation aux QBRs ou webinars</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-action-2-1">Varier les canaux de communication (LinkedIn, etc.)</li>
+                                        <li id="churn-action-2-2">Établir une relation avec le nouveau contact</li>
+                                        <li id="churn-action-2-3">Sonder sur les formats de communication préférés</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="border-t border-gray-700">
+                                <td id="churn-cat-3" class="p-4 border border-gray-700 align-top font-semibold">Support & Satisfaction</td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-signal-3-1">Augmentation soudaine des tickets de support</li>
+                                        <li id="churn-signal-3-2">NPS ou CSAT en baisse</li>
+                                        <li id="churn-signal-3-3">Plaintes répétées sur le même sujet</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-action-3-1">Analyser la nature des tickets, identifier la cause racine</li>
+                                        <li id="churn-action-3-2">Déclencher un appel pour discuter des feedbacks</li>
+                                        <li id="churn-action-3-3">Remonter le problème à l'équipe produit/tech</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-800/50 border-t border-gray-700">
+                                <td id="churn-cat-4" class="p-4 border border-gray-700 align-top font-semibold">Facteurs Externes</td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-signal-4-1">Annonce de fusion/acquisition de l'entreprise cliente</li>
+                                        <li id="churn-signal-4-2">Difficultés financières ou restructuration</li>
+                                        <li id="churn-signal-4-3">Départ d'un champion interne du produit</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 border border-gray-700 align-top">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li id="churn-action-4-1">Identifier les nouveaux décisionnaires</li>
+                                        <li id="churn-action-4-2">Adapter l'offre et démontrer le ROI</li>
+                                        <li id="churn-action-4-3">Former un nouveau champion et recréer du lien</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // --- GESTION DU MENU MOBILE ---
@@ -1627,6 +1718,7 @@
             { id: 'onboarding-template', type: 'modal', imgSrc: "check-lists-onboarding.jpg", title: { fr: "Check-lists d'onboarding", en: "Onboarding Check-lists" }, modalId: 'onboarding-modal' },
             { id: 'onboarding-low-touch-portfolio', type: 'modal', imgSrc: 'onboarding-low-touch.jpg', title: { fr: "Onboarding Low-Touch", en: "Onboarding Low-Touch" }, modalId: 'onboarding-low-touch-modal' },
             { id: 'onboarding-steps-portfolio', type: 'modal', imgSrc: 'onboarding-mid-high-touch.jpg', title: { fr: "Onboarding Mid/High-touch", en: "Onboarding Mid/High-touch" }, modalId: 'onboarding-steps-modal' },
+            { id: 'churn-checklist-portfolio', type: 'modal', imgSrc: 'check-list-signaux-churn.jpg', title: { fr: "Check-list de signaux faibles de churn", en: "Weak Signals of Churn Checklist" }, modalId: 'churn-checklist-modal' },
         ];
 
         // --- GESTION DE LA MODALE DES LIVRES ---
@@ -2635,62 +2727,22 @@
             });
         }
 
+        const churnChecklistModal = document.getElementById('churn-checklist-modal');
+        const closeChurnChecklistModalButton = document.getElementById('close-churn-checklist-modal-button');
+        if (churnChecklistModal && closeChurnChecklistModalButton) {
+            const closeModal = () => {
+                churnChecklistModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            closeChurnChecklistModalButton.addEventListener('click', closeModal);
+            churnChecklistModal.addEventListener('click', (e) => {
+                if (e.target === churnChecklistModal) closeModal();
+            });
+        }
+
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
