@@ -1,938 +1,284 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enquête Freelance CSM/AM/Care - Corinne</title>
-    <!-- Tailwind CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corinne Marsiac - Customer Success Manager</title>
+
+    <!-- Balises META pour le SEO -->
+    <meta id="meta-description" name="description" content="Découvrez le profil de Corinne Marsiac, Customer Success Manager avec plus de 10 ans d'expérience en SaaS B2B. Experte en onboarding, rétention et croissance client." />
+    <meta name="keywords" content="Customer Success Management, Customer Care, relation client, SaaS, B2B, onboarding, adoption, growth, rétention, upsell, cross-sell, CRM" />
+    <meta name="author" content="Corinne Marsiac" />
+    <link rel="canonical" href="https://corinne-marsiac-csm.github.io/corinne-marsiac-customer-success-manager.github.io/" />
+
+    <!-- Open Graph (pour le partage sur les réseaux sociaux comme Facebook, LinkedIn) -->
+    <meta property="og:title" content="Corinne Marsiac - Customer Success Manager" />
+    <meta property="og:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://corinne-marsiac-csm.github.io/corinne-marsiac-customer-success-manager.github.io/" />
+    <meta property="og:image" content="https://corinne-marsiac-csm.github.io/corinne-marsiac-customer-success-manager.github.io/Github-banner.jpg" />
+
+    <!-- Twitter Card (pour le partage sur Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Corinne Marsiac - Customer Success Manager" />
+    <meta id="twitter-description" name="twitter:description" content="Professionnelle de la relation client avec plus de 10 ans d’expérience en SaaS B2B, spécialisée en onboarding, rétention et croissance." />
+    <meta name="twitter:image" content="https://corinne-marsiac-csm.github.io/corinne-marsiac-customer-success-manager.github.io/Github-banner.jpg" />
+
+
+    <!-- 1) Configurer Tailwind AVANT le CDN -->
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = { darkMode: 'class' };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Police Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- 2) Appliquer le thème le plus tôt possible pour éviter le FOUC -->
+    <script>
+        (function () {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const saved = localStorage.getItem('theme');
+            const isDark = saved ? saved === 'dark' : prefersDark;
+            if (isDark) document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
+        })();
+    </script>
+
     <style>
-        body { 
+        body { font-family: 'Poppins', sans-serif; }
+        /* Icônes: état par défaut pour éviter le flash */
+        #theme-toggle-dark-icon, #theme-toggle-dark-icon-mobile { display: none; }
+
+        .text-gradient {
+            background: linear-gradient(to right, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #8B5CF6, #EC4899);
+        }
+        .btn-secondary {
+            background: rgba(55, 65, 81, 0.5);
+            border: 1px solid #4B5563;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Styles pour la barre de défilement */
+        ::-webkit-scrollbar { width: 8px; }
+        .dark ::-webkit-scrollbar-track { background: #1F2937; }
+        .dark ::-webkit-scrollbar-thumb { background: #4F46E5; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
+
+        /* Styles pour les menus déroulants */
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .details-content.open {
+            max-height: 500px; /* Hauteur suffisante pour le contenu */
+            opacity: 1;
+        }
+        .details-trigger .chevron {
+            transition: transform 0.3s ease-in-out;
+        }
+        .details-trigger.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Animation pour les pastilles de mots-clés */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .keyword-pill {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Styles pour le graphique NPS */
+        .nps-circle-progress {
+            transition: stroke-dashoffset 2s ease-out;
+            stroke-linecap: round;
+        }
+        /* Hide scrollbar for carousel */
+        #book-carousel-container::-webkit-scrollbar, #portfolio-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        #book-carousel-container, #portfolio-carousel-container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-snap-type: x mandatory; /* Ajout pour un défilement fluide */
+        }
+
+        /* Styles pour le template d'onboarding dans la modale */
+        #onboarding-modal-content {
             font-family: 'Inter', sans-serif;
-            background-image: url('https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
         }
-        /* Filtre sombre pour lisibilité */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.4);
-            z-index: -1;
+        #onboarding-modal-content .card {
+            background-color: #111827; /* bg-gray-900 adjusted */
+            border-radius: 0.75rem;
+            border: 1px solid #374151; /* border-gray-700 */
         }
-        
-        .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.4s ease-in-out; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Style unifié pour les cartes de choix */
-        .option-card:checked + div { border-color: #3B82F6; background-color: #EFF6FF; }
-        .option-card:checked + div .font-medium { color: #1e3a8a; }
-        .checkbox-card:checked + div { border-color: #3B82F6; background-color: #EFF6FF; color: #1e3a8a; }
-        
-        .progress-bar { transition: width 0.4s ease; }
-        
-        .summary-item { margin-bottom: 8px; }
-        .summary-question { font-size: 0.85rem; color: #64748b; margin-bottom: 2px; }
-        .summary-answer { font-weight: 500; color: #0f172a; }
-        .error-text { color: #dc2626; font-weight: 600; }
-        
-        /* Classe pour cacher le compteur */
-        .invisible { visibility: hidden; }
+        #onboarding-modal-content h1, #onboarding-modal-content h2, #onboarding-modal-content h3 {
+            font-weight: 700;
+        }
+        #onboarding-modal-content .nav-link-active {
+            background-color: #374151; /* bg-gray-700 */
+            color: #A78BFA; /* text-violet-400 */
+            font-weight: 600;
+        }
+
+        /* Styles pour les points de navigation du carrousel */
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4B5563; /* gray-600 */
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .carousel-dot:hover {
+            transform: scale(1.2);
+        }
+        .carousel-dot.active {
+            background-color: #A78BFA; /* violet-400 */
+            transform: scale(1.2);
+        }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col">
+<body class="bg-gray-900 text-gray-200 transition-colors duration-500">
 
-    <!-- Header -->
-    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-10" id="main-header">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="font-semibold text-lg text-slate-700">Étude Freelance CSM/AM/Care</h1>
-            <div class="text-sm text-slate-500 invisible" id="step-counter-container">
-                <span id="current-step-display">1</span> / <span id="total-step-display">6</span>
+    <!-- Barre de Navigation -->
+    <nav class="bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#accueil" class="text-2xl font-bold text-gradient">Corinne Marsiac</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#qui-suis-je" id="nav-qui" class="text-gray-300 hover:text-violet-400 transition duration-300">Qui suis-je ?</a>
+                    <a href="#a-propos" id="nav-apropos" class="text-gray-300 hover:text-violet-400 transition duration-300">À Propos</a>
+                    <a href="#parcours" id="nav-parcours" class="text-gray-300 hover:text-violet-400 transition duration-300">Parcours</a>
+                    <a href="#reussite" id="nav-projet" class="text-gray-300 hover:text-violet-400 transition duration-300">Projet</a>
+                    <a href="#competences" id="nav-competences" class="text-gray-300 hover:text-violet-400 transition duration-300">Compétences</a>
+                    <a href="#plus-sur-moi" id="nav-personnalite" class="text-gray-300 hover:text-violet-400 transition duration-300">Personnalité</a>
+                    <a href="#contact" id="nav-contact" class="btn-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/20">Contact</a>
+                    <button id="translate-button-desktop" aria-label="Changer de langue" class="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-500 flex items-center justify-center hover:scale-105 transition hover:shadow-lg">
+                        <img id="translate-flag-desktop" src="https://flagcdn.com/w20/gb.png" alt="English Flag" class="w-5 h-auto rounded-sm">
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="translate-button-mobile" aria-label="Changer de langue" class="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-500 flex items-center justify-center hover:scale-105 transition hover:shadow-lg">
+                        <img id="translate-flag-mobile" src="https://flagcdn.com/w20/gb.png" alt="English Flag" class="w-5 h-auto rounded-sm">
+                    </button>
+                    <button id="mobile-menu-button" class="focus:outline-none text-gray-200">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="h-1 bg-slate-200 w-full">
-            <div id="progress" class="h-1 bg-blue-600 progress-bar" style="width: 0%"></div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
+            <a href="#qui-suis-je" id="nav-qui-mobile" class="block py-3 px-4 hover:bg-gray-700">Qui suis-je ?</a>
+            <a href="#a-propos" id="nav-apropos-mobile" class="block py-3 px-4 hover:bg-gray-700">À Propos</a>
+            <a href="#parcours" id="nav-parcours-mobile" class="block py-3 px-4 hover:bg-gray-700">Parcours</a>
+            <a href="#reussite" id="nav-projet-mobile" class="block py-3 px-4 hover:bg-gray-700">Projet</a>
+            <a href="#competences" id="nav-competences-mobile" class="block py-3 px-4 hover:bg-gray-700">Compétences</a>
+            <a href="#plus-sur-moi" id="nav-personnalite-mobile" class="block py-3 px-4 hover:bg-gray-700">Personnalité</a>
+            <a href="#contact" id="nav-contact-mobile" class="block py-3 px-4 hover:bg-gray-700">Contact</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center p-4">
-        <form id="surveyForm" class="w-full max-w-5xl bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-6 md:p-10 border border-white/50">
-            
-            <!-- Step 0: Intro (Page 1) -->
-            <div class="step active" data-step="0">
-                <div class="mb-6">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-4 text-slate-900">Hello, je m'appelle Corinne 👋</h2>
-                    
-                    <p class="text-slate-600 mb-4 leading-relaxed">
-                        Passionnée par la relation client, je me suis formée au métier de Customer Success Manager à la <strong>Kare School</strong> en août dernier, puis j’ai complété mon parcours par une formation technique sur le CRM <strong>Salesforce</strong> afin de renforcer mon profil.
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Section Accueil -->
+        <section id="accueil" class="min-h-[90vh] flex items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Column -->
+                <div>
+                    <span id="accueil-job-title" class="text-2xl font-semibold text-violet-400">CUSTOMER SUCCESS MANAGER</span>
+                    <h1 id="accueil-headline" class="text-4xl md:text-6xl font-extrabold text-white leading-tight mt-2 animate-pulse">
+                        Je transforme l'expérience client en levier de croissance durable.
+                    </h1>
+                    <p id="accueil-subheadline" class="mt-6 text-lg text-gray-400 max-w-2xl">
+                        Plus de 10 ans d'expérience en SaaS B2B.
                     </p>
-                    
-                    <p class="text-slate-600 mb-4 leading-relaxed">
-                        Aujourd’hui, je suis en phase de réflexion sur la suite de mon parcours professionnel. Le freelancing fait partie des pistes que j’explore et, avant d’aller plus loin, j’ai besoin de mieux comprendre la réalité du terrain ainsi que les enjeux concrets de ce mode d’exercice.
-                    </p>
-                    
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Si tu es freelance aujourd’hui, ou si tu l’as été par le passé, ton retour d’expérience honnête m’aiderait à avancer dans ma réflexion.
-                    </p>
+                    <div class="mt-8 flex gap-4">
+                        <a href="#contact" id="accueil-contact-btn" class="btn-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition duration-300 shadow-lg shadow-violet-500/30">Contactez-moi</a>
+                    </div>
+                </div>
+                <!-- Graphic Column -->
+                <div class="flex justify-center items-center">
+                    <button id="open-cycle-modal-button" class="group focus:outline-none" aria-label="Ouvrir le détail du cycle de succès client">
+                        <svg class="w-80 h-80 md:w-96 md:h-96 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 400 400">
+                            <defs>
+                                <!-- Colors for the cycle -->
+                                <linearGradient id="grad1"><stop stop-color="#F472B6"/></linearGradient> <!-- Lightest -->
+                                <linearGradient id="grad2"><stop stop-color="#EC4899"/></linearGradient>
+                                <linearGradient id="grad3"><stop stop-color="#D946EF"/></linearGradient>
+                                <linearGradient id="grad4"><stop stop-color="#A78BFA"/></linearGradient>
+                                <linearGradient id="grad5"><stop stop-color="#8B5CF6"/></linearGradient>
+                                <linearGradient id="grad6"><stop stop-color="#7C3AED"/></linearGradient> <!-- Darkest -->
 
-                    <a href="https://www.linkedin.com/in/corinne-csm/" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium mb-6 transition-colors group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                <!-- Invisible paths for text -->
+                                <path id="textPath1" d="M 200,40 A 160,160 0 0 1 338.6,120" fill="none"/>
+                                <path id="textPath2" d="M 338.6,120 A 160,160 0 0 1 338.6,280" fill="none"/>
+                                <path id="textPath3" d="M 338.6,280 A 160,160 0 0 1 200,360" fill="none"/>
+                                <path id="textPath4" d="M 200,360 A 160,160 0 0 1 61.4,280" fill="none"/>
+                                <path id="textPath5" d="M 61.4,280 A 160,160 0 0 1 61.4,120" fill="none"/>
+                                <path id="textPath6" d="M 61.4,120 A 160,160 0 0 1 200,40" fill="none"/>
+                            </defs>
+
+                            <!-- Central Text -->
+                            <circle cx="200" cy="200" r="130" fill="#1F2937" opacity="0.8"/>
+                            <text x="200" y="190" text-anchor="middle" class="fill-gray-200 font-bold text-3xl" id="svg-cycle-title1">Proactive Care</text>
+                            <text x="200" y="225" text-anchor="middle" class="fill-gray-200 font-bold text-3xl" id="svg-cycle-title2">& CS</text>
+                            <text x="200" y="250" text-anchor="middle" class="fill-violet-400 text-sm" id="svg-cycle-cta">(Cliquez pour voir)</text>
+
+                            <!-- Static Group -->
+                            <g>
+                                <!-- 6 Arc Paths -->
+                                <path d="M 200,40 A 160,160 0 0 1 338.6,120" stroke="url(#grad1)" stroke-width="40" fill="none"/>
+                                <path d="M 338.6,120 A 160,160 0 0 1 338.6,280" stroke="url(#grad2)" stroke-width="40" fill="none"/>
+                                <path d="M 338.6,280 A 160,160 0 0 1 200,360" stroke="url(#grad3)" stroke-width="40" fill="none"/>
+                                <path d="M 200,360 A 160,160 0 0 1 61.4,280" stroke="url(#grad4)" stroke-width="40" fill="none"/>
+                                <path d="M 61.4,280 A 160,160 0 0 1 61.4,120" stroke="url(#grad5)" stroke-width="40" fill="none"/>
+                                <path d="M 61.4,120 A 160,160 0 0 1 200,40" stroke="url(#grad6)" stroke-width="40" fill="none"/>
+
+                                <!-- 6 Text elements using textPath -->
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-1" href="#textPath1" startOffset="50%" text-anchor="middle">Écouter</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-2" href="#textPath2" startOffset="50%" text-anchor="middle">Planifier</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-3" href="#textPath3" startOffset="50%" text-anchor="middle">Accompagner</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-4" href="#textPath4" startOffset="50%" text-anchor="middle">Mesurer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-5" href="#textPath5" startOffset="50%" text-anchor="middle">Améliorer</textPath></text>
+                                <text fill="white" font-weight="bold" font-size="18"><textPath id="svg-text-6" href="#textPath6" startOffset="50%" text-anchor="middle">Évoluer</textPath></text>
+                            </g>
                         </svg>
-                        Voir mon profil LinkedIn
-                    </a>
-
-                    <p class="text-sm text-slate-400 italic border-t border-slate-100 pt-4">Temps estimé pour m'aider 🙏 : 3 minutes chrono.</p>
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="goToStep(1)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors flex items-center shadow-lg shadow-blue-600/30">
-                        C'est parti
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
                     </button>
                 </div>
             </div>
+        </section>
 
-            <!-- Step 1: Profil (Page 2) -->
-            <div class="step" data-step="1">
-                <h3 class="text-xl font-semibold mb-6">Partie 1 : Profil & Contexte</h3>
-                
-                <div class="space-y-6">
-                    <!-- Q1 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">1. Depuis combien de temps es-tu freelance ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q1" value="Moins de 6 mois" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Moins de 6 mois</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q1" value="6 à 12 mois" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">6 à 12 mois</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q1" value="1 à 3 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">1 à 3 ans</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q1" value="Plus de 3 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Plus de 3 ans</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">2. Où es-tu basé(e) ?</label>
-                        <select name="q2" class="w-full border border-slate-300 rounded-lg p-3 bg-white focus:border-blue-500 outline-none">
-                            <option value="">Sélectionne une région...</option>
-                            <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
-                            <option value="Bourgogne-Franche-Comté">Bourgogne-Franche-Comté</option>
-                            <option value="Bretagne">Bretagne</option>
-                            <option value="Centre-Val de Loire">Centre-Val de Loire</option>
-                            <option value="Corse">Corse</option>
-                            <option value="Grand Est">Grand Est</option>
-                            <option value="Hauts-de-France">Hauts-de-France</option>
-                            <option value="Île-de-France">Île-de-France</option>
-                            <option value="Normandie">Normandie</option>
-                            <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
-                            <option value="Occitanie">Occitanie</option>
-                            <option value="Pays de la Loire">Pays de la Loire</option>
-                            <option value="Provence-Alpes-Côte d'Azur">Provence-Alpes-Côte d'Azur</option>
-                            <option value="À l'étranger">À l'étranger</option>
-                            <option value="Je ne souhaite pas répondre">Je ne souhaite pas répondre</option>
-                        </select>
-                    </div>
-
-                    <!-- Q3 (CORRIGÉ) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">3. Où sont basés tes clients ? (Plusieurs choix possibles)</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3 bg-white">
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Auvergne-Rhône-Alpes" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Auvergne-Rhône-Alpes</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Bourgogne-Franche-Comté" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Bourgogne-Franche-Comté</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Bretagne" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Bretagne</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Centre-Val de Loire" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Centre-Val de Loire</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Corse" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Corse</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Grand Est" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Grand Est</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Hauts-de-France" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Hauts-de-France</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Île-de-France" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Île-de-France</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Normandie" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Normandie</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Nouvelle-Aquitaine" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Nouvelle-Aquitaine</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Occitanie" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Occitanie</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Pays de la Loire" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Pays de la Loire</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Provence-Alpes-Côte d'Azur" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Provence-Alpes-Côte d'Azur</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="À l'étranger" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">À l'étranger</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q3" value="Je ne souhaite pas répondre" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-2 text-sm hover:bg-slate-50 transition-all">Je ne souhaite pas répondre</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q4 (NEW) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">4. Quel est ton mode de travail actuel avec tes clients ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q4" value="100% Remote" class="hidden option-card" onchange="toggleQ4Input(false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">100% Remote (Télétravail total)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q4" value="Hybride" class="hidden option-card" onchange="toggleQ4Input(false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Hybride (1 à 2 jours par semaine chez le client)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q4" value="Présentiel" class="hidden option-card" onchange="toggleQ4Input(false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Majoritairement en présentiel</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q4" value="Autre" class="hidden option-card" onchange="toggleQ4Input(true)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Autre</div></label>
-                        </div>
-                        <div id="q4_other_container" class="hidden mt-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                             <input type="text" name="q4_other" placeholder="Précise ton mode de travail..." class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none text-sm">
-                        </div>
-                    </div>
-
-                    <!-- Q5 (Ex-Q2) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">5. Quelle est ton activité principale aujourd’hui ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q5" value="CSM" class="hidden option-card" onchange="toggleInput('q5_other_container', false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Customer Success Manager (CSM)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q5" value="AM" class="hidden option-card" onchange="toggleInput('q5_other_container', false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Account Manager</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q5" value="Ops" class="hidden option-card" onchange="toggleInput('q5_other_container', false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Ops (RevOps, CS Ops...)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q5" value="Care" class="hidden option-card" onchange="toggleInput('q5_other_container', false)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Customer Care / Support</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q5" value="Autre" class="hidden option-card" onchange="toggleInput('q5_other_container', true)"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Autre</div></label>
-                        </div>
-                        <div id="q5_other_container" class="hidden mt-2">
-                             <input type="text" name="q5_other" placeholder="Précise ton activité..." class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none text-sm">
-                        </div>
-                    </div>
-
-                    <!-- Q6 (Ex-Q3) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">6. As-tu exercé ce métier auparavant en tant que salarié ?</label>
-                        <div class="flex gap-4">
-                            <label class="cursor-pointer flex-1"><input type="radio" name="q6" value="Oui" class="hidden option-card" onchange="toggleInput('q6_exp_container', true)"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50 transition-all">Oui</div></label>
-                            <label class="cursor-pointer flex-1"><input type="radio" name="q6" value="Non" class="hidden option-card" onchange="toggleInput('q6_exp_container', false)"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50 transition-all">Non</div></label>
-                        </div>
-                         <!-- Sous-question Q6 Expérience -->
-                         <div id="q6_exp_container" class="hidden mt-3 bg-slate-50 p-4 rounded-lg border border-slate-100">
-                            <label class="block font-medium text-slate-700 mb-3 text-sm">Combien d'années d'expérience ?</label>
-                            <div class="space-y-2">
-                                <label class="cursor-pointer block"><input type="radio" name="q6_exp" value="Moins d'un an" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 hover:bg-white transition-all text-sm">Moins d'un an</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="q6_exp" value="1 à 3 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 hover:bg-white transition-all text-sm">1 à 3 ans</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="q6_exp" value="3 à 5 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 hover:bg-white transition-all text-sm">3 à 5 ans</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="q6_exp" value="5 à 10 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 hover:bg-white transition-all text-sm">5 à 10 ans</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="q6_exp" value="Plus de 10 ans" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 hover:bg-white transition-all text-sm">Plus de 10 ans</div></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q7 & Q8 -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block font-medium text-slate-700 mb-3">7. Sexe</label>
-                            <div class="space-y-2">
-                                <label class="cursor-pointer block"><input type="radio" name="genre" value="Femme" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 text-center hover:bg-slate-50">Femme</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="genre" value="Homme" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 text-center hover:bg-slate-50">Homme</div></label>
-                                <label class="cursor-pointer block"><input type="radio" name="genre" value="Ne souhaite pas répondre" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-2 text-center hover:bg-slate-50">Ne souhaite pas répondre</div></label>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block font-medium text-slate-700 mb-3">8. Tranche d'âge</label>
-                             <select name="age" class="w-full border border-slate-300 rounded-lg p-3 bg-white focus:border-blue-500 outline-none">
-                                <option value="">Choisir...</option>
-                                <option value="18-24">18 - 24 ans</option>
-                                <option value="25-34">25 - 34 ans</option>
-                                <option value="35-44">35 - 44 ans</option>
-                                <option value="45-54">45 - 54 ans</option>
-                                <option value="55+">55 ans et plus</option>
-                                <option value="Ne souhaite pas répondre">Je ne souhaite pas répondre</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between mt-8">
-                    <button type="button" onclick="goToStep(0)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                    <button type="button" onclick="goToStep(2)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-lg shadow-blue-600/30">Suivant</button>
-                </div>
+        <!-- Section Qui suis-je -->
+        <section id="qui-suis-je" class="py-24 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12"><span class="text-gradient" id="quisuisje-title">Qui suis-je ?</span></h2>
+            <div class="bg-gray-800/50 backdrop-blur-lg border border-gray-700/50 p-8 md:p-12 rounded-2xl transition-transform duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-1 flex justify-center">
+                         <img src="Corinne-CSM.jpg" alt="Corinne Marsiac" class="rounded-full border-4 border-violet-500 w-48 h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/192x192/1F2937/FFFFFF?text=CM';">
+                         <img src="Corinne-CSM.png" alt="Corinne Marsiac" class="rounded-full border-4 border-violet-500 w-48 h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/192x192/1F2937/FFFFFF?text=CM';">
             </div>
-
-            <!-- Step 2: Marché (Page 3) -->
-            <div class="step" data-step="2">
-                <h3 class="text-xl font-semibold mb-6">Partie 2 : Le Marché & L'Acquisition</h3>
-                
-                <div class="space-y-6">
-                    <!-- Q9 (Checkbox) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">9. Comment trouves-tu tes clients majoritairement ? (Plusieurs choix possibles)</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="checkbox" name="q9" value="Réseau" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Réseau personnel / Bouche-à-oreille</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q9" value="Plateformes" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Plateformes (Malt, Crème de la crème...)</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q9" value="Prospection" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Prospection directe (LinkedIn, Cold Email)</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q9" value="Apporteur" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all">Apport d'affaires / Agences</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q10: Typologie Clients (Checkbox + Autre) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">10. Pour quels types de clients as-tu déjà travaillé en freelance ? (Plusieurs choix possibles)</label>
-                        <div class="grid grid-cols-1 gap-2">
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Startup (early stage)" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Startup (early stage)</span><span class="block text-xs text-slate-500 mt-1">(jeune entreprise, souvent < 20 salariés)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Scale-up" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Scale-up</span><span class="block text-xs text-slate-500 mt-1">(startup en forte croissance, environ 50 à 300 salariés)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="PME" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">PME</span><span class="block text-xs text-slate-500 mt-1">(Petite ou Moyenne Entreprise, < 250 salariés)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="ETI" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">ETI</span><span class="block text-xs text-slate-500 mt-1">(Entreprise de Taille Intermédiaire, 250 à 4 999 salariés)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Grand groupe" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Grand groupe</span><span class="block text-xs text-slate-500 mt-1">(≥ 5 000 salariés ou groupe international structuré)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Freelance / Indépendant" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Freelance / indépendant</span><span class="block text-xs text-slate-500 mt-1">(autre freelance, consultant indépendant, solopreneur)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Agence" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Agence</span><span class="block text-xs text-slate-500 mt-1">(ex. agence digitale, marketing, CRM, ESN, cabinet de conseil)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Collectif de freelances" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Collectif de freelances</span><span class="block text-xs text-slate-500 mt-1">(regroupement de freelances travaillant ensemble sur des missions)</span></div></label>
-                            <label class="cursor-pointer block h-full"><input type="checkbox" name="q10_clients" value="Autre" class="hidden checkbox-card" onchange="toggleCheckboxOther(this, 'q10_clients_other')"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 transition-all h-full"><span class="font-medium text-slate-800">Autre (à préciser)</span></div></label>
-                        </div>
-                        <input type="text" id="q10_clients_other" name="q10_clients_other_text" placeholder="Préciser..." class="w-full mt-2 border border-slate-300 rounded-lg p-2 text-sm focus:border-blue-500 outline-none hidden">
-                    </div>
-
-                    <!-- Q11 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">11. Est-il difficile de convaincre une entreprise de prendre un freelance sur des métiers "Relation Client" ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q11" value="Très difficile" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Très difficile (beaucoup de pédagogie nécessaire)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q11" value="Moyennement difficile" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Moyennement difficile</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q11" value="Non" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Non, les entreprises sont habituées</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q12 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">12. T'est-il déjà arrivé de te retrouver sans mission pendant une longue période ?</label>
-                        <div class="space-y-3">
-                            <div class="flex gap-4">
-                                <label class="cursor-pointer flex-1"><input type="radio" name="q12_gap" value="Oui" class="hidden option-card" onchange="toggleInput('gap_duration_container', true)"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">Oui</div></label>
-                                <label class="cursor-pointer flex-1"><input type="radio" name="q12_gap" value="Non" class="hidden option-card" onchange="toggleInput('gap_duration_container', false)"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">Non</div></label>
-                            </div>
-                            <div id="gap_duration_container" class="hidden mt-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                <label class="block text-sm text-slate-600 mb-2">Si oui, pendant combien de temps ?</label>
-                                <input type="text" name="q12_gap_duration" placeholder="Ex: 2 mois entre deux contrats..." class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none text-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" onclick="goToStep(1)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                    <button type="button" onclick="goToStep(3)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-lg shadow-blue-600/30">Suivant</button>
-                </div>
-            </div>
-
-            <!-- Step 3: Finance (Page 4) -->
-            <div class="step" data-step="3">
-                <h3 class="text-xl font-semibold mb-6">Partie 3 : Réalité Financière & Organisation</h3>
-                
-                <div class="space-y-6">
-                    <!-- Q13 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">13. Combien de temps après ton lancement as-tu commencé à générer des revenus réguliers ?</label>
-                        <select name="q13" class="w-full border border-slate-300 rounded-lg p-3 bg-white focus:border-blue-500 outline-none">
-                            <option value="">Sélectionne une option...</option>
-                            <option value="Immédiatement">Immédiatement</option>
-                            <option value="Moins de 3 mois">Moins de 3 mois</option>
-                            <option value="3 à 6 mois">3 à 6 mois</option>
-                            <option value="6 à 12 mois">6 à 12 mois</option>
-                            <option value="Plus d'un an">Plus d'un an</option>
-                            <option value="Pas encore">Pas encore</option>
-                        </select>
-                    </div>
-
-                    <!-- Q14 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">14. Selon toi, quel est le TJM minimal pour être viable ?</label>
-                        <div class="grid grid-cols-2 gap-2">
-                             <label class="cursor-pointer block"><input type="radio" name="q14" value="<300" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">Moins de 300€</div></label>
-                             <label class="cursor-pointer block"><input type="radio" name="q14" value="300-350" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">300€ - 350€</div></label>
-                             <label class="cursor-pointer block"><input type="radio" name="q14" value="350-450" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">350€ - 450€</div></label>
-                             <label class="cursor-pointer block"><input type="radio" name="q14" value=">450" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 text-center hover:bg-slate-50">Plus de 450€</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q15 (Ex-Q12) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">15. En moyenne, quel montant te verses-tu réellement sur ton compte personnel chaque mois (après charges professionnelles, avant impôt sur le revenu) ?</label>
-                        <select name="q15" class="w-full border border-slate-300 rounded-lg p-3 bg-white focus:border-blue-500 outline-none">
-                            <option value="">Sélectionne une option...</option>
-                            <option value="<2000">Moins de 2000€</option>
-                            <option value="2000-3000">Entre 2000€ et 3000€</option>
-                            <option value="3000-4500">Entre 3000€ et 4500€</option>
-                            <option value=">4500">Plus de 4500€</option>
-                            <option value="N/A">Je préfère ne pas répondre</option>
-                        </select>
-                    </div>
-
-                     <!-- Q16 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">16. Quel statut juridique as-tu choisi ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q16_status" value="Micro-entreprise" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Micro-entreprise (Auto-entrepreneur)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q16_status" value="EI" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">EI (Entreprise Individuelle)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q16_status" value="Société" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Société (EURL, SASU...)</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q16_status" value="Portage Salarial" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Portage Salarial</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q16_status" value="Autre" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Autre</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q17 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">17. Pour tes déclarations (URSSAF, TVA), comment t'organises-tu ?</label>
-                        <div class="space-y-2">
-                            <label class="cursor-pointer block">
-                                <input type="radio" name="q17" value="Manuel" class="hidden option-card" onchange="toggleInput('q17_app_container', false)">
-                                <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Je gère moi-même mes déclarations, de façon autonome</div>
-                            </label>
-                            
-                            <!-- Option APP et son champ lié -->
-                            <div>
-                                <label class="cursor-pointer block">
-                                    <input type="radio" name="q17" value="App" class="hidden option-card" onchange="toggleInput('q17_app_container', true)">
-                                    <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">J’utilise un outil ou une application pour m’accompagner dans mes déclarations</div>
-                                </label>
-                                <div id="q17_app_container" class="hidden mt-2 ml-4 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                     <label class="block text-sm text-slate-600 mb-2">Quelle application utilises-tu ? (Indy, Abby, Tiime...)</label>
-                                     <input type="text" name="q17_app_name" placeholder="Ex: Indy, Freebe..." class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none text-sm">
-                                </div>
-                            </div>
-
-                            <label class="cursor-pointer block">
-                                <input type="radio" name="q17" value="Comptable" class="hidden option-card" onchange="toggleInput('q17_app_container', false)">
-                                <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Je délègue ces démarches à un expert-comptable</div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" onclick="goToStep(2)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                    <button type="button" onclick="goToStep(4)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-lg shadow-blue-600/30">Suivant</button>
-                </div>
-            </div>
-
-             <!-- Step 4: Charge Mentale (Page 5) -->
-             <div class="step" data-step="4">
-                <h3 class="text-xl font-semibold mb-6">Partie 4 : Charge Mentale</h3>
-                
-                <div class="space-y-6">
-                    <!-- Q18 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">18. Par rapport au salariat, le freelance a été pour toi :</label>
-                         <div class="space-y-2">
-                            <label class="cursor-pointer block"><input type="radio" name="q18" value="Beaucoup plus stressant" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Beaucoup plus stressant 😰</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q18" value="Un peu plus stressant" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Un peu plus stressant 😟</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q18" value="Équivalent" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Équivalent 😐</div></label>
-                            <label class="cursor-pointer block"><input type="radio" name="q18" value="Moins stressant" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Moins stressant 😌</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q19 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">19. Ce qui te pèse le plus aujourd’hui :</label>
-                        <select name="q19" class="w-full border border-slate-300 rounded-lg p-3 bg-white focus:border-blue-500 outline-none" onchange="toggleSelectOther(this, 'q19_other_container')">
-                            <option value="">Sélectionne...</option>
-                            <option value="Trouver des clients">Trouver des clients (l'incertitude commerciale)</option>
-                            <option value="Irrégularité revenus">L’irrégularité des revenus</option>
-                            <option value="Administratif">La gestion administrative</option>
-                            <option value="Charge mentale">La charge mentale (ne jamais couper)</option>
-                            <option value="Solitude">La solitude</option>
-                            <option value="Autre">Autre (préciser)</option>
-                        </select>
-                        <div id="q19_other_container" class="hidden mt-2">
-                             <input type="text" name="q19_other" placeholder="Précise ce qui te pèse..." class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none text-sm">
-                        </div>
-                    </div>
-
-                    <!-- Q20 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">20. La chose la plus difficile à laquelle tu ne t’attendais pas ?</label>
-                        <textarea name="q20" rows="3" class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none" placeholder="Ta réponse..."></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" onclick="goToStep(3)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                    <button type="button" onclick="goToStep(5)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-lg shadow-blue-600/30">Suivant</button>
-                </div>
-            </div>
-
-            <!-- Step 5: Bilan (Page 6) -->
-            <div class="step" data-step="5">
-                <h3 class="text-xl font-semibold mb-6">Partie 5 : Bilan & Conseils</h3>
-                
-                <div class="space-y-6">
-                    <!-- Q21 (Checkbox + Autre) -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">21. Selon toi, quels sont les arguments de vente qui priment ? (Plusieurs choix possibles)</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Formation / Certifications" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Formation / Certifications</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Expérience passée" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Expérience passée</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Réseau" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Réseau / Recommandations</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Soft Skills / Personnalité" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Soft Skills / Personnalité</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Prix / TJM" class="hidden checkbox-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Prix / TJM</div></label>
-                            <label class="cursor-pointer block"><input type="checkbox" name="q21_args" value="Autre" class="hidden checkbox-card" onchange="toggleCheckboxOther(this, 'q21_args_other')"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Autre</div></label>
-                        </div>
-                        <input type="text" id="q21_args_other" name="q21_args_other_text" placeholder="Préciser..." class="w-full mt-2 border border-slate-300 rounded-lg p-2 text-sm focus:border-blue-500 outline-none hidden">
-                    </div>
-
-                    <!-- Q22 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">22. Recommanderais-tu de se lancer en 2026 ?</label>
-                        <div class="space-y-2">
-                             <label class="cursor-pointer block"><input type="radio" name="q22" value="Oui" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Oui, c'est le bon moment 🚀</div></label>
-                             <label class="cursor-pointer block"><input type="radio" name="q22" value="Oui mais" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Oui, mais avec beaucoup de prudence ⚠️</div></label>
-                             <label class="cursor-pointer block"><input type="radio" name="q22" value="Non" class="hidden option-card"><div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50">Non, le marché est trop saturé ⛔</div></label>
-                        </div>
-                    </div>
-
-                    <!-- Q23 -->
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-3">23. Si tu avais un seul conseil factuel à donner :</label>
-                        <textarea name="q23" rows="3" class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none" placeholder="Ton conseil en or..."></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" onclick="goToStep(4)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                    <button type="button" onclick="goToStep(6)" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-lg shadow-blue-600/30">Dernière étape</button>
-                </div>
-            </div>
-
-            <!-- Step 6: Restitution (Page 7) -->
-            <div class="step" data-step="6">
-                <h3 class="text-xl font-semibold mb-6">Restitution des résultats</h3>
-                
-                <div class="text-center py-6">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <p class="text-slate-600 mb-6">
-                        Merci beaucoup pour ton temps ! <br>
-                        Si tu souhaites recevoir l'analyse globale des réponses (TJM moyen, conseils...), laisse tes coordonnées ci-dessous.
-                    </p>
-                    
-                    <div class="space-y-4 max-w-sm mx-auto mb-6">
-                        <input type="text" name="pseudo" placeholder="Prénom ou Pseudo (facultatif)" class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none">
-                        <input type="email" name="email" placeholder="ton@email.com (facultatif)" class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none">
-                        <input type="url" name="linkedin" placeholder="Lien profil LinkedIn (facultatif)" class="w-full border border-slate-300 rounded-lg p-3 focus:border-blue-500 outline-none">
-                    </div>
-
-                    <button type="button" onclick="goToStep(7)" class="w-full max-w-sm bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:-translate-y-1">
-                        Vérifier mes réponses
-                    </button>
-                </div>
-                 <div class="flex justify-start mt-8">
-                    <button type="button" onclick="goToStep(5)" class="text-slate-500 hover:text-slate-700 font-medium">Retour</button>
-                </div>
-            </div>
-
-            <!-- Step 7: Récapitulatif (Page 8) -->
-            <div class="step" data-step="7">
-                <h3 class="text-xl font-semibold mb-6">Récapitulatif avant envoi</h3>
-                
-                <div class="bg-slate-50 rounded-lg p-6 max-h-[60vh] overflow-y-auto mb-6 border border-slate-200" id="summaryContainer">
-                    <!-- Le résumé sera généré ici par JS -->
-                </div>
-
-                <!-- Message d'erreur caché par défaut -->
-                <div id="error-message" class="hidden mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-200 text-center font-medium">
-                    Oups, je crois que tu n’as pas encore terminé 🙂 Il reste quelques réponses à compléter avant l’envoi.
-                </div>
-
-                <div class="flex flex-col sm:flex-row justify-between mt-8 gap-4">
-                    <button type="button" onclick="goToStep(6)" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-lg transition-colors">
-                        Modifier
-                    </button>
-                    <button type="button" onclick="finishSurvey()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:-translate-y-1">
-                        Envoyer
-                    </button>
-                    <button type="button" onclick="quitSurvey()" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-3 px-6 rounded-lg transition-colors border border-red-200">
-                        Quitter sans participer
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 8: Thank You -->
-            <div class="step" data-step="8">
-                <div class="text-center py-10">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 animate-bounce">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Merci infiniment ! 🙏</h2>
-                    <p class="text-slate-600 mb-2">Tes réponses ont bien été enregistrées.</p>
-                    <p class="text-slate-500 text-sm mb-6">Tu peux fermer cette page.</p>
-                </div>
-            </div>
-
-            <!-- Step 9: Quit (Hidden by default) -->
-            <div class="step" id="step-quit">
-                <div class="text-center py-10">
-                    <div class="text-6xl mb-4">🥺</div>
-                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Dommage !</h2>
-                    <p class="text-slate-600 mb-6">Je ne t'en veux pas. Une prochaine fois peut-être.</p>
-                    
-                    <button type="button" onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors shadow-md">
-                        Recommencer à zéro
-                    </button>
-                </div>
-            </div>
-
-        </form>
-    </main>
-
-    <footer class="text-center p-4 text-white/80 text-sm z-10 relative"></footer>
-
-    <!-- Configuration pour Google Sheets (Optionnel) -->
-    <script>
-        // --- CONFIGURATION TECHNIQUE ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2OG8Ewm-bjoauyP_tZbJ6hiqswNPBkyZmSWpdLJwSfNjqkCq776bluDeYbm8sFi3lxQ/exec'; 
-    </script>
-
-    <script>
-        // Configuration de la navigation
-        const totalStepsQuestions = 6; 
-
-        const questionLabels = {
-            'q1': 'Q1. Ancienneté freelance',
-            'q2': 'Q2. Localisation Freelance',
-            'q3': 'Q3. Localisation Clients',
-            'q4': 'Q4. Mode de travail',
-            'q4_other': 'Q4. Mode (Autre)',
-            'q5': 'Q5. Activité principale',
-            'q5_other': 'Q5. Activité (Autre)',
-            'q6': 'Q6. Ex-salarié du métier',
-            'q6_exp': 'Années expérience salariée',
-            'genre': 'Q7. Sexe',
-            'age': 'Q8. Tranche d\'âge',
-            'q9': 'Q9. Acquisition clients',
-            'q10_clients': 'Q10. Typologie clients',
-            'q10_clients_other_text': 'Autre type client',
-            'q11': 'Q11. Difficulté vente',
-            'q12_gap': 'Périodes sans mission',
-            'q12_gap_duration': 'Durée sans mission',
-            'q13': 'Q13. Délai revenus réguliers',
-            'q14': 'Q14. TJM minimal viable',
-            'q15': 'Q15. Montant versé perso',
-            'q16_status': 'Q16. Statut juridique',
-            'q17': 'Q17. Gestion déclarations',
-            'q17_app_name': 'Nom de l\'application',
-            'q18': 'Q18. Niveau de stress',
-            'q19': 'Q19. Poids principal',
-            'q19_other': 'Autre poids',
-            'q20': 'Q20. Difficulté inattendue',
-            'q21_args': 'Q21. Arguments de vente',
-            'q21_args_other_text': 'Autre argument',
-            'q22': 'Q22. Avis lancement 2026',
-            'q23': 'Q23. Conseil clé',
-            'pseudo': 'Contact - Prénom / Pseudo',
-            'email': 'Contact - Email',
-            'linkedin': 'Contact - LinkedIn'
-        };
-
-        // Liste des champs requis pour valider l'envoi (basé sur les noms HTML)
-        const requiredFields = [
-            'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'genre', 'age', 
-            'q9', 'q10_clients', 'q11', 'q12_gap', 
-            'q13', 'q14', 'q15', 'q16_status', 'q17', 
-            'q18', 'q19', 'q20', 
-            'q21_args', 'q22', 'q23'
-        ];
-
-        function goToStep(stepIndex) {
-            const steps = document.querySelectorAll('.step');
-            steps.forEach(step => {
-                if (step.id === 'step-quit') return; 
-                
-                if (step.dataset.step == stepIndex) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
-
-            // Update Progress Bar
-            let progress = 0;
-            if (stepIndex > 0 && stepIndex <= totalStepsQuestions + 1) { 
-                progress = Math.min(((stepIndex) / (totalStepsQuestions + 1)) * 100, 100);
-            }
-            
-            document.getElementById('progress').style.width = `${progress}%`;
-            
-            const stepCountEl = document.getElementById('current-step-display');
-            const totalStepsEl = document.getElementById('total-step-display');
-            const counterContainer = document.getElementById('step-counter-container');
-
-            if (stepIndex === 0 || stepIndex === 8) {
-                 if(counterContainer) counterContainer.style.visibility = 'hidden'; 
-            } else {
-                 if(counterContainer) counterContainer.style.visibility = 'visible';
-            }
-            
-            if (stepIndex > 0 && stepIndex <= totalStepsQuestions) {
-                stepCountEl.innerText = stepIndex;
-                totalStepsEl.innerText = totalStepsQuestions;
-            } else if (stepIndex === 7) {
-                // Etape Recap
-                stepCountEl.innerText = "Fin";
-                totalStepsEl.innerText = totalStepsQuestions;
-                renderSummary(); // Generate summary when reaching step 7
-            }
-
-            window.scrollTo(0, 0);
-        }
-
-        // Gestion générique pour afficher/masquer un input lié à un radio/select
-        function toggleInput(containerId, shouldShow) {
-            const container = document.getElementById(containerId);
-            if (shouldShow) {
-                container.classList.remove('hidden');
-                container.classList.add('block');
-            } else {
-                container.classList.remove('block');
-                container.classList.add('hidden');
-                // Optionnel : vider le champ
-                const input = container.querySelector('input');
-                if(input) input.value = '';
-                const radios = container.querySelectorAll('input[type="radio"]');
-                radios.forEach(r => r.checked = false);
-            }
-        }
-
-        // Gestion spécifique pour les Select avec option "Autre"
-        function toggleSelectOther(selectElement, containerId) {
-            toggleInput(containerId, selectElement.value === 'Autre');
-        }
-
-        // Gestion spécifique pour les Checkboxes "Autre"
-        function toggleCheckboxOther(checkbox, inputId) {
-            const input = document.getElementById(inputId);
-            if (checkbox.checked) {
-                input.classList.remove('hidden');
-            } else {
-                input.classList.add('hidden');
-                input.value = '';
-            }
-        }
-
-        function toggleQ4Input(show) {
-            const container = document.getElementById('q4_other_container');
-            if (show) {
-                container.classList.remove('hidden');
-                container.classList.add('block');
-            } else {
-                container.classList.remove('block');
-                container.classList.add('hidden');
-                const input = container.querySelector('input');
-                if(input) input.value = '';
-            }
-        }
-
-        function toggleQ6Input(show) {
-            const container = document.getElementById('q6_exp_container');
-            if (show) {
-                container.classList.remove('hidden');
-                container.classList.add('block');
-            } else {
-                container.classList.remove('block');
-                container.classList.add('hidden');
-                // Clear selection
-                const radios = document.getElementsByName('q6_exp');
-                radios.forEach(r => r.checked = false);
-            }
-        }
-
-        function toggleOtherInput(value) {
-            const container = document.getElementById('q19_other_container'); // Fixed ID for Q19
-            if (value === 'Autre') {
-                container.classList.remove('hidden');
-                container.classList.add('block');
-            } else {
-                container.classList.remove('block');
-                container.classList.add('hidden');
-            }
-        }
-
-        function toggleAppInput(show) {
-            const container = document.getElementById('q17_app_container');
-            if (show) {
-                container.classList.remove('hidden');
-                container.classList.add('block');
-            } else {
-                container.classList.remove('block');
-                container.classList.add('hidden');
-            }
-        }
-
-        function quitSurvey() {
-            // Suppression de confirm() qui bloque dans l'iframe
-            // Hide all steps
-            const steps = document.querySelectorAll('.step');
-            steps.forEach(step => step.classList.remove('active'));
-            
-            // Show quit step
-            const quitStep = document.getElementById('step-quit');
-            quitStep.classList.add('active');
-            
-            // Hide header counter
-            const counterContainer = document.getElementById('step-counter-container');
-            if(counterContainer) counterContainer.style.visibility = 'hidden';
-
-            window.scrollTo(0, 0);
-        }
-
-        function renderSummary() {
-            const formData = new FormData(document.getElementById('surveyForm'));
-            const container = document.getElementById('summaryContainer');
-            let html = '';
-
-            // Group data
-            let groupedData = {};
-            for (let [key, value] of formData.entries()) {
-                if (value && value.trim() !== "") {
-                    if (!groupedData[key]) groupedData[key] = [];
-                    groupedData[key].push(value);
-                }
-            }
-
-            const summaryOrder = [
-                'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q6_exp', 'genre', 'age',
-                'q9', 'q10_clients', 'q11', 'q12_gap', 'q12_gap_duration',
-                'q13', 'q14', 'q15', 'q16_status', 'q17',
-                'q18', 'q19', 'q20',
-                'q21_args', 'q22', 'q23',
-                'pseudo', 'email', 'linkedin'
-            ];
-
-            for (let key of summaryOrder) {
-                let label = questionLabels[key] || key;
-                let valueHtml = '';
-                let borderClass = 'border-b border-slate-100'; 
-                let isMissing = false;
-
-                // Check dependencies for required fields
-                let isActuallyRequired = requiredFields.includes(key);
-
-                // Conditional requirements logic
-                if (key === 'q6_exp') {
-                    // Required only if Q6 is Oui
-                    if (!groupedData['q6'] || !groupedData['q6'].includes('Oui')) isActuallyRequired = false;
-                }
-                if (key === 'q12_gap_duration') {
-                    // Required only if Q12 is Oui (using logic from HTML structure)
-                    // The HTML name is q12_gap
-                    if (!groupedData['q12_gap'] || !groupedData['q12_gap'].includes('Oui')) isActuallyRequired = false;
-                    else isActuallyRequired = true; // Force requirement if Yes
-                }
-                
-                // Special handling for "Autre" text fields requirements
-                // We check if parent has "Autre" or similar trigger, then check if text field is filled
-                // Note: The loop iterates over keys. q4 is processed, then q4_other is implicit in q4 display below.
-                // But we need to validate if q4=Autre and text is missing.
-
-                if (groupedData[key]) {
-                    let values = groupedData[key];
-                    let displayValue = values.join(', ');
-                    
-                    // Append specific 'other' text details dynamically
-                    if (key === 'q4' && values.includes('Autre')) {
-                        if (groupedData['q4_other']) displayValue += ' (' + groupedData['q4_other'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Précision manquante)</span>'; }
-                    }
-                    if (key === 'q5' && values.includes('Autre')) {
-                        if (groupedData['q5_other']) displayValue += ' (' + groupedData['q5_other'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Précision manquante)</span>'; }
-                    }
-                    if (key === 'q10_clients' && values.includes('Autre')) {
-                        if (groupedData['q10_clients_other_text']) displayValue += ' (' + groupedData['q10_clients_other_text'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Précision manquante)</span>'; }
-                    }
-                    if (key === 'q15' && values.includes('Autre')) {
-                        if (groupedData['q15_other']) displayValue += ' (' + groupedData['q15_other'] + ')'; // Note: HTML uses q15_other in select toggle? Check logic. 
-                        // HTML uses toggleOtherInput for Q19 (Ex-Q18), wait. 
-                        // Q15 is Revenue. It does NOT have "Autre" in HTML options above.
-                    }
-                    if (key === 'q17' && values.includes('App')) {
-                        if (groupedData['q17_app_name']) displayValue += ' (' + groupedData['q17_app_name'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Nom de l\'app manquant)</span>'; }
-                    }
-                    if (key === 'q19' && values.includes('Autre')) {
-                        if (groupedData['q19_other']) displayValue += ' (' + groupedData['q19_other'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Précision manquante)</span>'; }
-                    }
-                    if (key === 'q21_args' && values.includes('Autre')) {
-                        if (groupedData['q21_args_other_text']) displayValue += ' (' + groupedData['q21_args_other_text'] + ')';
-                        else { isMissing = true; displayValue += ' <span class="error-text">(Précision manquante)</span>'; }
-                    }
-
-                    if (isMissing) {
-                         borderClass = 'border-b border-red-100 bg-red-50';
-                    }
-
-                    valueHtml = `<div class="summary-answer text-slate-800 font-medium">${displayValue}</div>`;
-                } else {
-                    if (isActuallyRequired) {
-                        isMissing = true;
-                        valueHtml = `<div class="summary-answer text-red-600 font-bold flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        Non renseigné
-                                     </div>`;
-                        borderClass = 'border-b border-red-100 bg-red-50';
-                    } else {
-                        valueHtml = `<div class="summary-answer text-slate-400 italic">Non renseigné (Facultatif ou N/A)</div>`;
-                    }
-                }
-
-                html += `
-                    <div class="summary-item ${borderClass} p-3 rounded-lg mb-1" data-key="${key}" data-missing="${isMissing}">
-                        <div class="summary-question text-sm text-slate-500 mb-1">${label}</div>
-                        ${valueHtml}
-                    </div>
-                `;
-            }
-
-            container.innerHTML = html;
-        }
-
-        function finishSurvey() {
-            // Re-run validation logic based on rendered summary status
-            // This ensures logic matches exactly what user sees
-            renderSummary(); 
-            const container = document.getElementById('summaryContainer');
-            const missingItems = container.querySelectorAll('[data-missing="true"]');
-
-            if (missingItems.length > 0) {
-                const errorDiv = document.getElementById('error-message');
-                errorDiv.classList.remove('hidden');
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
-                return; 
-            }
-
-            // Proceed to send
-            const formData = new FormData(document.getElementById('surveyForm'));
-            const dataMap = new Map();
-            for (let [key, value] of formData.entries()) {
-                if (value && value.trim() !== "") {
-                    if (dataMap.has(key)) dataMap.set(key, dataMap.get(key) + ', ' + value);
-                    else dataMap.set(key, value);
-                }
-            }
-            
-            const finalFormData = new FormData();
-            dataMap.forEach((value, key) => finalFormData.append(key, value));
-            
-            if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL.length > 5) {
-                fetch(SCRIPT_URL, { method: 'POST', body: finalFormData })
-                .then(res => console.log('Success'))
-                .catch(err => console.error('Error', err));
-            } else {
-                console.log("Simulation", Object.fromEntries(dataMap));
-            }
-
-            goToStep(8);
-        }
-
-        // Init
-        goToStep(0);
-    </script>
-</body>
-</html>
+            <div class="md:col-span-2 text-left">
+                <p class="text-gray-300 leading-relaxed text-lg">
